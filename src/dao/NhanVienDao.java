@@ -6,7 +6,7 @@
 package dao;
 
 import Entity.NhanVien;
-import com.duan.utils.XJdbc;
+import utils.XJdbc;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
