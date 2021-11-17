@@ -15,7 +15,7 @@ public class Auth {
     }
     
     public static boolean isLogin(){
-        return Auth.user1 != null && Auth.user2 != null;
+        return Auth.user1 != null || Auth.user2 != null;
     }
     
     public static boolean isManager(){
