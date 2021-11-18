@@ -30,7 +30,7 @@ public class HoaDonCTDao extends DuAnDao<HoaDonChiTiet, String>{
 
     @Override
     public void update(HoaDonChiTiet entity) {
-        XJdbc.update(INSERT_SQL, entity.getMaHD(), entity.getMaSan(), entity.getMaKG(), entity.getNgayDat(), entity.getGiaTien(), entity.getTrangThai(), entity.getMaHDCT()); 
+        XJdbc.update(UPDATE_SQL, entity.getMaHD(), entity.getMaSan(), entity.getMaKG(), entity.getNgayDat(), entity.getGiaTien(), entity.getTrangThai(), entity.getMaHDCT()); 
     }
 
     @Override

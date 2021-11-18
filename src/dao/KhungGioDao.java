@@ -30,7 +30,7 @@ public class KhungGioDao extends DuAnDao<KhungGio, String>{
 
     @Override
     public void update(KhungGio entity) {
-        XJdbc.update(INSERT_SQL, entity.getMaKG(), entity.getKhungGio());
+        XJdbc.update(UPDATE_SQL, entity.getMaKG(), entity.getKhungGio());
     }
 
     @Override
