@@ -61,7 +61,7 @@ public class SanBongDao extends DuAnDao<SanBong, String>{
                 entity.setMaSan(rs.getString("Id_San"));
                 entity.setLoaiSan(rs.getString("LoaiSan"));
                 entity.setTrangThaiSan(rs.getString("TrangThaiSan"));
-                entity.setGiaSan(rs.getString("GiaSan"));
+                entity.setGiaSan(rs.getFloat("GiaSan"));
                 list.add(entity);
             }
             rs.getStatement().getConnection().close();
