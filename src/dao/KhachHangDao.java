@@ -82,6 +82,10 @@ public class KhachHangDao extends DuAnDao<KhachHang, String>{
         }
         return list.get(0); 
     }
+    public  List<KhachHang> selectByKeyword(String keyword){
+        String sql = "SELECT * FROM KHACHHANG WHERE HoTen LIKE ?";
+        return this.selectBySql(sql, "%"+keyword+"%");
+    }
     }
     
 
