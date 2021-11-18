@@ -30,7 +30,7 @@ public class DichVuDao extends DuAnDao<DichVu, String>{
 
     @Override
     public void update(DichVu entity) {
-        XJdbc.update(INSERT_SQL, entity.getMaHDCT(), entity.getTenDV(), entity.getSoLuong(), entity.getGiaTien(),entity.getTrangThaiDichVu(), entity.getMaDV()); 
+        XJdbc.update(UPDATE_SQL, entity.getMaHDCT(), entity.getTenDV(), entity.getSoLuong(), entity.getGiaTien(),entity.getTrangThaiDichVu(), entity.getMaDV()); 
     }
 
     @Override
