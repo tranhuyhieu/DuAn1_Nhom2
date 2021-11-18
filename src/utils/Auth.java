@@ -1,8 +1,8 @@
 
 package utils;
 
-import entity.NhanVien;
-import entity.KhachHang;
+import Entity.NhanVien;
+import Entity.KhachHang;
 
 public class Auth {
    
