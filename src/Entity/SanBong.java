@@ -13,12 +13,12 @@ public class SanBong {
     private String maSan;
     private String loaiSan;
     private String trangThaiSan;
-    private String giaSan;
+    private float giaSan;
 
     public SanBong() {
     }
 
-    public SanBong(String maSan, String loaiSan, String trangThaiSan, String giaSan) {
+    public SanBong(String maSan, String loaiSan, String trangThaiSan, float giaSan) {
         this.maSan = maSan;
         this.loaiSan = loaiSan;
         this.trangThaiSan = trangThaiSan;
@@ -49,11 +49,11 @@ public class SanBong {
         this.trangThaiSan = trangThaiSan;
     }
 
-    public String getGiaSan() {
+    public float getGiaSan() {
         return giaSan;
     }
 
-    public void setGiaSan(String giaSan) {
+    public void setGiaSan(float giaSan) {
         this.giaSan = giaSan;
     }
     
