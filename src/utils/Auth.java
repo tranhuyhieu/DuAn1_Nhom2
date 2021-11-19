@@ -21,4 +21,12 @@ public class Auth {
     public static boolean isManager(){
         return Auth.isLogin() && user1.getVaiTro();
     }
+    public static int role(){
+        if(Auth.isLogin()&&isManager()==false){
+        return 0;
+        }else if(Auth.isLogin()&&isManager()==true){
+        return 1;    
+        }
+        return 2;
+    }
 }

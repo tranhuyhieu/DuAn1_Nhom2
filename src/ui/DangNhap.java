@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ktpm;
+package ui;
 
 import Entity.KhachHang;
 import Entity.NhanVien;
 import dao.KhachHangDao;
 import dao.NhanVienDao;
-import ui.QuenMatKhauJInternalFrame;
+//import ui.QuenMatKhauJInternalFrame;
 import utils.Auth;
 import utils.MsgBox;
 
@@ -17,12 +17,12 @@ import utils.MsgBox;
  *
  * @author sonho
  */
-public class DangNhapNV extends javax.swing.JDialog {
+public class DangNhap extends javax.swing.JDialog {
     int check = 1 ;
     /**
      * Creates new form DangNhap
      */
-    public DangNhapNV(java.awt.Frame parent, boolean modal) {
+    public DangNhap(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         init();
@@ -87,8 +87,6 @@ public class DangNhapNV extends javax.swing.JDialog {
         jLabel3.setText("Tài khoản");
         jPanel1.add(jLabel3);
         jLabel3.setBounds(30, 40, 120, 25);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\DuanMau\\KTPM\\src\\icon\\ecd5b39b7d1eb440ed0f.jpg")); // NOI18N
         jPanel1.add(jLabel1);
         jLabel1.setBounds(0, 0, 500, 300);
 
@@ -150,21 +148,23 @@ public class DangNhapNV extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DangNhapNV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DangNhapNV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DangNhapNV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DangNhapNV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DangNhapNV dialog = new DangNhapNV(new javax.swing.JFrame(), true);
+                DangNhap dialog = new DangNhap(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
