@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="alwaysOnTop" type="boolean" value="true"/>
+    <Property name="undecorated" type="boolean" value="true"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,9,0,0,2,3"/>
+  </AuxValues>
+
+  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="jPanel1">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder>
+              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+            </LineBorder>
+          </Border>
+        </Property>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+          <BorderConstraints direction="Center"/>
+        </Constraint>
+      </Constraints>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icon/anhGioiThieu (1).jpg"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Click &#x111;&#x1ec3; &#x111;&#xf3;ng"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel1MouseClicked"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+              <BorderConstraints direction="First"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JTextPane" name="jTextPane1">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="S&#xe2;n b&#xf3;ng &#x111;&#xe1; C&#x1b0;&#x1edd;ng Qu&#x1ed1;c 2 - H&#xe0; &#x110;&#xf4;ng. N&#x1eb1;m gi&#x1eef;a khu chung c&#x1b0; Ki&#xea;n H&#x1b0;ng, &#x111;&#x1ebf;n nay&#xa;s&#xe2;n g&#x1ed3;m 2 lo&#x1ea1;i s&#xe2;n b&#xf3;ng 7 ng&#x1b0;&#x1edd;i v&#xe0; 11 ng&#x1b0;&#x1edd;i, &#x111;&#x1eb9;p nh&#x1ea5;t H&#xe0; N&#x1ed9;i. Ch&#x1ea5;t l&#x1b0;&#x1ee3;ng c&#x1ecf;, &#x111;&#xe8;n&#xa;chi&#x1ebf;u sang hi&#x1ec7;n &#x111;&#x1ea1;i, &#x111;&#x1ea1;t ti&#xea;u chu&#x1ea9;n. Gi&#xe1; si&#xea;u r&#x1ebb;, ph&#x1ee5;c v&#x1ee5; nhi&#x1ec7;t t&#xec;nh, d&#x1ecb;ch v&#x1ee5; ti&#x1ec7;n nghi&#xa;&#x111;a d&#x1ea1;ng. S&#xe2;n &#x111;&#xe1; b&#xf3;ng C&#x1b0;&#x1edd;ng Qu&#x1ed1;c 2 l&#xe0; m&#x1ed9;t trong t&#x1ed5; h&#x1ee3;p nh&#x1eef;ng s&#xe2;n c&#x1ecf; nh&#xe2;n t&#x1ea1;o &#x111;&#x1eb9;p&#xa;b&#x1ead;c nh&#x1ea5;t H&#xe0; N&#x1ed9;i n&#xf3;i chung, &#x111;&#x1eb9;p nh&#x1ea5;t trong nh&#x1eef;ng s&#xe2;n b&#xf3;ng qu&#x1ead;n H&#xe0; &#x110;&#xf4;ng n&#xf3;i ri&#xea;ng.&#xa;T&#x1ea5;t c&#x1ea3; c&#x1a1; s&#x1edf; h&#x1ea1; t&#x1ea7;ng &#x111;&#x1ec1;u &#x111;&#x1b0;&#x1ee3;c &#x111;&#x1ea7;u t&#x1b0; r&#x1ea5;t t&#x1ed1;t, l&#xf2;ng s&#xe2;n r&#x1ea5;t r&#x1ed9;ng, t&#x1ea1;o kh&#xf4;ng gian tho&#x1ea3;i &#xa;m&#xe1;i khi &#x111;&#xe1;. M&#x1eb7;t s&#xe2;n ch&#x1ea5;t l&#x1b0;&#x1ee3;ng, &#x111;&#x1b0;&#x1ee3;c &#x111;&#x1ea7;u t&#x1b0; c&#x1ecf; theo chu&#x1ea9;n qu&#x1ed1;c t&#x1ebf;, n&#xea;n khi &#x111;&#xe1; s&#x1ebd; c&#x1ea3;m&#xa;th&#x1ea5;y y&#xea;n t&#xe2;m, an to&#xe0;n. D&#xe0;n &#x111;&#xe8;n Led chi&#x1ebf;u s&#xe1;ng s&#xe2;n t&#x1ed1;t, cung c&#x1ea5;p &#x111;&#x1ee7; &#xe1;nh s&#xe1;ng cho c&#xe1;c&#xa;s&#xe2;n &#x111;&#x1ea5;u v&#xe0;o bu&#x1ed5;i t&#x1ed1;i. N&#x1a1;i &#x111;&#xe2;y thu h&#xfa;t nhi&#x1ec1;u c&#x1ea7;u th&#x1ee7; t&#x1edb;i luy&#x1ec7;n t&#x1ead;p v&#xe0; thi &#x111;&#x1ea5;u. &#x110;&#xe2;y c&#x169;ng&#xa;l&#xe0; n&#x1a1;i th&#x1b0;&#x1edd;ng t&#x1ed5; ch&#x1ee9;c c&#xe1;c gi&#x1ea3;i &#x111;&#x1ea5;u &#x111;&#xe1; b&#xf3;ng l&#x1edb;n."/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTextPane1MouseClicked"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+              <BorderConstraints direction="Center"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>

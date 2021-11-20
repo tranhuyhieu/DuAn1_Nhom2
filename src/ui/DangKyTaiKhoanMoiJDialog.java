@@ -6,7 +6,7 @@
 package ui;
 
 import Entity.KhachHang;
-import com.duan.utils.MsgBox;
+import utils.MsgBox;
 import dao.KhachHangDao;
 import java.awt.Color;
 import utils.XDate;

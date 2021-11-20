@@ -5,6 +5,7 @@
  */
 package ui;
 
+import com.edusys.ui.GioiThieuJDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -274,6 +275,11 @@ public class FormChinh extends javax.swing.JFrame {
         jMenu3.add(mniLienHe);
 
         mniGioiThieu.setText("Giới Thiệu Sản Phẩm");
+        mniGioiThieu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniGioiThieuActionPerformed(evt);
+            }
+        });
         jMenu3.add(mniGioiThieu);
 
         MenuBar.add(jMenu3);
@@ -354,6 +360,11 @@ public class FormChinh extends javax.swing.JFrame {
         // TODO add your handling code here:
         new DangKyTaiKhoanMoiJDialog(this, true).setVisible(true);
     }//GEN-LAST:event_btnDangKyActionPerformed
+
+    private void mniGioiThieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniGioiThieuActionPerformed
+        // TODO add your handling code here:
+        new GioiThieuJDialog(this, true).setVisible(true);
+    }//GEN-LAST:event_mniGioiThieuActionPerformed
 
     /**
      * @param args the command line arguments
