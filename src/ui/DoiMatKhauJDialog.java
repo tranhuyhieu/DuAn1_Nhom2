@@ -58,7 +58,7 @@ public class DoiMatKhauJDialog extends javax.swing.JDialog {
         kh.setMaKH(Auth.user2.getMaKH());
         kh.setMaNV("NV01");
         kh.setHoTen(Auth.user2.getHoTen());
-        kh.setMatKhau(String.valueOf(txtMK.getPassword()));
+        kh.setMatKhau(String.valueOf(txtXNMK.getPassword()));
         kh.setNgayDK(Auth.user2.getNgayDK());
         return kh;
     }
@@ -66,7 +66,7 @@ public class DoiMatKhauJDialog extends javax.swing.JDialog {
     NhanVien getFormNV() {
         NhanVien nv = new NhanVien();
         nv.setMaNV(Auth.user1.getMaNV());
-        nv.setMatKhau(new String(txtMK.getPassword()));
+        nv.setMatKhau(new String(txtXNMK.getPassword()));
         nv.setVaiTro(Auth.user1.getVaiTro());
         nv.setHoTen(Auth.user1.getHoTen());
         nv.setDiaChi(Auth.user1.getDiaChi());
@@ -108,7 +108,27 @@ public class DoiMatKhauJDialog extends javax.swing.JDialog {
             MsgBox.alert(this, "Chưa nhập mật khẩu");
             check = false;
             return;
-        } else if (!String.valueOf(txtMK.getPassword()).equals(Auth.user1.getMatKhau()) || !String.valueOf(txtMK.getPassword()).equals(Auth.user2.getMatKhau())) {
+//        } else if (!String.valueOf(txtMK.getPassword()).equals(Auth.user1.getMatKhau()) || !String.valueOf(txtMK.getPassword()).equals(Auth.user2.getMatKhau())) {
+//            txtMK.requestFocus();
+//            txtMK.setBackground(Color.YELLOW);
+//            MsgBox.alert(this, "Nhập sai mật khẩu vui lòng nhập lại !");
+//            check = false;
+//            return;
+        } else {
+            txtMK.setBackground(Color.white);
+            check = true;
+        } if (Auth.user1 != null) {
+            if (!String.valueOf(txtMK.getPassword()).equals(Auth.user1.getMatKhau())) {
+                txtMK.requestFocus();
+                txtMK.setBackground(Color.YELLOW);
+                MsgBox.alert(this, "Nhập sai mật khẩu vui lòng nhập lại !");
+                check = false;
+                return;
+            } else {
+                txtMK.setBackground(Color.white);
+                check = true;
+            }
+        } else if (!String.valueOf(txtMK.getPassword()).equals(Auth.user2.getMatKhau())) {
             txtMK.requestFocus();
             txtMK.setBackground(Color.YELLOW);
             MsgBox.alert(this, "Nhập sai mật khẩu vui lòng nhập lại !");
