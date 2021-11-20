@@ -5,6 +5,7 @@
  */
 package dao;
 
+import Entity.KhachHang;
 import Entity.ThongTinKH;
 import Entity.ThongTinNV;
 import utils.XJdbc;
@@ -21,7 +22,7 @@ public class ThongTinKHDao extends DuAnDao<ThongTinKH, String>{
     String UPDATE_SQL = "UPDATE ThongTinNV SET Id_KH=?,Email=?,SoDT=? WHERE Id_ThongTin=?";
     String DELETE_SQL = "DELETE FROM ThongTinNV WHERE Id_ThongTin=?";
     String SELECT_ALL_SQL = "SELECT*FROM ThongTinKH";
-    String SELECT_BY_ID_SQL = "SELECT*FROM ThongTinNV Id_ThongTin=?";
+    String SELECT_BY_ID_SQL = "SELECT*FROM ThongTinNV Where Id_ThongTin=?";
 
     @Override
     public void insert(ThongTinKH entity) {
@@ -74,6 +75,9 @@ public class ThongTinKHDao extends DuAnDao<ThongTinKH, String>{
         return list;
     }
 
-    
+    public List<ThongTinKH> selectEmail(String Id_KH){
+        String sql="select * from THONGTINKH Where Id_KH =?";
+        return this.selectBySql(sql, Id_KH);
+    }
 
 }
