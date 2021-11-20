@@ -12,7 +12,7 @@ import javax.swing.ImageIcon;
 
 public class XImage {
     public static Image getAppIcon() {
-        URL url = XImage.class.getResource("/duan/icon/ball.png");
+        URL url = XImage.class.getResource("/icon/ball.png");
         return new ImageIcon(url).getImage();
     }
     
