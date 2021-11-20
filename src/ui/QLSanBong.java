@@ -1,5 +1,5 @@
 
-package Form;
+package ui;
 
 import Entity.SanBong;
 import dao.SanBongDao;
@@ -115,7 +115,7 @@ public class QLSanBong extends javax.swing.JDialog {
         });
 
         btnXoa.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-delete-24.png"))); // NOI18N
+        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-delete-24_1.png"))); // NOI18N
         btnXoa.setText("Xóa");
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -176,13 +176,10 @@ public class QLSanBong extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(rdo1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(rdo2))
-                                    .addComponent(cboTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(rdo1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(rdo2))
+                            .addComponent(cboTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtGiaSan)
                             .addComponent(txtMaSan)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -464,7 +461,13 @@ public class QLSanBong extends javax.swing.JDialog {
         txtMaSan.setText("");
         rdo1.setSelected(true);
         txtGiaSan.setText("");
+        txtTimKiem.setText("");
         cboTrangThai.setSelectedIndex(0);
+        List<SanBong> list= dao.selectAll();
+        mol.setRowCount(0);
+        for (SanBong sb : list) {
+            mol.addRow(new Object[]{sb.getMaSan(),sb.getLoaiSan(),sb.getTrangThaiSan(),sb.getGiaSan()});
+        }
     }
     
     void checkDuLieu(){
