@@ -65,6 +65,7 @@ public class NhanVienDao extends DuAnDao<NhanVien, String>{
                 entity.setVaiTro(rs.getBoolean("VaiTro"));
                 entity.setHoTen(rs.getString("HoTen"));
                 entity.setDiaChi(rs.getString("DiaChi"));
+                entity.setTrangThai(rs.getBoolean("TrangThai"));
                 list.add(entity);
             }
             rs.getStatement().getConnection().close();
@@ -73,5 +74,9 @@ public class NhanVienDao extends DuAnDao<NhanVien, String>{
             throw new RuntimeException(e);
         }
         return list;
+    }
+    public  List<NhanVien> selectByKeyword(String keyword){
+        String sql = "SELECT * FROM NHANVIEN WHERE HoTen LIKE ?";
+        return this.selectBySql(sql, "%"+keyword+"%");
     }
 }
