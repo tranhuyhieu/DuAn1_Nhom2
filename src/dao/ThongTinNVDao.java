@@ -5,7 +5,6 @@
  */
 package dao;
 
-import Entity.KhachHang;
 import Entity.ThongTinNV;
 import utils.XJdbc;
 import java.sql.ResultSet;
@@ -22,6 +21,7 @@ public class ThongTinNVDao extends DuAnDao<ThongTinNV, String>{
     String DELETE_SQL = "DELETE FROM ThongTinNV WHERE Id_ThongTin=?";
     String SELECT_ALL_SQL = "SELECT*FROM ThongTinNV";
     String SELECT_BY_ID_SQL = "SELECT*FROM ThongTinNV Where Id_ThongTin=?";
+    String SELECT_BY_ID_NV = "SELECT*FROM ThongTinNV Where Id_NV=?";
 
     @Override
     public void insert(ThongTinNV entity) {
@@ -76,6 +76,13 @@ public class ThongTinNVDao extends DuAnDao<ThongTinNV, String>{
     public List<ThongTinNV> selectEmail(String Id_NV){
         String sql="select * from THONGTINNV Where Id_NV =?";
         return this.selectBySql(sql, Id_NV);
+    }
+<<<<<<< Updated upstream
+    public List<ThongTinNV> selectByIdKH(String id) {
+=======
+    public List<ThongTinNV> selectByIdNV(String id) {
+>>>>>>> Stashed changes
+        return this.selectBySql(SELECT_BY_ID_NV, id);  
     }
     
 }
