@@ -18,11 +18,12 @@ import java.util.List;
  * @author PC
  */
 public class ThongTinKHDao extends DuAnDao<ThongTinKH, String>{
-    String INSERT_SQL = "INSERT INTO ThongTinKH(Id_ThongTin,Id_KH,Email,SoDT)VALUES(?,?,?,?)";
-    String UPDATE_SQL = "UPDATE ThongTinNV SET Id_KH=?,Email=?,SoDT=? WHERE Id_ThongTin=?";
-    String DELETE_SQL = "DELETE FROM ThongTinNV WHERE Id_ThongTin=?";
+    String INSERT_SQL = "INSERT INTO ThongTinKH(Id_KH,Email,SoDT)VALUES(?,?,?)";
+    String UPDATE_SQL = "UPDATE ThongTinKH SET Id_KH=?,Email=?,SoDT=? WHERE Id_ThongTin=?";
+    String DELETE_SQL = "DELETE FROM ThongTinKH WHERE Id_ThongTin=?";
     String SELECT_ALL_SQL = "SELECT*FROM ThongTinKH";
-    String SELECT_BY_ID_SQL = "SELECT*FROM ThongTinNV Where Id_ThongTin=?";
+    String SELECT_BY_ID_SQL = "SELECT*FROM ThongTinKH Where Id_ThongTin=?";
+    String SELECT_BY_ID_KH = "SELECT*FROM ThongTinKH Where Id_KH=?";
 
     @Override
     public void insert(ThongTinKH entity) {
@@ -80,4 +81,7 @@ public class ThongTinKHDao extends DuAnDao<ThongTinKH, String>{
         return this.selectBySql(sql, Id_KH);
     }
 
+    public List<ThongTinKH> selectByIdKH(String id) {
+        return this.selectBySql(SELECT_BY_ID_KH, id);  
+    }
 }

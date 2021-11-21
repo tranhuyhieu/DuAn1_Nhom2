@@ -5,7 +5,6 @@
  */
 package dao;
 
-import Entity.KhachHang;
 import Entity.ThongTinNV;
 import utils.XJdbc;
 import java.sql.ResultSet;
@@ -78,7 +77,11 @@ public class ThongTinNVDao extends DuAnDao<ThongTinNV, String>{
         String sql="select * from THONGTINNV Where Id_NV =?";
         return this.selectBySql(sql, Id_NV);
     }
+<<<<<<< Updated upstream
     public List<ThongTinNV> selectByIdKH(String id) {
+=======
+    public List<ThongTinNV> selectByIdNV(String id) {
+>>>>>>> Stashed changes
         return this.selectBySql(SELECT_BY_ID_NV, id);  
     }
     
