@@ -17,11 +17,11 @@ import java.util.List;
  * @author PC
  */
 public class ThongTinNVDao extends DuAnDao<ThongTinNV, String>{
-    String INSERT_SQL = "INSERT INTO ThongTinNV(Id_ThongTin,Id_NV,Email,SoDT)VALUES(?,?,?,?)";
+    String INSERT_SQL = "INSERT INTO ThongTinNV(Id_NV,Email,SoDT)VALUES(?,?,?)";
     String UPDATE_SQL = "UPDATE ThongTinNV SET Id_NV=?,Email=?,SoDT=? WHERE Id_ThongTin=?";
     String DELETE_SQL = "DELETE FROM ThongTinNV WHERE Id_ThongTin=?";
     String SELECT_ALL_SQL = "SELECT*FROM ThongTinNV";
-    String SELECT_BY_ID_SQL = "SELECT*FROM ThongTinNV Id_ThongTin=?";
+    String SELECT_BY_ID_SQL = "SELECT*FROM ThongTinNV Where Id_ThongTin=?";
 
     @Override
     public void insert(ThongTinNV entity) {
@@ -72,6 +72,12 @@ public class ThongTinNVDao extends DuAnDao<ThongTinNV, String>{
         }
         return list;
     } 
+    
+    public List<ThongTinNV> selectEmail(String Id_NV){
+        String sql="select * from THONGTINNV Where Id_NV =?";
+        return this.selectBySql(sql, Id_NV);
+    }
+    
 }
     
 
