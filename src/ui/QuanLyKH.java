@@ -468,7 +468,7 @@ public class QuanLyKH extends javax.swing.JInternalFrame {
             ThongTinChiTietKH formtt=new ThongTinChiTietKH(makhachhang);
             formtt.setVisible(true);
         }else{
-            JOptionPane.showMessageDialog(this, "Bạn chưa chọn đối tượng");
+            JOptionPane.showMessageDialog(this, "Chưa chọn đối tượng");
         }
     }//GEN-LAST:event_btnThongTinChiTietActionPerformed
 
