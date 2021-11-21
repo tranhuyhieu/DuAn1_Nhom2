@@ -13,6 +13,7 @@ import static java.awt.Color.white;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import utils.Auth;
@@ -29,9 +30,11 @@ public class QuanLyKH extends javax.swing.JInternalFrame {
     List<KhachHang> listKH=new ArrayList<>();
     DefaultTableModel mol;
     int index;
+    String makhachhang;
     public QuanLyKH() {
         initComponents();
         init();
+        load();
     }
 
     void init(){
@@ -231,6 +234,11 @@ public class QuanLyKH extends javax.swing.JInternalFrame {
         });
 
         btnThongTinChiTiet.setText("Xem thông tin chi tiết");
+        btnThongTinChiTiet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThongTinChiTietActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -385,7 +393,7 @@ public class QuanLyKH extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
+            .addComponent(tabs)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -452,6 +460,17 @@ public class QuanLyKH extends javax.swing.JInternalFrame {
         tabs.setSelectedIndex(0);
         edit();
     }//GEN-LAST:event_tblDanhSachKHMouseClicked
+
+    private void btnThongTinChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongTinChiTietActionPerformed
+        // TODO add your handling code here
+        if(!txtMaKH.getText().trim().isEmpty()){
+            makhachhang=txtMaKH.getText().trim();
+            ThongTinChiTietKH formtt=new ThongTinChiTietKH(makhachhang);
+            formtt.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(this, "Chưa chọn đối tượng");
+        }
+    }//GEN-LAST:event_btnThongTinChiTietActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
