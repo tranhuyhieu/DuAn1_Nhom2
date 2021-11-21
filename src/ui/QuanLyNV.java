@@ -12,6 +12,7 @@ import static java.awt.Color.white;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import utils.Auth;
 import utils.MsgBox;
@@ -27,6 +28,7 @@ public class QuanLyNV extends javax.swing.JInternalFrame {
     List<NhanVien> listNV=new ArrayList<>();
     DefaultTableModel mol;
     int index;
+    static String manhanvien;
     public QuanLyNV() {
         initComponents();
         init();
@@ -191,7 +193,7 @@ public class QuanLyNV extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         rdoQuanLy = new javax.swing.JRadioButton();
         rdoNhanVien = new javax.swing.JRadioButton();
-        jButton2 = new javax.swing.JButton();
+        btnXemTTChiTiet = new javax.swing.JButton();
         txtMatKhau = new javax.swing.JPasswordField();
         txtHoTen = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
@@ -285,7 +287,12 @@ public class QuanLyNV extends javax.swing.JInternalFrame {
         buttonGroup1.add(rdoNhanVien);
         rdoNhanVien.setText("Nhân Viên");
 
-        jButton2.setText("Xem thông tin chi tiết");
+        btnXemTTChiTiet.setText("Xem thông tin chi tiết");
+        btnXemTTChiTiet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXemTTChiTietActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -335,7 +342,7 @@ public class QuanLyNV extends javax.swing.JInternalFrame {
                                 .addComponent(btnMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton2))
+                                .addComponent(btnXemTTChiTiet))
                             .addComponent(txtMatKhau, javax.swing.GroupLayout.Alignment.LEADING))
                         .addContainerGap())))
         );
@@ -383,7 +390,7 @@ public class QuanLyNV extends javax.swing.JInternalFrame {
                         .addComponent(btnSua)
                         .addComponent(btnMoi)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(btnXemTTChiTiet)
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
@@ -536,6 +543,17 @@ public class QuanLyNV extends javax.swing.JInternalFrame {
         tim();
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
+    private void btnXemTTChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemTTChiTietActionPerformed
+        // TODO add your handling code here:
+        if(!txtMaNV.getText().trim().isEmpty()){
+            manhanvien=txtMaNV.getText().trim();
+            ThongTinChiTietNV formtt=new ThongTinChiTietNV(manhanvien);
+            formtt.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(this, "Chưa chọn đối tượng");
+        }
+    }//GEN-LAST:event_btnXemTTChiTietActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFirst;
@@ -546,9 +564,9 @@ public class QuanLyNV extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnTimKiem;
+    private javax.swing.JButton btnXemTTChiTiet;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
