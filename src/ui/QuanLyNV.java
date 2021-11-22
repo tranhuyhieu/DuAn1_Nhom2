@@ -545,13 +545,13 @@ public class QuanLyNV extends javax.swing.JInternalFrame {
 
     private void btnXemTTChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemTTChiTietActionPerformed
         // TODO add your handling code here:
-        if(!txtMaNV.getText().trim().isEmpty()){
-            manhanvien=txtMaNV.getText().trim();
-            ThongTinChiTietNV formtt=new ThongTinChiTietNV(manhanvien);
-            formtt.setVisible(true);
-        }else{
-            JOptionPane.showMessageDialog(this, "Chưa chọn đối tượng");
-        }
+//        if(!txtMaNV.getText().trim().isEmpty()){
+//            manhanvien=txtMaNV.getText().trim();
+//            ThongTinChiTietNV formtt=new ThongTinChiTietNV(manhanvien);
+//            formtt.setVisible(true);
+//        }else{
+//            JOptionPane.showMessageDialog(this, "Chưa chọn đối tượng");
+//        }
     }//GEN-LAST:event_btnXemTTChiTietActionPerformed
 
 
