@@ -79,7 +79,7 @@ public class QuenMatKhauJDialog extends javax.swing.JDialog {
             msg.setFrom(new InternetAddress(accountName));
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(txtEmail.getText()));
             msg.setSubject("Gửi mật khẩu");
-            msg.setText("Mật khẩu của bạn : " + matKhau() + "\n Hãy bảo mật thông tin này !");
+            msg.setText("Mật khẩu của bạn : " + matKhau() + "\nHãy bảo mật thông tin này !");
 
             Transport.send(msg);
             MsgBox.alert(this, "Đã gửi mật khẩu tới " + txtEmail.getText());
