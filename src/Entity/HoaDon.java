@@ -6,12 +6,14 @@
 package Entity;
 
 import java.util.Date;
+import utils.XDate;
 
 /**
  *
  * @author admin
  */
 public class HoaDon {
+
     private String maHD;
     private String maNV;
     private String maKH;
@@ -38,7 +40,7 @@ public class HoaDon {
         this.anhDatCoc = anhDatCoc;
         this.giamGia = giamGia;
         this.tongTien = tongTien;
-        this.ngayThanhToan = ngayThanhToan;
+        this.ngayThanhToan = XDate.now();
         this.trangThaiHD = trangThaiHD;
         this.trangThaiTT = trangThaiTT;
     }
@@ -138,5 +140,12 @@ public class HoaDon {
     public void setTrangThaiTT(int trangThaiTT) {
         this.trangThaiTT = trangThaiTT;
     }
+
+    @Override
+    public String toString() {
+        return "HoaDon{" + "maHD=" + maHD + ", maNV=" + maNV + ", maKH=" + maKH + ", hoTenKH=" + hoTenKH + ", soDienThoai=" + soDienThoai + ", email=" + email + ", anhDatCoc=" + anhDatCoc + ", giamGia=" + giamGia + ", tongTien=" + tongTien + ", ngayThanhToan=" + ngayThanhToan + ", trangThaiHD=" + trangThaiHD + ", trangThaiTT=" + trangThaiTT + '}';
+    }
+    
+    
 
 }
