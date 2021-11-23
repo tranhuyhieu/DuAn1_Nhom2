@@ -34,7 +34,6 @@ public class FormChinh extends javax.swing.JFrame {
 
     void dangnhap(){
         new DangNhap(this, true).setVisible(true);
-        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -48,7 +47,7 @@ public class FormChinh extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JToolBar.Separator();
         btnQLSan = new javax.swing.JButton();
         Separator01 = new javax.swing.JToolBar.Separator();
-        btnDangNhap2 = new javax.swing.JButton();
+        btnQLLichSuDatSan = new javax.swing.JButton();
         jSeparator10 = new javax.swing.JToolBar.Separator();
         btnDangKy = new javax.swing.JButton();
         jSeparator11 = new javax.swing.JToolBar.Separator();
@@ -58,8 +57,8 @@ public class FormChinh extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JToolBar.Separator();
         DesktopPane = new javax.swing.JDesktopPane();
         jLabel2 = new javax.swing.JLabel();
-        lblDongHo = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        lblDongHo = new javax.swing.JLabel();
         MenuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnithongTinCaNhan = new javax.swing.JMenuItem();
@@ -77,7 +76,7 @@ public class FormChinh extends javax.swing.JFrame {
         jSeparator8 = new javax.swing.JPopupMenu.Separator();
         mniQLsanBong = new javax.swing.JMenuItem();
         mniHoaDon = new javax.swing.JMenuItem();
-        mniQLLichSuDat = new javax.swing.JMenuItem();
+        mniQLLichSuDatSan = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         mniQLThongKe = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
@@ -119,12 +118,17 @@ public class FormChinh extends javax.swing.JFrame {
         ToolBar.add(btnQLSan);
         ToolBar.add(Separator01);
 
-        btnDangNhap2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-order-history-48.png"))); // NOI18N
-        btnDangNhap2.setText("Quản Lý Lịch Sử Đặt Sân");
-        btnDangNhap2.setFocusable(false);
-        btnDangNhap2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnDangNhap2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        ToolBar.add(btnDangNhap2);
+        btnQLLichSuDatSan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-order-history-48.png"))); // NOI18N
+        btnQLLichSuDatSan.setText("Quản Lý Lịch Sử Đặt Sân");
+        btnQLLichSuDatSan.setFocusable(false);
+        btnQLLichSuDatSan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnQLLichSuDatSan.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnQLLichSuDatSan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQLLichSuDatSanActionPerformed(evt);
+            }
+        });
+        ToolBar.add(btnQLLichSuDatSan);
         ToolBar.add(jSeparator10);
 
         btnDangKy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-sign-up-48.png"))); // NOI18N
@@ -174,22 +178,22 @@ public class FormChinh extends javax.swing.JFrame {
         DesktopPane.setLayout(DesktopPaneLayout);
         DesktopPaneLayout.setHorizontalGroup(
             DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel2)
         );
         DesktopPaneLayout.setVerticalGroup(
             DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel2)
         );
-
-        lblDongHo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-clock-16.png"))); // NOI18N
-        lblDongHo.setText("11:41:17 AM");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/i.png"))); // NOI18N
         jLabel3.setText("Hệ Thống Quản Lý ");
 
+        lblDongHo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-clock-16.png"))); // NOI18N
+        lblDongHo.setText("11:41:17 AM");
+
         jMenu1.setText("Hệ Thống ");
 
-        mnithongTinCaNhan.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mnithongTinCaNhan.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
         mnithongTinCaNhan.setText("Thông Tin Cá Nhân");
         mnithongTinCaNhan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,16 +202,16 @@ public class FormChinh extends javax.swing.JFrame {
         });
         jMenu1.add(mnithongTinCaNhan);
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText("Đổi Mật Khẩu");
         jMenu1.add(jMenuItem1);
 
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem2.setText("Quên Mật Khẩu");
         jMenu1.add(jMenuItem2);
         jMenu1.add(jSeparator1);
 
-        mnidangNhap.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mnidangNhap.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_MASK));
         mnidangNhap.setText("Đăng Nhập");
         mnidangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,16 +220,16 @@ public class FormChinh extends javax.swing.JFrame {
         });
         jMenu1.add(mnidangNhap);
 
-        mniDangKy.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniDangKy.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_MASK));
         mniDangKy.setText("Đăng Ký");
         jMenu1.add(mniDangKy);
         jMenu1.add(jSeparator7);
 
-        mniDangXuat.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniDangXuat.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_MASK));
         mniDangXuat.setText("Đăng Xuất");
         jMenu1.add(mniDangXuat);
 
-        mniketThuc.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniketThuc.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.CTRL_MASK));
         mniketThuc.setText("Kết Thúc");
         jMenu1.add(mniketThuc);
 
@@ -233,7 +237,7 @@ public class FormChinh extends javax.swing.JFrame {
 
         MenuQuanLy.setText("Quản Lý ");
 
-        mniNhanVien.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_5, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniNhanVien.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_5, java.awt.event.InputEvent.CTRL_MASK));
         mniNhanVien.setText("Quản Lý Nhân Viên");
         mniNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -242,7 +246,7 @@ public class FormChinh extends javax.swing.JFrame {
         });
         MenuQuanLy.add(mniNhanVien);
 
-        mniKhachHang.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_6, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniKhachHang.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_6, java.awt.event.InputEvent.CTRL_MASK));
         mniKhachHang.setText("Quản Lý Khách Hàng");
         mniKhachHang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -252,7 +256,7 @@ public class FormChinh extends javax.swing.JFrame {
         MenuQuanLy.add(mniKhachHang);
         MenuQuanLy.add(jSeparator8);
 
-        mniQLsanBong.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_7, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniQLsanBong.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_7, java.awt.event.InputEvent.CTRL_MASK));
         mniQLsanBong.setText("Quản Lý Sân Bóng");
         mniQLsanBong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -261,19 +265,24 @@ public class FormChinh extends javax.swing.JFrame {
         });
         MenuQuanLy.add(mniQLsanBong);
 
-        mniHoaDon.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        mniHoaDon.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_MASK));
         mniHoaDon.setText("Quản Lý Hóa Đơn");
         MenuQuanLy.add(mniHoaDon);
 
-        mniQLLichSuDat.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
-        mniQLLichSuDat.setText("Quản Lý Lịch Sử Đặt Sân");
-        MenuQuanLy.add(mniQLLichSuDat);
+        mniQLLichSuDatSan.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        mniQLLichSuDatSan.setText("Quản Lý Lịch Sử Đặt Sân");
+        mniQLLichSuDatSan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniQLLichSuDatSanActionPerformed(evt);
+            }
+        });
+        MenuQuanLy.add(mniQLLichSuDatSan);
 
         MenuBar.add(MenuQuanLy);
 
         jMenu4.setText("Thống Kê");
 
-        mniQLThongKe.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniQLThongKe.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
         mniQLThongKe.setText("Quản Lý Thống Kê");
         jMenu4.add(mniQLThongKe);
 
@@ -300,15 +309,16 @@ public class FormChinh extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblDongHo)
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblDongHo))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(ToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 1028, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(DesktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(DesktopPane, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ToolBar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -317,7 +327,7 @@ public class FormChinh extends javax.swing.JFrame {
                 .addComponent(ToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(DesktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDongHo)
                     .addComponent(jLabel3))
@@ -363,7 +373,9 @@ public class FormChinh extends javax.swing.JFrame {
 
     private void mniQLsanBongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLsanBongActionPerformed
         // TODO add your handling code here:
-        new QLSanBong(this, true).setVisible(true);
+        QuanLySanBong qlsb= new QuanLySanBong();
+        DesktopPane.add(qlsb);
+        qlsb.setVisible(true);
     }//GEN-LAST:event_mniQLsanBongActionPerformed
 
     private void btnDangKyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangKyActionPerformed
@@ -392,6 +404,20 @@ public class FormChinh extends javax.swing.JFrame {
             MsgBox.alert(this, "Bạn không có quyền truy cập");
         }
     }//GEN-LAST:event_mniNhanVienActionPerformed
+
+    private void btnQLLichSuDatSanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLLichSuDatSanActionPerformed
+        // TODO add your handling code here:
+        LichSuDatSan lsds= new LichSuDatSan();
+        DesktopPane.add(lsds);
+        lsds.setVisible(true);
+    }//GEN-LAST:event_btnQLLichSuDatSanActionPerformed
+
+    private void mniQLLichSuDatSanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLLichSuDatSanActionPerformed
+        // TODO add your handling code here:
+        LichSuDatSan lsds= new LichSuDatSan();
+        DesktopPane.add(lsds);
+        lsds.setVisible(true);
+    }//GEN-LAST:event_mniQLLichSuDatSanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -438,8 +464,8 @@ public class FormChinh extends javax.swing.JFrame {
     private javax.swing.JToolBar ToolBar;
     private javax.swing.JButton btnDangKy;
     private javax.swing.JButton btnDangNhap;
-    private javax.swing.JButton btnDangNhap2;
     private javax.swing.JButton btnDangXuat;
+    private javax.swing.JButton btnQLLichSuDatSan;
     private javax.swing.JButton btnQLSan;
     private javax.swing.JButton btnQuenMatKhau;
     private javax.swing.JButton btnTrangChu;
@@ -466,7 +492,7 @@ public class FormChinh extends javax.swing.JFrame {
     private javax.swing.JMenuItem mniKhachHang;
     private javax.swing.JMenuItem mniLienHe;
     private javax.swing.JMenuItem mniNhanVien;
-    private javax.swing.JMenuItem mniQLLichSuDat;
+    private javax.swing.JMenuItem mniQLLichSuDatSan;
     private javax.swing.JMenuItem mniQLThongKe;
     private javax.swing.JMenuItem mniQLsanBong;
     private javax.swing.JMenuItem mnidangNhap;
@@ -475,7 +501,6 @@ public class FormChinh extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     void init (){
         setLocationRelativeTo(null);
-        //setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setIconImage(XImage.getAppIcon());
         new ChaoJDialog(this, true).setVisible(true);
         new DangNhap(this, true).setVisible(true);

@@ -76,4 +76,9 @@ public class HoaDonCTDao extends DuAnDao<HoaDonChiTiet, String>{
         return list;
     }
     
+    public List<HoaDonChiTiet> selectHoaDonChiTietByHoaDon(String Email){
+        String sql= "select HOADONCHITIET.* from HOADONCHITIET join HOADON on HOADON.Id_HD= HOADONCHITIET.Id_HD Where HOADON.Email= ?";
+        return this.selectBySql(sql, Email);
+    }
+    
 }
