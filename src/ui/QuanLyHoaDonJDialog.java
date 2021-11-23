@@ -20,7 +20,6 @@ import utils.XImage;
  * @author haoca
  */
 public class QuanLyHoaDonJDialog extends javax.swing.JDialog {
-
     HoaDonDao hdDAO = new HoaDonDao();
     int row = -1;
     boolean check = false;
@@ -68,6 +67,19 @@ public class QuanLyHoaDonJDialog extends javax.swing.JDialog {
             e.printStackTrace();
         }
     }
+    
+//    String getMaKH(String IDHD) {
+//        String maKH = null;
+//        try {
+//            List<HoaDon> lst;
+//            lst =  (List<HoaDon>) hdDAO.selectById(IDHD);
+//            maKH = lst.get(0).getMaKH();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println(maKH);
+//        return maKH; 
+//    }
 
     void capNhat() {
         HoaDon model = getForm();
@@ -87,7 +99,7 @@ public class QuanLyHoaDonJDialog extends javax.swing.JDialog {
         HoaDon hd = new HoaDon();
         hd.setMaHD(txtMaHoaDon.getText());
         hd.setHoTenKH(txtTenKH.getText());
-        hd.setSoDienThoai(txtSDT.getText());
+        hd.setSoDienThoai(txtSDT.getText().trim());
         hd.setEmail(txtEmail.getText());
         if (rdo0.isSelected()) {
             hd.setGiamGia(0);
@@ -99,8 +111,8 @@ public class QuanLyHoaDonJDialog extends javax.swing.JDialog {
             hd.setGiamGia(20);
         }
         hd.setTongTien(Float.parseFloat(txtTongTien.getText()));
-        hd.setMaKH(Auth.user2.getMaKH());
-        hd.setMaNV("NV01");
+        hd.setMaKH("KHbot");
+        hd.setMaNV(Auth.user1.getMaNV());
         hd.setAnhDatCoc(lblAnh.getText());
         if (rdoCho.isSelected()) {
             hd.setTrangThaiHD(1);
@@ -122,7 +134,7 @@ public class QuanLyHoaDonJDialog extends javax.swing.JDialog {
         try {
             txtMaHoaDon.setText(hd.getMaHD());
             txtTenKH.setText(hd.getHoTenKH());
-            txtSDT.setText(hd.getSoDienThoai());
+            txtSDT.setText(hd.getSoDienThoai().trim());
             txtEmail.setText(hd.getEmail());
             txtTongTien.setText(hd.getTongTien() + "");
             if (hd.getGiamGia() == 0) {
@@ -737,6 +749,7 @@ public class QuanLyHoaDonJDialog extends javax.swing.JDialog {
         check();
         if(check == true){
             capNhat();
+            fillTableDanhSach();
         }
     }//GEN-LAST:event_btnCapNhatActionPerformed
 

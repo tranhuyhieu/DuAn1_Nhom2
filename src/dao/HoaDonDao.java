@@ -23,7 +23,7 @@ public class HoaDonDao extends DuAnDao<HoaDon, String>{
     String DELETE_SQL = "DELETE FROM HOADON WHERE Id_HD=?";
     String SELECT_ALL_SQL = "SELECT*FROM HOADON";
     String SELECT_BY_ID_SQL = "SELECT *FROM HOADON WHERE Id_HD=?";
-
+    
     @Override
     public void insert(HoaDon entity) {
         XJdbc.update(INSERT_SQL, entity.getMaHD(), entity.getMaNV(), entity.getMaKH(), entity.getHoTenKH(), entity.getSoDienThoai(),entity.getEmail(), entity.getAnhDatCoc(),entity.getGiamGia(),entity.getTongTien(),entity.getNgayThanhToan(),entity.getTrangThaiHD(),entity.getTrangThaiTT()); 
