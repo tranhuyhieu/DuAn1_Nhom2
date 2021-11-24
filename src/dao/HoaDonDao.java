@@ -22,7 +22,7 @@ public class HoaDonDao extends DuAnDao<HoaDon, String>{
     String UPDATE_SQL = "UPDATE HOADON SET Id_NV=? ,Id_KH=?,HoTenKH=?,SoDienThoai=?,Email=?,AnhDatCoc=?,GiamGia=?,TongTien=?,NgayThanhToan=?,TrangThaiHD=?,TrangThaiTT=? WHERE Id_HD=?";
     String DELETE_SQL = "DELETE FROM HOADON WHERE Id_HD=?";
     String SELECT_ALL_SQL = "SELECT*FROM HOADON";
-    String SELECT_BY_ID_SQL = "SELECT*FROM HOADON WHERE Id_HD=?";
+    String SELECT_BY_ID_SQL = "SELECT *FROM HOADON WHERE Id_HD=?";
 
     @Override
     public void insert(HoaDon entity) {
@@ -60,10 +60,11 @@ public class HoaDonDao extends DuAnDao<HoaDon, String>{
             ResultSet rs = XJdbc.query(sql, args);
             while(rs.next()){
                 HoaDon entity = new HoaDon();
+                entity.setMaHD(rs.getString("Id_HD"));
                 entity.setMaKH(rs.getString("Id_KH"));
                 entity.setMaNV(rs.getString("Id_NV"));
                 entity.setHoTenKH(rs.getString("HoTenKH"));
-                entity.setSoDienThoai(rs.getString("SoDT"));
+                entity.setSoDienThoai(rs.getString("SoDienThoai"));
                 entity.setEmail(rs.getString("Email"));
                 entity.setAnhDatCoc(rs.getString("AnhDatCoc"));
                 entity.setGiamGia(rs.getFloat("GiamGia"));
@@ -78,6 +79,14 @@ public class HoaDonDao extends DuAnDao<HoaDon, String>{
             throw new RuntimeException(e);
         }
         return list;
+    }
+    
+    public List<HoaDon> selectByIdNew(String id) {
+        List<HoaDon> list = this.selectBySql(SELECT_BY_ID_SQL, id);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list; 
     }
    
 }
