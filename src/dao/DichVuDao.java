@@ -16,16 +16,17 @@ import java.util.List;
  *
  * @author PC
  */
-public class DichVuDao extends DuAnDao<DichVu, String>{
-    String INSERT_SQL = "INSERT INTO DichVu(Id_DV,Id_HDCT,TenDV,SoLuong,GiaTien,TrangThaiDV)VALUES(?,?,?,?,?,?)";
+public class DichVuDao extends DuAnDao<DichVu, Integer>{
+    String INSERT_SQL = "INSERT INTO DichVu(Id_HDCT,TenDV,SoLuong,GiaTien)VALUES(?,?,?,?)";
     String UPDATE_SQL = "UPDATE DichVu SET Id_HDCT=?,TenDV=?,SoLuong=?,GiaTien=?,TrangThaiDV=? WHERE Id_DV=?";
     String DELETE_SQL = "DELETE FROM DichVu WHERE Id_DV=?";
     String SELECT_ALL_SQL = "SELECT*FROM DichVu";
     String SELECT_BY_ID_SQL = "SELECT*FROM DichVu WHERE Id_DV=?";
+    String SELECT_BY_ID_HDCT = "SELECT*FROM DICHVU Where Id_HDCT=?";
 
     @Override
     public void insert(DichVu entity) {
-        XJdbc.update(INSERT_SQL, entity.getMaDV(), entity.getMaHDCT(), entity.getTenDV(), entity.getSoLuong(), entity.getGiaTien(),entity.getTrangThaiDichVu()); 
+        XJdbc.update(INSERT_SQL, entity.getMaHDCT(), entity.getTenDV(), entity.getSoLuong(), entity.getGiaTien()); 
     }
 
     @Override
@@ -34,7 +35,7 @@ public class DichVuDao extends DuAnDao<DichVu, String>{
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Integer id) {
         XJdbc.update(DELETE_SQL, id); 
     }
 
@@ -44,7 +45,7 @@ public class DichVuDao extends DuAnDao<DichVu, String>{
     }
 
     @Override
-    public DichVu selectById(String id) {
+    public DichVu selectById(Integer id) {
         List<DichVu> list = this.selectBySql(SELECT_BY_ID_SQL, id);
         if(list.isEmpty()){
             return null;
@@ -59,13 +60,12 @@ public class DichVuDao extends DuAnDao<DichVu, String>{
             ResultSet rs = XJdbc.query(sql, args);
             while(rs.next()){
                 DichVu entity = new DichVu();
-                entity.setMaHDCT(rs.getInt("Id_HDCT"));
-                entity.setMaDV(rs.getInt("Id_DV"));
-                
-                entity.setSoLuong(rs.getInt("SoLuong"));
+                entity.setMaHDCT(rs.getInt("Id_DV"));
+                entity.setMaDV(rs.getInt("Id_HDCT"));   
                 entity.setTenDV(rs.getString("TenDV"));
+                entity.setSoLuong(rs.getInt("SoLuong"));
                 entity.setGiaTien(rs.getFloat("GiaTien"));
-                entity.setTrangThaiDichVu(rs.getString("TrangThai"));
+              //  entity.setTrangThaiDichVu(rs.getString("TrangThai"));
                 list.add(entity);
             }
             rs.getStatement().getConnection().close();
@@ -76,4 +76,8 @@ public class DichVuDao extends DuAnDao<DichVu, String>{
         return list;
     }
     
+    public List<DichVu> selectByIdHDCT(Integer id) {
+
+        return this.selectBySql(SELECT_BY_ID_HDCT, id);  
+    }
 }
