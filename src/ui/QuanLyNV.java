@@ -168,7 +168,7 @@ public class QuanLyNV extends javax.swing.JInternalFrame {
                     x.getTrangThai()? "Đi làm" : "Nghỉ việc"});
         }
         }else{
-            MsgBox.alert(this, "Chưa tìm thấy");
+            MsgBox.alert(this, "Không tìm thấy");
         }
     }
     public boolean checkTrungMa() {
@@ -178,7 +178,7 @@ public class QuanLyNV extends javax.swing.JInternalFrame {
             return true;
         } else {
             txtMaNV.setBackground(Color.RED);
-            MsgBox.alert(this, "Mã khách hàng đã tồn tại.");
+            MsgBox.alert(this, "Mã nhân viên đã tồn tại.");
             return false;
         }
     }

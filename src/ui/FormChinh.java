@@ -400,12 +400,12 @@ public class FormChinh extends javax.swing.JFrame {
 
     private void mniNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniNhanVienActionPerformed
         // TODO add your handling code here:
-        if(Auth.user1!=null){
+        if(Auth.user1!=null&&Auth.isManager()){
         QuanLyNV fnv=new QuanLyNV();
             DesktopPane.add(fnv);
             fnv.setVisible(true);
         }
-        if(Auth.user2!=null){
+        if(Auth.user2!=null||!Auth.isManager()){
             MsgBox.alert(this, "Bạn không có quyền truy cập");
         }
     }//GEN-LAST:event_mniNhanVienActionPerformed
