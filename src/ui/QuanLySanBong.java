@@ -69,6 +69,7 @@ public class QuanLySanBong extends javax.swing.JInternalFrame {
         btnTimKiem = new javax.swing.JButton();
         txtTimKiem = new javax.swing.JTextField();
 
+        setClosable(true);
         setTitle("QUẢN LÝ SÂN BÓNG");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -331,7 +332,7 @@ public class QuanLySanBong extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         List<SanBong> list = dao.selectAll();
         for (SanBong sb : list) {
-            if (txtMaSan.getText().equals(sb.getMaSan())) {
+            if (txtMaSan1.getText().equals(sb.getMaSan())) {
                 check = 0;
                 MsgBox.alert(this, "Mã sân đã tồn tại");
                 return;
@@ -412,11 +413,11 @@ public class QuanLySanBong extends javax.swing.JInternalFrame {
     void moi(){
         this.index=-1;
         status();
-        txtMaSan.setText("");
-        rdo1.setSelected(true);
-        txtGiaSan.setText("");
+        txtMaSan1.setText("");
+        rdo3.setSelected(true);
+        txtGiaSan1.setText("");
         txtTimKiem.setText("");
-        cboTrangThai.setSelectedIndex(0);
+        cboTrangThai1.setSelectedIndex(0);
         List<SanBong> list= dao.selectAll();
         mol.setRowCount(0);
         for (SanBong sb : list) {
@@ -426,12 +427,12 @@ public class QuanLySanBong extends javax.swing.JInternalFrame {
     
     void checkDuLieu(){
         List<SanBong> list= dao.selectAll();
-        if(txtMaSan.getText().equals("")){
+        if(txtMaSan1.getText().equals("")){
             check= 0;
             MsgBox.alert(this, "Vui lòng nhập mã sân");
             return;
         }
-        if(txtGiaSan.getText().equals("")){
+        if(txtGiaSan1.getText().equals("")){
             check= 0;
             MsgBox.alert(this, "Vui lòng nhập giá sân");
             return;
@@ -441,14 +442,14 @@ public class QuanLySanBong extends javax.swing.JInternalFrame {
     
     void them(){
         SanBong sb= new SanBong();
-        sb.setMaSan(txtMaSan.getText());
-        if(rdo1.isSelected()){
+        sb.setMaSan(txtMaSan1.getText());
+        if(rdo3.isSelected()){
             sb.setLoaiSan("sân 7");
         }else{
             sb.setLoaiSan("sân 11");
         }
-        sb.setGiaSan(Float.valueOf(txtGiaSan.getText()));
-        sb.setTrangThaiSan(cboTrangThai.getSelectedItem()+"");
+        sb.setGiaSan(Float.valueOf(txtGiaSan1.getText()));
+        sb.setTrangThaiSan(cboTrangThai1.getSelectedItem()+"");
         try {
             dao.insert(sb);
             MsgBox.alert(this, "Thêm sân bóng thành công");
@@ -461,14 +462,14 @@ public class QuanLySanBong extends javax.swing.JInternalFrame {
         
     void sua(){
         SanBong sb= new SanBong();
-        sb.setMaSan(txtMaSan.getText());
-        if(rdo1.isSelected()){
+        sb.setMaSan(txtMaSan1.getText());
+        if(rdo3.isSelected()){
             sb.setLoaiSan("sân 7");
         }else{
             sb.setLoaiSan("sân 11");
         }
-        sb.setGiaSan(Float.valueOf(txtGiaSan.getText()));
-        sb.setTrangThaiSan(cboTrangThai.getSelectedItem()+"");
+        sb.setGiaSan(Float.valueOf(txtGiaSan1.getText()));
+        sb.setTrangThaiSan(cboTrangThai1.getSelectedItem()+"");
         try {
             dao.update(sb);
             MsgBox.alert(this, "Sửa sân bóng thành công");
@@ -481,7 +482,7 @@ public class QuanLySanBong extends javax.swing.JInternalFrame {
     
     void xoa(){
         try {
-            SanBong sb= dao.selectById(txtMaSan.getText());
+            SanBong sb= dao.selectById(txtMaSan1.getText());
             if(sb!=null){
                 dao.delete(sb.getMaSan());
                 MsgBox.alert(this, "Xóa sân bóng thành công");
@@ -512,15 +513,15 @@ public class QuanLySanBong extends javax.swing.JInternalFrame {
         tblSanBong.setRowSelectionInterval(this.index, this.index);
         String masan= String.valueOf(tblSanBong.getValueAt(this.index, 0));
         SanBong sb= dao.selectById(masan);
-        txtMaSan.setText(sb.getMaSan());
+        txtMaSan1.setText(sb.getMaSan());
         if(sb.getLoaiSan().equals("sân 7")){
-            rdo1.setSelected(true);
+            rdo3.setSelected(true);
         }else{
-            rdo2.setSelected(true);
+            rdo4.setSelected(true);
         }
-        txtGiaSan.setText(sb.getGiaSan()+"");
-        cboTrangThai.setSelectedItem(sb.getTrangThaiSan());
-        tabs.setSelectedIndex(0);
+        txtGiaSan1.setText(sb.getGiaSan()+"");
+        cboTrangThai1.setSelectedItem(sb.getTrangThaiSan());
+        tabs1.setSelectedIndex(0);
         }
     }
     
@@ -528,100 +529,81 @@ public class QuanLySanBong extends javax.swing.JInternalFrame {
         tblSanBong.setRowSelectionInterval(this.index, this.index);
         String masan= String.valueOf(tblSanBong.getValueAt(this.index, 0));
         SanBong sb= dao.selectById(masan);
-        txtMaSan.setText(sb.getMaSan());
+        txtMaSan1.setText(sb.getMaSan());
         if(sb.getLoaiSan().equals("sân 7")){
-            rdo1.setSelected(true);
+            rdo3.setSelected(true);
         }else{
-            rdo2.setSelected(true);
+            rdo4.setSelected(true);
         }
-        txtGiaSan.setText(sb.getGiaSan()+"");
-        cboTrangThai.setSelectedItem(sb.getTrangThaiSan());
-        tabs.setSelectedIndex(0);
+        txtGiaSan1.setText(sb.getGiaSan()+"");
+        cboTrangThai1.setSelectedItem(sb.getTrangThaiSan());
+        tabs1.setSelectedIndex(0);
     }
     
     void status(){
         if(this.index==-1){
-            btnThem.setEnabled(true);
-            btnSua.setEnabled(false);
-            btnXoa.setEnabled(false);
-            btnMoi.setEnabled(false);
-            btnFirst.setEnabled(false);
-            btnPrev.setEnabled(false);
-            btnNext.setEnabled(false);
-            btnLast.setEnabled(false);
+            btnThem1.setEnabled(true);
+            btnSua1.setEnabled(false);
+            btnXoa1.setEnabled(false);
+            btnMoi1.setEnabled(false);
+            btnFirst1.setEnabled(false);
+            btnPrev1.setEnabled(false);
+            btnNext1.setEnabled(false);
+            btnLast1.setEnabled(false);
         }else if(this.index==0){
-            btnThem.setEnabled(false);
-            btnSua.setEnabled(true);
-            btnXoa.setEnabled(true);
-            btnMoi.setEnabled(true);
-            btnFirst.setEnabled(false);
-            btnPrev.setEnabled(false);
-            btnNext.setEnabled(true);
-            btnLast.setEnabled(true);
+            btnThem1.setEnabled(false);
+            btnSua1.setEnabled(true);
+            btnXoa1.setEnabled(true);
+            btnMoi1.setEnabled(true);
+            btnFirst1.setEnabled(false);
+            btnPrev1.setEnabled(false);
+            btnNext1.setEnabled(true);
+            btnLast1.setEnabled(true);
         }else if(this.index>0&&this.index<tblSanBong.getRowCount()-1){
-            btnThem.setEnabled(false);
-            btnSua.setEnabled(true);
-            btnXoa.setEnabled(true);
-            btnMoi.setEnabled(true);
-            btnFirst.setEnabled(true);
-            btnPrev.setEnabled(true);
-            btnNext.setEnabled(true);
-            btnLast.setEnabled(true);
+            btnThem1.setEnabled(false);
+            btnSua1.setEnabled(true);
+            btnXoa1.setEnabled(true);
+            btnMoi1.setEnabled(true);
+            btnFirst1.setEnabled(true);
+            btnPrev1.setEnabled(true);
+            btnNext1.setEnabled(true);
+            btnLast1.setEnabled(true);
         }else if(this.index== tblSanBong.getRowCount()-1){
-            btnThem.setEnabled(false);
-            btnSua.setEnabled(true);
-            btnXoa.setEnabled(true);
-            btnMoi.setEnabled(true);
-            btnFirst.setEnabled(true);
-            btnPrev.setEnabled(true);
-            btnNext.setEnabled(false);
-            btnLast.setEnabled(false);
+            btnThem1.setEnabled(false);
+            btnSua1.setEnabled(true);
+            btnXoa1.setEnabled(true);
+            btnMoi1.setEnabled(true);
+            btnFirst1.setEnabled(true);
+            btnPrev1.setEnabled(true);
+            btnNext1.setEnabled(false);
+            btnLast1.setEnabled(false);
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnFirst;
     private javax.swing.JButton btnFirst1;
-    private javax.swing.JButton btnLast;
     private javax.swing.JButton btnLast1;
-    private javax.swing.JButton btnMoi;
     private javax.swing.JButton btnMoi1;
-    private javax.swing.JButton btnNext;
     private javax.swing.JButton btnNext1;
-    private javax.swing.JButton btnPrev;
     private javax.swing.JButton btnPrev1;
-    private javax.swing.JButton btnSua;
     private javax.swing.JButton btnSua1;
-    private javax.swing.JButton btnThem;
     private javax.swing.JButton btnThem1;
     private javax.swing.JButton btnTimKiem;
-    private javax.swing.JButton btnXoa;
     private javax.swing.JButton btnXoa1;
-    private javax.swing.JComboBox<String> cboTrangThai;
     private javax.swing.JComboBox<String> cboTrangThai1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JRadioButton rdo1;
-    private javax.swing.JRadioButton rdo2;
     private javax.swing.JRadioButton rdo3;
     private javax.swing.JRadioButton rdo4;
-    private javax.swing.JTabbedPane tabs;
     private javax.swing.JTabbedPane tabs1;
     private javax.swing.JTable tblSanBong;
-    private javax.swing.JTextField txtGiaSan;
     private javax.swing.JTextField txtGiaSan1;
-    private javax.swing.JTextField txtMaSan;
     private javax.swing.JTextField txtMaSan1;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
