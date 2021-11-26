@@ -31,6 +31,8 @@ public class DichVu {
         this.trangThaiDichVu = trangThaiDichVu;
     }
 
+   
+
     public int getMaDV() {
         return maDV;
     }
