@@ -222,7 +222,7 @@ public class LichSuDatSan extends javax.swing.JInternalFrame {
             }
         }else{
             if(txtMaXacNhan.getText().equals(String.valueOf(this.x))){
-                String mahdct= String.valueOf(tblDanhsach.getValueAt(this.index, 0));
+                int mahdct= Integer.valueOf(tblDanhsach.getValueAt(this.index, 0)+"");
                 HoaDonChiTiet hdct2= dao.selectById(mahdct);
                 hdct2.setTrangThai(2);
                 dao.update(hdct2);

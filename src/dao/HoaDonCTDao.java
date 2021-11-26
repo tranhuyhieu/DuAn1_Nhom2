@@ -80,4 +80,9 @@ public class HoaDonCTDao extends DuAnDao<HoaDonChiTiet, Integer>{
         String sql = "SELECT * FROM HOADONCHITIET WHERE Id_HD LIKE ?";
         return this.selectBySql(sql, "%"+keyword+"%");
     }
+    
+    public List<HoaDonChiTiet> selectHoaDonChiTietByHoaDon(String Email){
+        String sql= "select HOADONCHITIET.* from HOADONCHITIET join HOADON on HOADON.Id_HD= HOADONCHITIET.Id_HD Where HOADON.Email= ?";
+        return this.selectBySql(sql, Email);
+    }
 }

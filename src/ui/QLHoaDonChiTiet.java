@@ -665,10 +665,6 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
 
     private void btnXemDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemDVActionPerformed
         // TODO add your handling code here:
-        QLDichVu dv = new QLDichVu();
-        dv.setVisible(true);
-        this.getDesktopPane().add(dv);
-        this.dispose();
     }//GEN-LAST:event_btnXemDVActionPerformed
 
     private void txtSoLuongFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSoLuongFocusLost
