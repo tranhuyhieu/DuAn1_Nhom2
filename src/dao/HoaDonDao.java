@@ -23,6 +23,7 @@ public class HoaDonDao extends DuAnDao<HoaDon, String>{
     String DELETE_SQL = "DELETE FROM HOADON WHERE Id_HD=?";
     String SELECT_ALL_SQL = "SELECT*FROM HOADON";
     String SELECT_BY_ID_SQL = "SELECT *FROM HOADON WHERE Id_HD=?";
+    String SELECT_BY_ID = "SELECT * FROM HOADON WHERE EMAIL = ?";
     
     @Override
     public void insert(HoaDon entity) {
@@ -89,4 +90,8 @@ public class HoaDonDao extends DuAnDao<HoaDon, String>{
         return list; 
     }
    
+    public List<HoaDon> selectByEmail(String email){
+        String sql = "SELECT * FROM HOADON WHERE EMAIL = ?";
+        return this.selectBySql(sql, email);
+    }
 }
