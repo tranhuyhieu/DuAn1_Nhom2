@@ -24,6 +24,7 @@ public class HoaDonDao extends DuAnDao<HoaDon, String>{
     String DELETE_SQL = "DELETE FROM HOADON WHERE Id_HD=?";
     String SELECT_ALL_SQL = "SELECT*FROM HOADON";
     String SELECT_BY_ID_SQL = "SELECT *FROM HOADON WHERE Id_HD=?";
+    String SELECT_BY_ID = "SELECT * FROM HOADON WHERE EMAIL = ?";
     
     @Override
     public void insert(HoaDon entity) {
@@ -89,9 +90,6 @@ public class HoaDonDao extends DuAnDao<HoaDon, String>{
         }
         return list; 
     }
-   public List<HoaDon> selectIDhoaDon() {
-        return this.selectBySql("SELECT * FROM HOADON WHERE Id_HD = (SELECT MAX(Id_HD) FROM HOADON)");
-    }
    public HoaDon selecthoaDon(String Email, Date NgayThanhToan){
        String sql = "select * from HOADON where Email = ? and NgayThanhToan =? and TrangThaiHD = 0" ;
        List<HoaDon> listhd = this.selectBySql(sql,Email,NgayThanhToan);
@@ -100,7 +98,7 @@ public class HoaDonDao extends DuAnDao<HoaDon, String>{
         }
         return listhd.get(0);
    }
-   public HoaDon selectByEmail(String Email){
+   public HoaDon selectByEmailHoaDon(String Email){
        String sql = "select * from HOADON where Email = ?" ;
        List<HoaDon> listhd = this.selectBySql(sql,Email);
        if(listhd.isEmpty()){
@@ -108,4 +106,8 @@ public class HoaDonDao extends DuAnDao<HoaDon, String>{
         }
         return listhd.get(0);
    }
+    public List<HoaDon> selectByEmail(String email){
+        String sql = "SELECT * FROM HOADON WHERE EMAIL = ?";
+        return this.selectBySql(sql, email);
+    }
 }
