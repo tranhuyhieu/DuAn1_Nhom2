@@ -16,8 +16,8 @@ import java.util.List;
  *
  * @author PC
  */
-public class HoaDonCTDao extends DuAnDao<HoaDonChiTiet, Integer>{
-    String INSERT_SQL = "INSERT INTO HOADONCHITIET(Id_HDCT,Id_HD,Id_San,Id_KG,NgayDat,GiaTien,TrangThai)VALUES(?,?,?,?,?,?,?)";
+public class HoaDonCTDao extends DuAnDao<HoaDonChiTiet, String>{
+    String INSERT_SQL = "INSERT INTO HOADONCHITIET(Id_HD,Id_San,Id_KG,NgayDat,GiaTien,TrangThai)VALUES(?,?,?,?,?,?)";
     String UPDATE_SQL = "UPDATE HOADONCHITIET SET Id_HD=?,Id_San=?,Id_KG=?,NgayDat=?,GiaTien=?,TrangThai=? WHERE Id_HDCT=?";
     String DELETE_SQL = "DELETE FROM HOADONCHITIET WHERE Id_HDCT=?";
     String SELECT_ALL_SQL = "SELECT*FROM HOADONCHITIET";
@@ -25,7 +25,7 @@ public class HoaDonCTDao extends DuAnDao<HoaDonChiTiet, Integer>{
 
     @Override
     public void insert(HoaDonChiTiet entity) {
-        XJdbc.update(INSERT_SQL, entity.getMaHDCT(), entity.getMaHD(), entity.getMaSan(), entity.getMaKG(), entity.getNgayDat(), entity.getGiaTien(), entity.getTrangThai()); 
+        XJdbc.update(INSERT_SQL, entity.getMaHD(), entity.getMaSan(), entity.getMaKG(), entity.getNgayDat(), entity.getGiaTien(), entity.getTrangThai()); 
     }
 
     @Override
@@ -34,7 +34,7 @@ public class HoaDonCTDao extends DuAnDao<HoaDonChiTiet, Integer>{
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(String id) {
         XJdbc.update(DELETE_SQL, id); 
     }
 
@@ -44,7 +44,7 @@ public class HoaDonCTDao extends DuAnDao<HoaDonChiTiet, Integer>{
     }
 
     @Override
-    public HoaDonChiTiet selectById(Integer id) {
+    public HoaDonChiTiet selectById(String id) {
         List<HoaDonChiTiet> list = this.selectBySql(SELECT_BY_ID_SQL, id);
         if(list.isEmpty()){
             return null;
@@ -76,13 +76,9 @@ public class HoaDonCTDao extends DuAnDao<HoaDonChiTiet, Integer>{
         return list;
     }
     
-    public  List<HoaDonChiTiet> selectByKeyword(String keyword){
-        String sql = "SELECT * FROM HOADONCHITIET WHERE Id_HD LIKE ?";
-        return this.selectBySql(sql, "%"+keyword+"%");
-    }
-    
     public List<HoaDonChiTiet> selectHoaDonChiTietByHoaDon(String Email){
         String sql= "select HOADONCHITIET.* from HOADONCHITIET join HOADON on HOADON.Id_HD= HOADONCHITIET.Id_HD Where HOADON.Email= ?";
         return this.selectBySql(sql, Email);
     }
+    
 }

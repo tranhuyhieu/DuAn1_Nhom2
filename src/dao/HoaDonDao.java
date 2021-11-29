@@ -10,6 +10,7 @@ import utils.XDate;
 import utils.XJdbc;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ import java.util.List;
  */
 public class HoaDonDao extends DuAnDao<HoaDon, String>{
 
-    String INSERT_SQL = "INSERT INTO HOADON(Id_HD,Id_NV ,Id_KH,HoTenKH,SoDienThoai,Email,AnhDatCoc,GiamGia,TongTien,NgayThanhToan,TrangThaiHD,TrangThaiTT)VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+    String INSERT_SQL = "INSERT INTO HOADON(Id_NV ,Id_KH,HoTenKH,SoDienThoai,Email,AnhDatCoc,GiamGia,TongTien,NgayThanhToan,TrangThaiHD,TrangThaiTT)VALUES(?,?,?,?,?,?,?,?,?,?,?)";
     String UPDATE_SQL = "UPDATE HOADON SET Id_NV=? ,Id_KH=?,HoTenKH=?,SoDienThoai=?,Email=?,AnhDatCoc=?,GiamGia=?,TongTien=?,NgayThanhToan=?,TrangThaiHD=?,TrangThaiTT=? WHERE Id_HD=?";
     String DELETE_SQL = "DELETE FROM HOADON WHERE Id_HD=?";
     String SELECT_ALL_SQL = "SELECT*FROM HOADON";
@@ -26,7 +27,7 @@ public class HoaDonDao extends DuAnDao<HoaDon, String>{
     
     @Override
     public void insert(HoaDon entity) {
-        XJdbc.update(INSERT_SQL, entity.getMaHD(), entity.getMaNV(), entity.getMaKH(), entity.getHoTenKH(), entity.getSoDienThoai(),entity.getEmail(), entity.getAnhDatCoc(),entity.getGiamGia(),entity.getTongTien(),entity.getNgayThanhToan(),entity.getTrangThaiHD(),entity.getTrangThaiTT()); 
+        XJdbc.update(INSERT_SQL, entity.getMaNV(), entity.getMaKH(), entity.getHoTenKH(), entity.getSoDienThoai(),entity.getEmail(), entity.getAnhDatCoc(),entity.getGiamGia(),entity.getTongTien(),entity.getNgayThanhToan(),entity.getTrangThaiHD(),entity.getTrangThaiTT()); 
     }
 
     @Override
@@ -88,5 +89,23 @@ public class HoaDonDao extends DuAnDao<HoaDon, String>{
         }
         return list; 
     }
-   
+   public List<HoaDon> selectIDhoaDon() {
+        return this.selectBySql("SELECT * FROM HOADON WHERE Id_HD = (SELECT MAX(Id_HD) FROM HOADON)");
+    }
+   public HoaDon selecthoaDon(String Email, Date NgayThanhToan){
+       String sql = "select * from HOADON where Email = ? and NgayThanhToan =? and TrangThaiHD = 0" ;
+       List<HoaDon> listhd = this.selectBySql(sql,Email,NgayThanhToan);
+       if(listhd.isEmpty()){
+            return null;
+        }
+        return listhd.get(0);
+   }
+   public HoaDon selectByEmail(String Email){
+       String sql = "select * from HOADON where Email = ?" ;
+       List<HoaDon> listhd = this.selectBySql(sql,Email);
+       if(listhd.isEmpty()){
+            return null;
+        }
+        return listhd.get(0);
+   }
 }
