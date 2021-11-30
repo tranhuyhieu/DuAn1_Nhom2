@@ -14,24 +14,20 @@ public class DichVu {
     private int maHDCT;
     private String tenDV;
     private int soLuong;
-    private String trongTai;
     private float giaTien;
-    private String trangThaiDichVu;
+    private boolean trangThaiDichVu;
 
     public DichVu() {
     }
 
-    public DichVu(int maDV, int maHDCT, String tenDV, int soLuong, String trongTai, float giaTien, String trangThaiDichVu) {
+    public DichVu(int maDV, int maHDCT, String tenDV, int soLuong, float giaTien, boolean trangThaiDichVu) {
         this.maDV = maDV;
         this.maHDCT = maHDCT;
         this.tenDV = tenDV;
         this.soLuong = soLuong;
-        this.trongTai = trongTai;
         this.giaTien = giaTien;
         this.trangThaiDichVu = trangThaiDichVu;
     }
-
-   
 
     public int getMaDV() {
         return maDV;
@@ -65,14 +61,6 @@ public class DichVu {
         this.soLuong = soLuong;
     }
 
-    public String getTrongTai() {
-        return trongTai;
-    }
-
-    public void setTrongTai(String trongTai) {
-        this.trongTai = trongTai;
-    }
-
     public float getGiaTien() {
         return giaTien;
     }
@@ -81,11 +69,13 @@ public class DichVu {
         this.giaTien = giaTien;
     }
 
-    public String getTrangThaiDichVu() {
+    public boolean getTrangThaiDichVu() {
         return trangThaiDichVu;
     }
 
-    public void setTrangThaiDichVu(String trangThaiDichVu) {
+    public void setTrangThaiDichVu(boolean trangThaiDichVu) {
         this.trangThaiDichVu = trangThaiDichVu;
     }
+
+    
 }

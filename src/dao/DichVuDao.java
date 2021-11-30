@@ -60,12 +60,12 @@ public class DichVuDao extends DuAnDao<DichVu, Integer>{
             ResultSet rs = XJdbc.query(sql, args);
             while(rs.next()){
                 DichVu entity = new DichVu();
-                entity.setMaHDCT(rs.getInt("Id_DV"));
-                entity.setMaDV(rs.getInt("Id_HDCT"));   
+                entity.setMaDV(rs.getInt("Id_DV"));
+                entity.setMaHDCT(rs.getInt("Id_HDCT"));   
                 entity.setTenDV(rs.getString("TenDV"));
                 entity.setSoLuong(rs.getInt("SoLuong"));
                 entity.setGiaTien(rs.getFloat("GiaTien"));
-              //  entity.setTrangThaiDichVu(rs.getString("TrangThai"));
+                entity.setTrangThaiDichVu(rs.getBoolean("TrangThaiDV"));
                 list.add(entity);
             }
             rs.getStatement().getConnection().close();
