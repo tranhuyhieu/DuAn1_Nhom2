@@ -6,12 +6,15 @@
 package ui;
 
 import com.edusys.ui.GioiThieuJDialog;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.Timer;
 import ui.DangNhap;
 import utils.Auth;
@@ -34,7 +37,7 @@ public class FormChinh extends javax.swing.JFrame {
 
     void dangnhap(){
         new DangNhap(this, true).setVisible(true);
-    }
+    }        
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -193,7 +196,7 @@ public class FormChinh extends javax.swing.JFrame {
 
         jMenu1.setText("Hệ Thống ");
 
-        mnithongTinCaNhan.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mnithongTinCaNhan.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
         mnithongTinCaNhan.setText("Thông Tin Cá Nhân");
         mnithongTinCaNhan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,16 +205,16 @@ public class FormChinh extends javax.swing.JFrame {
         });
         jMenu1.add(mnithongTinCaNhan);
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText("Đổi Mật Khẩu");
         jMenu1.add(jMenuItem1);
 
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem2.setText("Quên Mật Khẩu");
         jMenu1.add(jMenuItem2);
         jMenu1.add(jSeparator1);
 
-        mnidangNhap.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mnidangNhap.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_MASK));
         mnidangNhap.setText("Đăng Nhập");
         mnidangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,16 +223,16 @@ public class FormChinh extends javax.swing.JFrame {
         });
         jMenu1.add(mnidangNhap);
 
-        mniDangKy.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniDangKy.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_MASK));
         mniDangKy.setText("Đăng Ký");
         jMenu1.add(mniDangKy);
         jMenu1.add(jSeparator7);
 
-        mniDangXuat.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniDangXuat.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_MASK));
         mniDangXuat.setText("Đăng Xuất");
         jMenu1.add(mniDangXuat);
 
-        mniketThuc.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniketThuc.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.CTRL_MASK));
         mniketThuc.setText("Kết Thúc");
         jMenu1.add(mniketThuc);
 
@@ -237,7 +240,7 @@ public class FormChinh extends javax.swing.JFrame {
 
         MenuQuanLy.setText("Quản Lý ");
 
-        mniNhanVien.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_5, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniNhanVien.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_5, java.awt.event.InputEvent.CTRL_MASK));
         mniNhanVien.setText("Quản Lý Nhân Viên");
         mniNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -246,7 +249,7 @@ public class FormChinh extends javax.swing.JFrame {
         });
         MenuQuanLy.add(mniNhanVien);
 
-        mniKhachHang.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_6, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniKhachHang.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_6, java.awt.event.InputEvent.CTRL_MASK));
         mniKhachHang.setText("Quản Lý Khách Hàng");
         mniKhachHang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -256,7 +259,7 @@ public class FormChinh extends javax.swing.JFrame {
         MenuQuanLy.add(mniKhachHang);
         MenuQuanLy.add(jSeparator8);
 
-        mniQLsanBong.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_7, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniQLsanBong.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_7, java.awt.event.InputEvent.CTRL_MASK));
         mniQLsanBong.setText("Quản Lý Sân Bóng");
         mniQLsanBong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -265,11 +268,16 @@ public class FormChinh extends javax.swing.JFrame {
         });
         MenuQuanLy.add(mniQLsanBong);
 
-        mniHoaDon.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniHoaDon.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_MASK));
         mniHoaDon.setText("Quản Lý Hóa Đơn");
+        mniHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniHoaDonActionPerformed(evt);
+            }
+        });
         MenuQuanLy.add(mniHoaDon);
 
-        mniQLLichSuDatSan.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniQLLichSuDatSan.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         mniQLLichSuDatSan.setText("Quản Lý Lịch Sử Đặt Sân");
         mniQLLichSuDatSan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -282,7 +290,7 @@ public class FormChinh extends javax.swing.JFrame {
 
         jMenu4.setText("Thống Kê");
 
-        mniQLThongKe.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniQLThongKe.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
         mniQLThongKe.setText("Quản Lý Thống Kê");
         mniQLThongKe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -438,6 +446,13 @@ public class FormChinh extends javax.swing.JFrame {
             MsgBox.alert(this, "Bạn không có quyền truy cập");
         }
     }//GEN-LAST:event_mniQLThongKeActionPerformed
+
+    private void mniHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniHoaDonActionPerformed
+        // TODO add your handling code here:
+        QuanLyHoaDonJInternalFrame qlhd = new QuanLyHoaDonJInternalFrame();
+        DesktopPane.add(qlhd);
+        qlhd.setVisible(true);
+    }//GEN-LAST:event_mniHoaDonActionPerformed
 
     /**
      * @param args the command line arguments
