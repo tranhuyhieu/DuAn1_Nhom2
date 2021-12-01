@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author PC
  */
-public class HoaDonCTDao extends DuAnDao<HoaDonChiTiet, String>{
+public class HoaDonCTDao extends DuAnDao<HoaDonChiTiet, Integer>{
     String INSERT_SQL = "INSERT INTO HOADONCHITIET(Id_HD,Id_San,Id_KG,NgayDat,GiaTien,TrangThai)VALUES(?,?,?,?,?,?)";
     String UPDATE_SQL = "UPDATE HOADONCHITIET SET Id_HD=?,Id_San=?,Id_KG=?,NgayDat=?,GiaTien=?,TrangThai=? WHERE Id_HDCT=?";
     String DELETE_SQL = "DELETE FROM HOADONCHITIET WHERE Id_HDCT=?";
@@ -34,7 +34,7 @@ public class HoaDonCTDao extends DuAnDao<HoaDonChiTiet, String>{
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Integer id) {
         XJdbc.update(DELETE_SQL, id); 
     }
 
@@ -44,7 +44,7 @@ public class HoaDonCTDao extends DuAnDao<HoaDonChiTiet, String>{
     }
 
     @Override
-    public HoaDonChiTiet selectById(String id) {
+    public HoaDonChiTiet selectById(Integer id) {
         List<HoaDonChiTiet> list = this.selectBySql(SELECT_BY_ID_SQL, id);
         if(list.isEmpty()){
             return null;
@@ -80,5 +80,11 @@ public class HoaDonCTDao extends DuAnDao<HoaDonChiTiet, String>{
         String sql= "select HOADONCHITIET.* from HOADONCHITIET join HOADON on HOADON.Id_HD= HOADONCHITIET.Id_HD Where HOADON.Email= ?";
         return this.selectBySql(sql, Email);
     }
+    
+    public  List<HoaDonChiTiet> selectByKeyword(String keyword){
+        String sql = "SELECT * FROM HOADONCHITIET WHERE Id_HD LIKE ?";
+        return this.selectBySql(sql, "%"+keyword+"%");
+    }
+
     
 }

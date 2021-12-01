@@ -389,7 +389,7 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
         }else{
             HoaDon model = getModel();
             hddao.insert(model);
-            HoaDon hd2 = hddao.selectByEmail(model.getEmail());
+            HoaDon hd2 = hddao.selectByEmailHoaDon(model.getEmail());
             HoaDonChiTiet model1 = new HoaDonChiTiet();
             model1.setMaHD(hd2.getMaHD());
             model1.setMaSan(QuanLyDatSan.sb.getMaSan());

@@ -777,9 +777,8 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
     private void btnMoHoaDonCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoHoaDonCTActionPerformed
         // TODO add your handling code here:
         QLHoaDonChiTiet ql = new QLHoaDonChiTiet();
-        ql.setVisible(true);
         this.getDesktopPane().add(ql);
-        this.dispose();
+        ql.setVisible(true);
     }//GEN-LAST:event_btnMoHoaDonCTActionPerformed
 
 

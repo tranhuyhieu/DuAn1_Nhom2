@@ -184,11 +184,6 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
         dv.setTenDV(String.valueOf(tblDichVu.getValueAt(this.index, 0)));
         dv.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
         dv.setGiaTien(Float.parseFloat(String.valueOf(tblDichVu.getValueAt(this.index, 1))));
-        if(rdoThueTrongTai.isSelected()){
-            dv.setTrongTai("Có");
-        }else{
-            dv.setTrongTai("Không");
-        }
         return dv;
     }
 
@@ -665,6 +660,9 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
 
     private void btnXemDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemDVActionPerformed
         // TODO add your handling code here:
+        QLDichVu dv= new QLDichVu();
+        this.getDesktopPane().setVisible(true);
+        dv.setVisible(true);
     }//GEN-LAST:event_btnXemDVActionPerformed
 
     private void txtSoLuongFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSoLuongFocusLost
