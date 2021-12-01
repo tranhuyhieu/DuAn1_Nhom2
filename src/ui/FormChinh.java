@@ -52,6 +52,8 @@ public class FormChinh extends javax.swing.JFrame {
         Separator01 = new javax.swing.JToolBar.Separator();
         btnQLLichSuDatSan = new javax.swing.JButton();
         jSeparator10 = new javax.swing.JToolBar.Separator();
+        btnDatCoc = new javax.swing.JButton();
+        jSeparator5 = new javax.swing.JToolBar.Separator();
         btnDangKy = new javax.swing.JButton();
         jSeparator11 = new javax.swing.JToolBar.Separator();
         btnQuenMatKhau = new javax.swing.JButton();
@@ -133,6 +135,19 @@ public class FormChinh extends javax.swing.JFrame {
         });
         ToolBar.add(btnQLLichSuDatSan);
         ToolBar.add(jSeparator10);
+
+        btnDatCoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-initiate-money-transfer-48.png"))); // NOI18N
+        btnDatCoc.setText("Đặt cọc");
+        btnDatCoc.setFocusable(false);
+        btnDatCoc.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnDatCoc.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnDatCoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDatCocActionPerformed(evt);
+            }
+        });
+        ToolBar.add(btnDatCoc);
+        ToolBar.add(jSeparator5);
 
         btnDangKy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-sign-up-48.png"))); // NOI18N
         btnDangKy.setText("Đăng Ký");
@@ -474,6 +489,13 @@ public class FormChinh extends javax.swing.JFrame {
         new QuenMatKhauJDialog(this, true).setVisible(true);
     }//GEN-LAST:event_mniQuenMatKhauActionPerformed
 
+    private void btnDatCocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatCocActionPerformed
+        // TODO add your handling code here:
+        DatCoc dc= new DatCoc();
+        DesktopPane.add(dc);
+        dc.setVisible(true);
+    }//GEN-LAST:event_btnDatCocActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -520,6 +542,7 @@ public class FormChinh extends javax.swing.JFrame {
     private javax.swing.JButton btnDangKy;
     private javax.swing.JButton btnDangNhap;
     private javax.swing.JButton btnDangXuat;
+    private javax.swing.JButton btnDatCoc;
     private javax.swing.JButton btnQLLichSuDatSan;
     private javax.swing.JButton btnQLSan;
     private javax.swing.JButton btnQuenMatKhau;
@@ -535,6 +558,7 @@ public class FormChinh extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
+    private javax.swing.JToolBar.Separator jSeparator5;
     private javax.swing.JPopupMenu.Separator jSeparator7;
     private javax.swing.JPopupMenu.Separator jSeparator8;
     private javax.swing.JLabel lblDongHo;
