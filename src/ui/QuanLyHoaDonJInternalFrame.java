@@ -24,6 +24,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
     HoaDonDao hdDAO = new HoaDonDao();
     int row = -1;
     boolean check = false;
+    
     /**
      * Creates new form QuanLyHoaDonJInternalFrame
      */
@@ -94,6 +95,14 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
     }
+    
+    String maKH(String id){
+        String maKH = null;
+        HoaDon hd = new HoaDon();
+        hd = hdDAO.selectById(id);
+        maKH = hd.getMaKH();
+        return maKH;
+    }
 
     HoaDon getForm() {
         this.row = 0;
@@ -112,7 +121,11 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
             hd.setGiamGia(20);
         }
         hd.setTongTien(Float.parseFloat(txtTongTien.getText()));
-        hd.setMaKH("KHbot");
+        if(maKH(txtMaHoaDon.getText()) == null){
+            hd.setMaKH("KHbot");
+        }else{
+            hd.setMaKH(maKH(txtMaHoaDon.getText()));
+        }        
         hd.setMaNV(Auth.user1.getMaNV());
         hd.setAnhDatCoc(lblAnh.getText());
         if (rdoCho.isSelected()) {

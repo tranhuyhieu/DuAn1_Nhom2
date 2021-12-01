@@ -101,24 +101,36 @@ public class DoiMatKhauJDialog extends javax.swing.JDialog {
         }
     }
 
+    String passNV(String id) {
+        String pass = null;
+        NhanVien nv = new NhanVien();
+        nv = nvDAO.selectById(id);
+        pass = nv.getMatKhau();
+        return pass;
+    }
+
+    String passKH(String id) {
+        String pass = null;
+        KhachHang kh = new KhachHang();
+        kh = khDAO.selectById(id);
+        pass = kh.getMatKhau();
+        return pass;
+    }
+
     void kiemTra() {
-        if (txtMK.getText().equals("")) {
+        if (txtMK.getText().length() == 0) {
             txtMK.requestFocus();
             txtMK.setBackground(Color.YELLOW);
             MsgBox.alert(this, "Chưa nhập mật khẩu");
             check = false;
             return;
-//        } else if (!String.valueOf(txtMK.getPassword()).equals(Auth.user1.getMatKhau()) || !String.valueOf(txtMK.getPassword()).equals(Auth.user2.getMatKhau())) {
-//            txtMK.requestFocus();
-//            txtMK.setBackground(Color.YELLOW);
-//            MsgBox.alert(this, "Nhập sai mật khẩu vui lòng nhập lại !");
-//            check = false;
-//            return;
         } else {
             txtMK.setBackground(Color.white);
             check = true;
-        } if (Auth.user1 != null) {
-            if (!String.valueOf(txtMK.getPassword()).equals(Auth.user1.getMatKhau())) {
+        }
+
+        if (Auth.user1 != null) {
+            if (!String.valueOf(txtMK.getPassword()).equals(passNV(txtTK.getText()))) {
                 txtMK.requestFocus();
                 txtMK.setBackground(Color.YELLOW);
                 MsgBox.alert(this, "Nhập sai mật khẩu vui lòng nhập lại !");
@@ -128,21 +140,29 @@ public class DoiMatKhauJDialog extends javax.swing.JDialog {
                 txtMK.setBackground(Color.white);
                 check = true;
             }
-        } else if (!String.valueOf(txtMK.getPassword()).equals(Auth.user2.getMatKhau())) {
-            txtMK.requestFocus();
-            txtMK.setBackground(Color.YELLOW);
-            MsgBox.alert(this, "Nhập sai mật khẩu vui lòng nhập lại !");
-            check = false;
-            return;
+        } else if (Auth.user1 == null) {
+            if (!String.valueOf(txtMK.getPassword()).equals(passKH(txtTK.getText()))) {
+                txtMK.requestFocus();
+                txtMK.setBackground(Color.YELLOW);
+                MsgBox.alert(this, "Nhập sai mật khẩu vui lòng nhập lại !");
+                check = false;
+                return;
+            }
         } else {
             txtMK.setBackground(Color.white);
             check = true;
         }
 
-        if (txtMKM.getText().equals("")) {
+        if (txtMKM.getText().length() == 0) {
             txtMKM.requestFocus();
             txtMKM.setBackground(Color.YELLOW);
             MsgBox.alert(this, "Chưa nhập mật khẩu mới");
+            check = false;
+            return;
+        }else if (txtMKM.getText().equals(" ")) {
+            txtMKM.requestFocus();
+            txtMKM.setBackground(Color.YELLOW);
+            MsgBox.alert(this, "Mật khẩu mới không chứa <space>");
             check = false;
             return;
         } else {
@@ -150,10 +170,16 @@ public class DoiMatKhauJDialog extends javax.swing.JDialog {
             check = true;
         }
 
-        if (txtXNMK.getText().equals("")) {
+        if (txtXNMK.getText().length() == 0) {
             txtXNMK.requestFocus();
             txtXNMK.setBackground(Color.YELLOW);
-            MsgBox.alert(this, "Chưa nhập mật khẩu mới");
+            MsgBox.alert(this, "Chưa nhập xác nhận mật khẩu mới");
+            check = false;
+            return;
+        }else if (txtXNMK.getText().equals(" ")) {
+            txtXNMK.requestFocus();
+            txtXNMK.setBackground(Color.YELLOW);
+            MsgBox.alert(this, "Xác nhận mật khẩu mới không chứa <space>");
             check = false;
             return;
         } else {
