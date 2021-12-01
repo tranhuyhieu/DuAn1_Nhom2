@@ -65,8 +65,8 @@ public class FormChinh extends javax.swing.JFrame {
         MenuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnithongTinCaNhan = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        mniDoiMatKhau = new javax.swing.JMenuItem();
+        mniQuenMatKhau = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mnidangNhap = new javax.swing.JMenuItem();
         mniDangKy = new javax.swing.JMenuItem();
@@ -205,13 +205,23 @@ public class FormChinh extends javax.swing.JFrame {
         });
         jMenu1.add(mnithongTinCaNhan);
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem1.setText("Đổi Mật Khẩu");
-        jMenu1.add(jMenuItem1);
+        mniDoiMatKhau.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
+        mniDoiMatKhau.setText("Đổi Mật Khẩu");
+        mniDoiMatKhau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniDoiMatKhauActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mniDoiMatKhau);
 
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem2.setText("Quên Mật Khẩu");
-        jMenu1.add(jMenuItem2);
+        mniQuenMatKhau.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
+        mniQuenMatKhau.setText("Quên Mật Khẩu");
+        mniQuenMatKhau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniQuenMatKhauActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mniQuenMatKhau);
         jMenu1.add(jSeparator1);
 
         mnidangNhap.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_MASK));
@@ -454,6 +464,16 @@ public class FormChinh extends javax.swing.JFrame {
         qlhd.setVisible(true);
     }//GEN-LAST:event_mniHoaDonActionPerformed
 
+    private void mniDoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDoiMatKhauActionPerformed
+        // TODO add your handling code here:
+        new DoiMatKhauJDialog(this, true).setVisible(true);
+    }//GEN-LAST:event_mniDoiMatKhauActionPerformed
+
+    private void mniQuenMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQuenMatKhauActionPerformed
+        // TODO add your handling code here:
+        new QuenMatKhauJDialog(this, true).setVisible(true);
+    }//GEN-LAST:event_mniQuenMatKhauActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -509,8 +529,6 @@ public class FormChinh extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator10;
     private javax.swing.JToolBar.Separator jSeparator11;
@@ -522,6 +540,7 @@ public class FormChinh extends javax.swing.JFrame {
     private javax.swing.JLabel lblDongHo;
     private javax.swing.JMenuItem mniDangKy;
     private javax.swing.JMenuItem mniDangXuat;
+    private javax.swing.JMenuItem mniDoiMatKhau;
     private javax.swing.JMenuItem mniGioiThieu;
     private javax.swing.JMenuItem mniHoaDon;
     private javax.swing.JMenuItem mniKhachHang;
@@ -530,6 +549,7 @@ public class FormChinh extends javax.swing.JFrame {
     private javax.swing.JMenuItem mniQLLichSuDatSan;
     private javax.swing.JMenuItem mniQLThongKe;
     private javax.swing.JMenuItem mniQLsanBong;
+    private javax.swing.JMenuItem mniQuenMatKhau;
     private javax.swing.JMenuItem mnidangNhap;
     private javax.swing.JMenuItem mniketThuc;
     private javax.swing.JMenuItem mnithongTinCaNhan;
