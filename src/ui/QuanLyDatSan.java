@@ -1187,9 +1187,8 @@ public class QuanLyDatSan extends javax.swing.JInternalFrame {
         
         this.sb = new SanBong(sb2.getMaSan(),sb2.getLoaiSan(),sb2.getTrangThaiSan(),sb2.getGiaSan());
         ThongTinNguoiDat thongtin = new ThongTinNguoiDat();
-        thongtin.setVisible(true);
         this.getDesktopPane().add(thongtin);
-        this.dispose();
+        thongtin.setVisible(true);
     }
     void init(){
         this.setFrameIcon(new ImageIcon(XImage.getAppIcon()));

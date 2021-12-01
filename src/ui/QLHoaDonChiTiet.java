@@ -55,7 +55,7 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
                 HoaDonChiTiet hdct = list.get(i);
                 String khungGio = kgDao.selectById(hdct.getMaKG()).getKhungGio();
                 Object[] row = {hdct.getMaHDCT(), hdct.getMaHD(), hdct.getMaSan(),
-                    khungGio, hdct.getNgayDat(), hdct.getGiaTien(), hdct.getTrangThai()
+                    khungGio, hdct.getNgayDat(), hdct.getTrongTai() ,hdct.getGiaTien(), hdct.getTrangThai()
                 };
                 model.addRow(row);
             }
@@ -70,6 +70,11 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
         txtMaSan.setText(hdct.getMaSan());
         txtMaKG.setText(hdct.getMaKG());
         txtNgayDat.setText(XDate.toString(hdct.getNgayDat(), "dd/MM/yyyy"));
+        if(hdct.getTrongTai().equals("Có")){
+            rdoThueTrongTai.setSelected(true);
+        }else{
+            rdoThueTrongTai.setSelected(false);
+        }
         txtTongTien.setText(String.valueOf(hdct.getGiaTien()));
         if (hdct.getTrangThai() == 1) {
             rdoXacNhan.setSelected(true);
@@ -85,6 +90,11 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
         hdct.setMaSan(txtMaSan.getText());
         hdct.setMaKG(txtMaKG.getText());
         hdct.setNgayDat(XDate.now());
+        if(rdoThueTrongTai.isSelected()){
+            hdct.setTrongTai("Có");
+        }else{
+            hdct.setTrongTai("Không");
+        }
         hdct.setGiaTien(Float.parseFloat(txtTongTien.getText()));
         if (rdoXacNhan.isSelected()) {
             hdct.setTrangThai(1);
@@ -184,11 +194,6 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
         dv.setTenDV(String.valueOf(tblDichVu.getValueAt(this.index, 0)));
         dv.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
         dv.setGiaTien(Float.parseFloat(String.valueOf(tblDichVu.getValueAt(this.index, 1))));
-        if(rdoThueTrongTai.isSelected()){
-            dv.setTrongTai("Có");
-        }else{
-            dv.setTrongTai("Không");
-        }
         return dv;
     }
 
@@ -527,13 +532,13 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
 
         tblHDCT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã hóa đơn ct", "Mã hóa đơn", "Mã sân", "Khung giờ", "Ngày đặt", "Tổng tiền", "Trạng Thái"
+                "Mã hóa đơn ct", "Mã hóa đơn", "Mã sân", "Khung giờ", "Ngày đặt", "Trọng tài", "Tổng tiền", "Trạng Thái"
             }
         ));
         tblHDCT.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -665,6 +670,9 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
 
     private void btnXemDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemDVActionPerformed
         // TODO add your handling code here:
+        QLDichVu dv= new QLDichVu();
+        this.getDesktopPane().add(dv);
+        dv.setVisible(true);
     }//GEN-LAST:event_btnXemDVActionPerformed
 
     private void txtSoLuongFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSoLuongFocusLost

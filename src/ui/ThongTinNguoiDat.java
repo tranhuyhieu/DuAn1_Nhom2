@@ -20,15 +20,17 @@ import ui.QuanLyDatSan;
 import utils.Auth;
 import utils.XDate;
 import utils.XImage;
+
 /**
  *
  * @author sonho
  */
 public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
+
     HoaDonCTDao hdctdao = new HoaDonCTDao();
     HoaDonDao hddao = new HoaDonDao();
     int check = 1;
-    
+
     /**
      * Creates new form ThongTinNguoiDat
      */
@@ -260,11 +262,11 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
     private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
         // TODO add your handling code here:
         CheckDL();
-        if (check==1) {
-           xacNhan(); 
+        if (check == 1) {
+            xacNhan();
         }
-        
-        
+
+
     }//GEN-LAST:event_btnXacNhanActionPerformed
 
     private void txtGiaSanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGiaSanActionPerformed
@@ -301,38 +303,30 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtSDT;
     private javax.swing.JTextField txtngayThanhToan;
     // End of variables declaration//GEN-END:variables
-    
-    void init(){
+
+    void init() {
         this.setFrameIcon(new ImageIcon(XImage.getAppIcon()));
         txtGiaSan.setEnabled(false);
-        txtGiaSan.setText(QuanLyDatSan.sb.getGiaSan()+"");
-        List<HoaDonChiTiet>list = hdctdao.selectAll() ;
+        txtGiaSan.setText(QuanLyDatSan.sb.getGiaSan() + "");
+        List<HoaDonChiTiet> list = hdctdao.selectAll();
         for (HoaDonChiTiet x : list) {
-            if (x.getMaSan().equals(QuanLyDatSan.sb.getMaSan())&& x.getMaKG().equals("KG01")) {
+            if (x.getMaSan().equals(QuanLyDatSan.sb.getMaSan()) && x.getMaKG().equals("KG01")) {
                 rd01.setEnabled(false);
-            }
-            else if (x.getMaSan().equals(QuanLyDatSan.sb.getMaSan())&& x.getMaKG().equals("KG02")) {
+            } else if (x.getMaSan().equals(QuanLyDatSan.sb.getMaSan()) && x.getMaKG().equals("KG02")) {
                 rd02.setEnabled(false);
-            }
-            else if (x.getMaSan().equals(QuanLyDatSan.sb.getMaSan())&& x.getMaKG().equals("KG03")) {
+            } else if (x.getMaSan().equals(QuanLyDatSan.sb.getMaSan()) && x.getMaKG().equals("KG03")) {
                 rd03.setEnabled(false);
-            }
-            else if (x.getMaSan().equals(QuanLyDatSan.sb.getMaSan())&& x.getMaKG().equals("KG04")) {
+            } else if (x.getMaSan().equals(QuanLyDatSan.sb.getMaSan()) && x.getMaKG().equals("KG04")) {
                 rd04.setEnabled(false);
-            }
-            else if (x.getMaSan().equals(QuanLyDatSan.sb.getMaSan())&& x.getMaKG().equals("KG05")) {
+            } else if (x.getMaSan().equals(QuanLyDatSan.sb.getMaSan()) && x.getMaKG().equals("KG05")) {
                 rd05.setEnabled(false);
-            }
-            else if (x.getMaSan().equals(QuanLyDatSan.sb.getMaSan())&& x.getMaKG().equals("KG06")) {
+            } else if (x.getMaSan().equals(QuanLyDatSan.sb.getMaSan()) && x.getMaKG().equals("KG06")) {
                 rd06.setEnabled(false);
-            }
-            else if (x.getMaSan().equals(QuanLyDatSan.sb.getMaSan())&& x.getMaKG().equals("KG07")) {
+            } else if (x.getMaSan().equals(QuanLyDatSan.sb.getMaSan()) && x.getMaKG().equals("KG07")) {
                 rd07.setEnabled(false);
-            }
-            else if (x.getMaSan().equals(QuanLyDatSan.sb.getMaSan())&& x.getMaKG().equals("KG08")) {
+            } else if (x.getMaSan().equals(QuanLyDatSan.sb.getMaSan()) && x.getMaKG().equals("KG08")) {
                 rd08.setEnabled(false);
-            }
-            else{
+            } else {
                 rd01.setEnabled(true);
                 rd02.setEnabled(true);
                 rd03.setEnabled(true);
@@ -342,20 +336,21 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
                 rd07.setEnabled(true);
                 rd08.setEnabled(true);
             }
-            
+
         }
-        
+
     }
-    void xacNhan(){
-        String Email= txtEmail.getText();
+
+    void xacNhan() {
+        String Email = txtEmail.getText();
         Date NgayThanhToan = XDate.toDate(txtngayThanhToan.getText());
-        HoaDon hd = hddao.selecthoaDon(Email,NgayThanhToan);
-        
-        if (hd!=null) {
+        HoaDon hd = hddao.selecthoaDon(Email, NgayThanhToan);
+
+        if (hd != null) {
             HoaDonChiTiet model1 = new HoaDonChiTiet();
             model1.setMaHD(hd.getMaHD());
             model1.setMaSan(QuanLyDatSan.sb.getMaSan());
-            String maKG = null ;
+            String maKG = null;
             if (rd01.isSelected()) {
                 maKG = "KG01";
             }
@@ -386,14 +381,14 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
             model1.setTrangThai(0);
             hdctdao.insert(model1);
             MsgBox.alert(this, "Bạn đã đặt thêm sân thành công");
-        }else{
+        } else {
             HoaDon model = getModel();
             hddao.insert(model);
-            HoaDon hd2 = hddao.selectByEmail(model.getEmail());
+            HoaDon hd2 = hddao.selectByEmailHoaDon(model.getEmail());
             HoaDonChiTiet model1 = new HoaDonChiTiet();
             model1.setMaHD(hd2.getMaHD());
             model1.setMaSan(QuanLyDatSan.sb.getMaSan());
-            String maKG1 = null ;
+            String maKG1 = null;
             if (rd01.isSelected()) {
                 maKG1 = "KG01";
             }
@@ -425,38 +420,19 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
             hdctdao.insert(model1);
             MsgBox.alert(this, "Bạn đã đặt sân thành công");
         }
-//        HoaDon model=getModel();
-//        
-//        List<HoaDonChiTiet> list1 = hdctdao.selectAll();
-//        HoaDonChiTiet model1=getModel1();
-//        for (HoaDon hoaDon : list) {
-//            for (HoaDonChiTiet hoaDonct : list1) {
-//                if (hoaDon.getSoDienThoai().equals(txtSDT.getText())&& hoaDonct.getNgayDat().equals(XDate.now())) {
-//                    hdctdao.insert(model1);
-//                    break;
-//                }else{
-//                    hddao.insert(model);
-//                    hdctdao.insert(model1);
-//                    break;
-//                }
-//            }
-//            
-//        }
-            
-        
-        
     }
-    HoaDon getModel(){
+
+    HoaDon getModel() {
         HoaDon model = new HoaDon();
-        if (Auth.user1==null) {
+        if (Auth.user1 == null) {
             model.setMaNV("NV01");
-        }else{
+        } else {
             model.setMaNV(Auth.user1.getMaNV());
         }
-        
-        if (Auth.user2==null) {
+
+        if (Auth.user2 == null) {
             model.setMaKH("KH_Boss");
-        }else{
+        } else {
             model.setMaKH(Auth.user2.getMaKH());
         }
         model.setHoTenKH(txtNguoiDat.getText());
@@ -468,110 +444,72 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
         model.setNgayThanhToan(XDate.toDate(txtngayThanhToan.getText()));
         model.setTrangThaiHD(0);
         model.setTrangThaiTT(0);
-        return model ;
+        return model;
     }
-//    HoaDonChiTiet getModel1(){
-//        HoaDonChiTiet model1 = new HoaDonChiTiet();
-//        List<HoaDon> list = hddao.selectIDhoaDon();
-//        for (HoaDon x : list) {
-//            model1.setMaHD(x.getMaHD());
-//        }
-//        model1.setGiaTien(Float.valueOf(txtGiaSan.getText()));
-//        if (rd01.isSelected()) {
-//            model1.setMaKG("KG01");
-//        }
-//        else if (rd02.isSelected()) {
-//            model1.setMaKG("KG02");
-//        }
-//        else if (rd03.isSelected()) {
-//            model1.setMaKG("KG03");
-//        }
-//        else if (rd04.isSelected()) {
-//            model1.setMaKG("KG04");
-//        }
-//        else if (rd05.isSelected()) {
-//            model1.setMaKG("KG05");
-//        }
-//        else if (rd06.isSelected()) {
-//            model1.setMaKG("KG06");
-//        }
-//        else if (rd07.isSelected()) {
-//            model1.setMaKG("KG07");
-//        }
-//        else if (rd08.isSelected()) {
-//            model1.setMaKG("KG08");
-//        }
-//        model1.setMaSan(QuanLyDatSan.sb.getMaSan()+"");
-//        model1.setNgayDat(XDate.now());
-//        model1.setTrangThai(0);
-//        return  model1 ;
-//    }
-    void CheckDL(){
+
+    void CheckDL() {
         String hoten = "[a-zA-Z]+";
-        String sdt ="((09|03|07|08|05)+([0-9]{8}))";
-        String email = "^[A-Za-z0-9]+[A-Za-z0-9]*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)$";
-        // check hoten
-        if (txtNguoiDat.getText().length()==0) {
+        String sdt = "((09|03|07|08|05)+([0-9]{8}))";
+        String email = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        if (txtNguoiDat.getText().length() == 0) {
             MsgBox.alert(this, "Bạn chưa điền thông tin họ tên");
             txtNguoiDat.requestFocus();
-            check=0;
+            check = 0;
             return;
-        }else if (txtNguoiDat.getText().matches(hoten)==false) {
+        } else if (txtNguoiDat.getText().matches(hoten) == false) {
             MsgBox.alert(this, "Bạn điền sai thông tin email");
             txtNguoiDat.requestFocus();
-            check=0;
+            check = 0;
             return;
-        }else{
-            check=1;
+        } else {
+            check = 1;
         }
-        // check sdt
-        if (txtSDT.getText().length()==0) {
+        if (txtSDT.getText().length() == 0) {
             MsgBox.alert(this, "Bạn chưa điền thông tin Số ĐT");
             txtSDT.requestFocus();
-            check=0;
+            check = 0;
             return;
-        }else if (txtSDT.getText().matches(sdt)==false) {
+        } else if (txtSDT.getText().matches(sdt) == false) {
             MsgBox.alert(this, "Bạn điền sai thông tin Số ĐT");
             txtSDT.requestFocus();
-            check=0;
+            check = 0;
             return;
-        }else{
-            check=1;
+        } else {
+            check = 1;
         }
-        // check hoten
-        if (txtEmail.getText().length()==0) {
+        if (txtEmail.getText().length() == 0) {
             MsgBox.alert(this, "Bạn chưa điền thông tin họ tên");
             txtEmail.requestFocus();
-            check=0;
+            check = 0;
             return;
-        }else if (txtEmail.getText().matches(email)==false) {
+        } else if (txtEmail.getText().matches(email) == false) {
             MsgBox.alert(this, "Bạn điền sai thông tin họ tên");
             txtEmail.requestFocus();
-            check=0;
+            check = 0;
             return;
-        }else{
-            check=1;
+        } else {
+            check = 1;
         }
-        //check ngày đặt 
-        java.util.Date ns ;
-        SimpleDateFormat df ;
-        if(txtngayThanhToan.getText().length()==0){
-            MsgBox.alert(this,"chưa có dữ liệu ngày sinh");
+        java.util.Date ns;
+        SimpleDateFormat df;
+        if (txtngayThanhToan.getText().length() == 0) {
+            MsgBox.alert(this, "chưa có dữ liệu ngày sinh");
             txtngayThanhToan.requestFocus();
-            check=0;
+            check = 0;
             return;
-        }else if (txtngayThanhToan.getText()!=null) {
+        } else if (txtngayThanhToan.getText() != null) {
             df = new SimpleDateFormat("yyyy/MM/dd");
             String d = txtngayThanhToan.getText();
             try {
                 ns = df.parse(txtngayThanhToan.getText());
             } catch (Exception e) {
                 MsgBox.alert(this, "ns k dung ");
-            txtngayThanhToan.requestFocus();
-            check = 0;
-            return;
+                txtngayThanhToan.requestFocus();
+                check = 0;
+                return;
             }
-        }else{
+        } else {
             check = 1;
         }
     }

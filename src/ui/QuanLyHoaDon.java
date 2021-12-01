@@ -20,14 +20,14 @@ import utils.XImage;
  *
  * @author haoca
  */
-public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
+public class QuanLyHoaDon extends javax.swing.JInternalFrame {
     HoaDonDao hdDAO = new HoaDonDao();
     int row = -1;
     boolean check = false;
     /**
      * Creates new form QuanLyHoaDonJInternalFrame
      */
-    public QuanLyHoaDonJInternalFrame() {
+    public QuanLyHoaDon() {
         initComponents();
         init();
     }
@@ -764,9 +764,8 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
     private void btnMoHoaDonCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoHoaDonCTActionPerformed
         // TODO add your handling code here:
         QLHoaDonChiTiet ql = new QLHoaDonChiTiet();
-        ql.setVisible(true);
         this.getDesktopPane().add(ql);
-        this.dispose();
+        ql.setVisible(true);
     }//GEN-LAST:event_btnMoHoaDonCTActionPerformed
 
 
