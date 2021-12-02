@@ -177,7 +177,7 @@ public class QuenMatKhauJDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGui)
                     .addComponent(btnDong))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
