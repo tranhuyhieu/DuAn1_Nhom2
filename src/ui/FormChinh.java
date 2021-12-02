@@ -255,6 +255,11 @@ public class FormChinh extends javax.swing.JFrame {
 
         mniDangKy.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_MASK));
         mniDangKy.setText("Đăng Ký");
+        mniDangKy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniDangKyActionPerformed(evt);
+            }
+        });
         jMenu1.add(mniDangKy);
         jMenu1.add(jSeparator7);
 
@@ -501,12 +506,19 @@ public class FormChinh extends javax.swing.JFrame {
         dc.setVisible(true);
     }//GEN-LAST:event_btnDatCocActionPerformed
 
+
+    private void mniDangKyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDangKyActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_mniDangKyActionPerformed
+
     private void btnQLSanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLSanActionPerformed
         // TODO add your handling code here:
         QuanLyDatSan qlds= new QuanLyDatSan();
         DesktopPane.add(qlds);
         qlds.setVisible(true);
     }//GEN-LAST:event_btnQLSanActionPerformed
+
 
     /**
      * @param args the command line arguments

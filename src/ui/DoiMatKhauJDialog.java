@@ -159,10 +159,10 @@ public class DoiMatKhauJDialog extends javax.swing.JDialog {
             MsgBox.alert(this, "Chưa nhập mật khẩu mới");
             check = false;
             return;
-        }else if (txtMKM.getText().equals(" ")) {
+        }else if (txtMKM.getText().contains(" ")) {
             txtMKM.requestFocus();
             txtMKM.setBackground(Color.YELLOW);
-            MsgBox.alert(this, "Mật khẩu mới không chứa <space>");
+            MsgBox.alert(this, "Mật khẩu mới không chứa khoảng trống");
             check = false;
             return;
         } else {
@@ -176,10 +176,10 @@ public class DoiMatKhauJDialog extends javax.swing.JDialog {
             MsgBox.alert(this, "Chưa nhập xác nhận mật khẩu mới");
             check = false;
             return;
-        }else if (txtXNMK.getText().equals(" ")) {
+        }else if (txtXNMK.getText().contains(" ")){
             txtXNMK.requestFocus();
             txtXNMK.setBackground(Color.YELLOW);
-            MsgBox.alert(this, "Xác nhận mật khẩu mới không chứa <space>");
+            MsgBox.alert(this, "Mật khẩu mới và mật khẩu xác nhận không khớp");
             check = false;
             return;
         } else {

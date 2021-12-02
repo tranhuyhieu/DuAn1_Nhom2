@@ -67,20 +67,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
             e.printStackTrace();
             MsgBox.alert(this, "Không có thông tin");
         }
-    }
-    
-//    String getMaKH(String IDHD) {
-//        String maKH = null;
-//        try {
-//            List<HoaDon> lst;
-//            lst =  (List<HoaDon>) hdDAO.selectById(IDHD);
-//            maKH = lst.get(0).getMaKH();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(maKH);
-//        return maKH; 
-//    }
+    }    
 
     void capNhat() {
         HoaDon model = getForm();
@@ -248,98 +235,102 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
     void check() {
         String email_regex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                 + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-        String sdt_regex = "[0-9]+";
-        if (txtMaHoaDon.getText().length() == 0) {
-            txtMaHoaDon.requestFocus();
-            txtMaHoaDon.setBackground(Color.YELLOW);
-            MsgBox.alert(this, "Không để trống mã hóa đơn");
-            check = false;
-            return;
-        } else if (txtMaHoaDon.getText().length() > 20) {
-            txtMaHoaDon.requestFocus();
-            txtMaHoaDon.setBackground(Color.YELLOW);
-            MsgBox.alert(this, "mã hóa đơn cho phép tối đa 20 ký tự");
-            check = false;
-            return;
-        } else {
-            txtMaHoaDon.setBackground(Color.white);
-            check = true;
-        }
+        String sdt_regex = "0[0-9\\s.-]{9,13}";
+        String hoTen_regex = "(?:[A-Z][a-z]{1,7} )+[A-Z][a-z]{1,7}";
+        
+//        if (txtMaHoaDon.getText().length() == 0) {
+//            txtMaHoaDon.requestFocus();
+//            txtMaHoaDon.setBackground(Color.YELLOW);
+//            MsgBox.alert(this, "Không để trống mã hóa đơn");
+//            check = false;
+//            return;
+//        } else if (txtMaHoaDon.getText().length() > 20) {
+//            txtMaHoaDon.requestFocus();
+//            txtMaHoaDon.setBackground(Color.YELLOW);
+//            MsgBox.alert(this, "mã hóa đơn cho phép tối đa 20 ký tự");
+//            check = false;
+//            return;
+//        } else {
+//            txtMaHoaDon.setBackground(Color.white);
+//            check = true;
+//        }
 
         if (txtTenKH.getText().equals("")) {
             txtTenKH.requestFocus();
-            txtTenKH.setBackground(Color.YELLOW);
             MsgBox.alert(this, "họ tên đang để trống");
             check = false;
             return;
+        }else if (!txtTenKH.getText().matches(hoTen_regex)) {
+            txtTenKH.requestFocus();
+            MsgBox.alert(this, "Sai định dạng họ tên(chỉ hỗ trợ alphabet)");
+            check = false;
+            return;
         } else {
-            txtTenKH.setBackground(Color.white);
             check = true;
         }
         
-        if (txtSDT.getText().equals("")) {
+        if (txtSDT.getText().length() == 0) {
             txtSDT.requestFocus();
-            txtSDT.setBackground(Color.YELLOW);
+//            txtSDT.setBackground(Color.YELLOW);
             MsgBox.alert(this, "Số điện thoại không được để trống ");
             check = false;
             return;
         } else if (!txtSDT.getText().matches(sdt_regex)) {
             txtSDT.requestFocus();
-            txtSDT.setBackground(Color.YELLOW);
-            MsgBox.alert(this, "Số điện thoại không đúng định dạng( ký tự số )");
+//            txtSDT.setBackground(Color.YELLOW);
+            MsgBox.alert(this, "Số điện thoại không đúng định dạng( ký tự số; 9->13)");
             check = false;
             return;
-        } else if (txtSDT.getText().length() < 10 || txtSDT.getText().length() > 11) {
-            txtSDT.requestFocus();
-            txtSDT.setBackground(Color.YELLOW);
-            MsgBox.alert(this, "Độ dài số điện thoại cho phép");
-            check = false;
-            return;
+//        } else if (txtSDT.getText().length() < 10 || txtSDT.getText().length() > 11) {
+//            txtSDT.requestFocus();
+//            txtSDT.setBackground(Color.YELLOW);
+//            MsgBox.alert(this, "Độ dài số điện thoại cho phép");
+//            check = false;
+//            return;
         } else {
-            txtSDT.setBackground(Color.white);
+ //           txtSDT.setBackground(Color.white);
             check = true;
         }
 
         if (txtEmail.getText().length() == 0) {
             txtEmail.requestFocus();
-            txtEmail.setBackground(Color.YELLOW);
+//            txtEmail.setBackground(Color.YELLOW);
             MsgBox.alert(this, "Email đang để trống");
             check = false;
             return;
         } else if (!txtEmail.getText().matches(email_regex)) {
             txtEmail.requestFocus();
-            txtEmail.setBackground(Color.YELLOW);
+ //           txtEmail.setBackground(Color.YELLOW);
             MsgBox.alert(this, "Email bạn vừa nhập không đúng định dạng");
             check = false;
         } else {
-            txtEmail.setBackground(Color.white);
+//            txtEmail.setBackground(Color.white);
             check = true;
         }
         
         if(txtTongTien.getText().length() == 0){
             txtTongTien.requestFocus();
-            txtTongTien.setBackground(Color.YELLOW);
-            MsgBox.alert(this, "Đang để trống số điện thoại");
+//            txtTongTien.setBackground(Color.YELLOW);
+            MsgBox.alert(this, "Đang để trống tổng tiền");
             check = false;
             return ;
         }else{
-            txtTongTien.setBackground(Color.YELLOW);
+//            txtTongTien.setBackground(Color.YELLOW);
             check = true;
         }
         
         try {
             float tien = Float.parseFloat(txtTongTien.getText());  
             System.out.println(tien);
-            txtTongTien.setBackground(Color.YELLOW);
+//            txtTongTien.setBackground(Color.YELLOW);
             check = true;
         } catch (Exception e) {
             txtTongTien.requestFocus();
-            txtTongTien.setBackground(Color.YELLOW);
-            MsgBox.alert(this, "Chỉ nhập ký tự số");
+//            txtTongTien.setBackground(Color.YELLOW);
+            MsgBox.alert(this, "Tổng tiền chỉ nhập ký tự số");
             check = false;
             return ;
-        }  
-             
+        }              
     }
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -748,7 +739,9 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
         if(check == true){
             capNhat();
             fillTableDanhSach();
+//            XImage.save((File)lblAnh.getText());         
         }
+        
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed

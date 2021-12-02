@@ -10,6 +10,7 @@ import utils.MsgBox;
 import dao.KhachHangDao;
 import java.awt.Color;
 import utils.XDate;
+import utils.XImage;
 
 /**
  *
@@ -28,16 +29,16 @@ public class DangKyTaiKhoanMoiJDialog extends javax.swing.JDialog {
     }
     
     void init(){
-        //setIconImage(XImage.getAppIcon());
+        setIconImage(XImage.getAppIcon());
         setLocationRelativeTo(null);
         setTitle("Hệ thống Đăng ký");
     }
     
     KhachHang getForm() {
         KhachHang kh = new KhachHang();
-        kh.setMaKH(txtTaiKhoan.getText());
+        kh.setMaKH(txtTaiKhoan.getText().trim());
         kh.setMaNV("NV01");
-        kh.setMatKhau(String.valueOf(txtMK.getPassword()));
+        kh.setMatKhau(String.valueOf(txtMK.getPassword()).trim());
         kh.setNgayDK(XDate.now());
         kh.setHoTen(txtHoTen.getText());
         return kh;
@@ -53,7 +54,7 @@ public class DangKyTaiKhoanMoiJDialog extends javax.swing.JDialog {
     void dangKy() {
         KhachHang model = getForm();
         String XNMK = new String(txtXNMK.getPassword());
-        if (!XNMK.equals(model.getMatKhau())) {
+        if (!XNMK.trim().equals(model.getMatKhau())) {
             MsgBox.alert(this, "Xác nhận mật khẩu sai");
         } else {
             try {
@@ -62,7 +63,6 @@ public class DangKyTaiKhoanMoiJDialog extends javax.swing.JDialog {
                 MsgBox.alert(this, "Đăng ký thành công");
             } catch (Exception e) {
                 txtTaiKhoan.requestFocus();
-                txtTaiKhoan.setBackground(Color.YELLOW);
                 MsgBox.alert(this, "Trùng tên tài khoản, vui lòng chọn tài khoản khác !");
                 return ;
             }
@@ -70,54 +70,67 @@ public class DangKyTaiKhoanMoiJDialog extends javax.swing.JDialog {
     }
 
     void kiemTraForm() {
-        
-        if (txtTaiKhoan.getText().equals("")) {
+        //String tenTK_regex = "/^[a-z0-9]{3,20}$/";
+        String hoTen_regex = "(?:[A-Z][a-z]{1,7} )+[A-Z][a-z]{1,7}";
+        if (txtTaiKhoan.getText().length()==0) {
             txtTaiKhoan.requestFocus();
-            txtTaiKhoan.setBackground(Color.YELLOW);
-            MsgBox.alert(this, "đang để trống tên tài khỏan");
+            MsgBox.alert(this, "Tài khoản đang để trống");
             check = false;
             return;
-        }else if(txtTaiKhoan.getText().length()>20){
+//        }else if(txtTaiKhoan.getText().matches(tenTK_regex) == false){
+//            txtTaiKhoan.requestFocus();
+//            MsgBox.alert(this, "Tên tài khoản không đúng định dạng (mẫu : tk123) - từ 3 - 20 ký tự");
+//            check = false;
+//            return;
+        }else if (txtTaiKhoan.getText().contains(" ")) {
             txtTaiKhoan.requestFocus();
-            txtTaiKhoan.setBackground(Color.YELLOW);
-            MsgBox.alert(this, "Tên tài khoản nhỏ hơn 20 ký tự");
+            MsgBox.alert(this, "Tên tài khoản không chứa khoảng trống");
             check = false;
             return;
         }  else{
-            txtTaiKhoan.setBackground(Color.white);
             check = true;
         } 
         
-        if (txtHoTen.getText().equals("")) {
+        if (txtHoTen.getText().length()==0) {
             txtHoTen.requestFocus();
-            txtHoTen.setBackground(Color.YELLOW);
-            MsgBox.alert(this, "đang để trống họ tên");
+            MsgBox.alert(this, "Không để trống họ tên");
+            check = false;
+            return;
+        }else if (txtHoTen.getText().matches(hoTen_regex) == false) {
+            System.out.println(txtHoTen.getText().matches(hoTen_regex));
+            txtHoTen.requestFocus();
+            MsgBox.alert(this, "Sai định dạng họ tên (ký tự alphabet)");
             check = false;
             return;
         }else{
-            txtHoTen.setBackground(Color.white);
             check = true;
         }
 
-        if (txtMK.getText().equals("")) {
+        if (txtMK.getText().length() == 0) {
             txtMK.requestFocus();
-            txtMK.setBackground(Color.YELLOW);
-            MsgBox.alert(this, "đang để trống mật khẩu");
+            MsgBox.alert(this, "Mật khẩu không để trống");
             check = false;
             return;
-        }  else{
-            txtMK.setBackground(Color.white);
+        }else if (txtMK.getText().contains(" ")) {
+            txtMK.requestFocus();
+            MsgBox.alert(this, "Mật khẩu không chứa khoảng trống");
+            check = false;
+            return;
+        } else if (txtMK.getText().length() > 30) {
+            txtXNMK.requestFocus();
+            MsgBox.alert(this, "Mật khẩu quá dài( ít hơn 30 ký tự )");
+            check = false;
+            return;
+        }else{
             check = true;
         }
         
-        if (txtXNMK.getText().equals("")) {
+        if (txtXNMK.getText().length() == 0) {
             txtXNMK.requestFocus();
-            txtXNMK.setBackground(Color.YELLOW);
-            MsgBox.alert(this, "chưa xác nhận mật khẩu");
+            MsgBox.alert(this, "chưa nhập mật khẩu xác nhận");
             check = false;
             return;
         }else {
-            txtXNMK.setBackground(Color.white);
             check = true;
         }
     }
@@ -144,6 +157,7 @@ public class DangKyTaiKhoanMoiJDialog extends javax.swing.JDialog {
         btnDong = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 153, 0));
@@ -202,7 +216,7 @@ public class DangKyTaiKhoanMoiJDialog extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel1)
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -224,7 +238,7 @@ public class DangKyTaiKhoanMoiJDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDangKy)
                     .addComponent(btnDong))
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
