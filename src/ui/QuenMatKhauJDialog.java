@@ -49,7 +49,7 @@ public class QuenMatKhauJDialog extends javax.swing.JDialog {
         try {
             KhachHang kh = new KhachHang();
             kh = khDAO.selectByEmail(txtEmail.getText());
-            pass = kh.getMatKhau();           
+            pass = "\nTên tài khoản: " + kh.getMaKH() + "\nMật khẩu: " + kh.getMatKhau() ;           
         } catch (Exception e) {
             MsgBox.alert(this, "không tồn tại email");
         }
@@ -78,8 +78,8 @@ public class QuenMatKhauJDialog extends javax.swing.JDialog {
             Message msg = new MimeMessage(s);
             msg.setFrom(new InternetAddress(accountName));
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(txtEmail.getText()));
-            msg.setSubject("Gửi mật khẩu");
-            msg.setText("Mật khẩu của bạn : " + matKhau() + "\n Hãy bảo mật thông tin này !");
+            msg.setSubject("Gửi mật khẩu uWu");
+            msg.setText("こんにちは <3\nNhững dữ liệu bạn cần để đăng nhập: " + matKhau() + "\nHãy bảo mật thông tin này !");
 
             Transport.send(msg);
             MsgBox.alert(this, "Đã gửi mật khẩu tới " + txtEmail.getText());
