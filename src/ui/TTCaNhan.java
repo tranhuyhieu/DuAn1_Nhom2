@@ -434,7 +434,7 @@ public class TTCaNhan extends javax.swing.JDialog {
             return;
         }else{
             if (Auth.user1 != null) {
-                if (txtNhapMa.equals(this.x)) {
+                if (txtNhapMa.getText().trim().equals(String.valueOf(this.x))) {
                     ThongTinNV ttnvmoi = new ThongTinNV();
                     ttnvmoi.setEmail(txtEmail.getText());
                     ttnvmoi.setSoDienThoai(txtSoDienThoai.getText());
@@ -448,7 +448,7 @@ public class TTCaNhan extends javax.swing.JDialog {
                 }
             }
             if (Auth.user2 != null) {
-                if (txtNhapMa.equals(this.x)) {
+                if (txtNhapMa.getText().trim().equals(String.valueOf(this.x))) {
                     ThongTinKH ttkhmoi = new ThongTinKH();
                     ttkhmoi.setEmail(txtEmail.getText());
                     ttkhmoi.setSoDienThoai(txtSoDienThoai.getText());

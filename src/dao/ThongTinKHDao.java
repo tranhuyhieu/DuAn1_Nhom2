@@ -27,7 +27,7 @@ public class ThongTinKHDao extends DuAnDao<ThongTinKH, String>{
 
     @Override
     public void insert(ThongTinKH entity) {
-        XJdbc.update(INSERT_SQL, entity.getMaThongTin(), entity.getMaKH(), entity.getEmail(), entity.getSoDienThoai()); 
+        XJdbc.update(INSERT_SQL, entity.getMaKH(), entity.getEmail(), entity.getSoDienThoai()); 
     }
 
     @Override
