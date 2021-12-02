@@ -120,6 +120,11 @@ public class FormChinh extends javax.swing.JFrame {
         btnQLSan.setFocusable(false);
         btnQLSan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnQLSan.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnQLSan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQLSanActionPerformed(evt);
+            }
+        });
         ToolBar.add(btnQLSan);
         ToolBar.add(Separator01);
 
@@ -188,7 +193,7 @@ public class FormChinh extends javax.swing.JFrame {
         ToolBar.add(btnDangNhap);
         ToolBar.add(jSeparator4);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/fa529f0341f489aad0e5 (1).png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/ANHCHAOMAIN8.png"))); // NOI18N
 
         DesktopPane.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -501,10 +506,19 @@ public class FormChinh extends javax.swing.JFrame {
         dc.setVisible(true);
     }//GEN-LAST:event_btnDatCocActionPerformed
 
+
     private void mniDangKyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDangKyActionPerformed
         // TODO add your handling code here:
-        new DangKyTaiKhoanMoiJDialog(this, true).setVisible(true);
+        
     }//GEN-LAST:event_mniDangKyActionPerformed
+
+    private void btnQLSanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLSanActionPerformed
+        // TODO add your handling code here:
+        QuanLyDatSan qlds= new QuanLyDatSan();
+        DesktopPane.add(qlds);
+        qlds.setVisible(true);
+    }//GEN-LAST:event_btnQLSanActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -591,6 +605,7 @@ public class FormChinh extends javax.swing.JFrame {
     void init (){
         setLocationRelativeTo(null);
         this.setIconImage(XImage.getAppIcon());
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         new ChaoJDialog(this, true).setVisible(true);
         new DangNhap(this, true).setVisible(true);
         new Timer(1000,new ActionListener() {

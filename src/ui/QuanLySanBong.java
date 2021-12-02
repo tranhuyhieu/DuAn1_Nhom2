@@ -8,8 +8,10 @@ package ui;
 import Entity.SanBong;
 import dao.SanBongDao;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import utils.MsgBox;
+import utils.XImage;
 
 /**
  *
@@ -30,6 +32,7 @@ public class QuanLySanBong extends javax.swing.JInternalFrame {
     }
     
     private void init(){
+        this.setFrameIcon(new ImageIcon(XImage.getAppIcon()));
         loadData();
         status();
     }
@@ -426,15 +429,29 @@ public class QuanLySanBong extends javax.swing.JInternalFrame {
     }
     
     void checkDuLieu(){
-        List<SanBong> list= dao.selectAll();
         if(txtMaSan1.getText().equals("")){
             check= 0;
             MsgBox.alert(this, "Vui lòng nhập mã sân");
+            return;
+        }else if(txtMaSan1.getText().trim().equals("")){
+            check= 0;
+            MsgBox.alert(this, "Mã sân không chưa khoảng trống");
             return;
         }
         if(txtGiaSan1.getText().equals("")){
             check= 0;
             MsgBox.alert(this, "Vui lòng nhập giá sân");
+            return;
+        }else if(txtGiaSan1.getText().trim().equals("")){
+            check= 0;
+            MsgBox.alert(this, "Giá sân không chưa khoảng trống");
+            return;
+        }
+        try {
+            float giasan= Float.parseFloat(txtGiaSan1.getText());
+        } catch (Exception e) {
+            check=0;
+            MsgBox.alert(this, "Sai định dạng giá sân");
             return;
         }
         check=1;
@@ -498,6 +515,7 @@ public class QuanLySanBong extends javax.swing.JInternalFrame {
         String masan= txtTimKiem.getText();
         SanBong sb= dao.selectById(masan);
         if(sb==null){
+            loadData();
             MsgBox.alert(this, "Không tìm thấy sân bóng");
             return;
         }else{
