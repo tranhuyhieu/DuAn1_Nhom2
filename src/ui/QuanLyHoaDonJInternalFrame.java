@@ -238,22 +238,20 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
         String sdt_regex = "0[0-9\\s.-]{9,13}";
         String hoTen_regex = "(?:[A-Z][a-z]{1,7} )+[A-Z][a-z]{1,7}";
         
-//        if (txtMaHoaDon.getText().length() == 0) {
-//            txtMaHoaDon.requestFocus();
-//            txtMaHoaDon.setBackground(Color.YELLOW);
-//            MsgBox.alert(this, "Không để trống mã hóa đơn");
-//            check = false;
-//            return;
+        if (txtMaHoaDon.getText().length() == 0) {
+            txtMaHoaDon.requestFocus();
+            MsgBox.alert(this, "Chưa có mã hóa đơn");
+            check = false;
+            return;
 //        } else if (txtMaHoaDon.getText().length() > 20) {
 //            txtMaHoaDon.requestFocus();
 //            txtMaHoaDon.setBackground(Color.YELLOW);
 //            MsgBox.alert(this, "mã hóa đơn cho phép tối đa 20 ký tự");
 //            check = false;
 //            return;
-//        } else {
-//            txtMaHoaDon.setBackground(Color.white);
-//            check = true;
-//        }
+        } else {
+            check = true;
+        }
 
         if (txtTenKH.getText().equals("")) {
             txtTenKH.requestFocus();
@@ -738,8 +736,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
         check();
         if(check == true){
             capNhat();
-            fillTableDanhSach();
-//            XImage.save((File)lblAnh.getText());         
+            fillTableDanhSach();        
         }
         
     }//GEN-LAST:event_btnCapNhatActionPerformed
