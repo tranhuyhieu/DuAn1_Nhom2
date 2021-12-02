@@ -170,7 +170,17 @@ public class LichSuDatSan extends javax.swing.JInternalFrame {
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         // TODO add your handling code here:
+        String p_email = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        if (txtEmail.getText().equals("")) {
+            MsgBox.alert(this, "Email trống");
+            return;
+        } else if (txtEmail.getText().matches(p_email) == false) {
+            MsgBox.alert(this, "Email không đúng định dạng");
+            return;
+        } else {
         xem();
+        }
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void btnHuysanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuysanActionPerformed
