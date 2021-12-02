@@ -146,6 +146,32 @@ public class QuanLyKH extends javax.swing.JInternalFrame {
             return false;
         }
     }
+    public boolean checkMatKhau(JTextField txt) {
+        txt.setBackground(white);
+        String name = txt.getText();
+        String rgx = "^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ0-9 ]{3,50}$";
+        if (name.matches(rgx)&&!name.contains(" ")) {
+            return true;
+        } else {
+            txt.setBackground(red);
+            MsgBox.alert(this, " Mật khẩu phải đúng định dạng và từ 3-50 kí tự");
+            return false;
+        }
+        
+    }
+    public boolean checkMaKH(JTextField txt) {
+        txt.setBackground(white);
+        String name = txt.getText();
+        String rgx = "^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ0-9 ]{1,20}$";
+        if (name.matches(rgx)&&!name.contains(" ")) {
+            return true;
+        } else {
+            txt.setBackground(red);
+            MsgBox.alert(this, " Mã khách hàng phải đúng định dạng và từ 1-20 kí tự");
+            return false;
+        }
+        
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -197,7 +223,7 @@ public class QuanLyKH extends javax.swing.JInternalFrame {
 
         txtNgayDK.setEditable(false);
 
-        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-add-tag-24.png"))); // NOI18N
+        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-add-24.png"))); // NOI18N
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -205,7 +231,7 @@ public class QuanLyKH extends javax.swing.JInternalFrame {
             }
         });
 
-        btnMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-add-24.png"))); // NOI18N
+        btnMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-delete-24_1.png"))); // NOI18N
         btnMoi.setText("Mới");
         btnMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -331,10 +357,10 @@ public class QuanLyKH extends javax.swing.JInternalFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTimKH, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnTimKiem)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -451,15 +477,13 @@ public class QuanLyKH extends javax.swing.JInternalFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-
-        if(checkTrong(txtMaKH)&&checkTrong(txtHoTen)&&checkTrong(txtMK)){
-            if(checkHoTen(txtHoTen)){
+        if(checkTrong(txtMaKH)&&checkTrong(txtMK)&&checkTrong(txtHoTen)){
+            if(checkMaKH(txtMaKH)&&checkMatKhau(txtMK)&&checkHoTen(txtHoTen)){
                 if(checkTrungMa()){
                     them();
                 }
             }
         }
-
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed

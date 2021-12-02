@@ -205,6 +205,33 @@ public class QuanLyNV extends javax.swing.JInternalFrame {
             return false;
         }
     }
+    public boolean checkMatKhau(JTextField txt) {
+        txt.setBackground(white);
+        String name = txt.getText();
+        String rgx = "^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ0-9 ]{3,50}$";
+        if (name.matches(rgx)&&!name.contains(" ")) {
+            return true;
+        } else {
+            txt.setBackground(red);
+            MsgBox.alert(this, " Mật khẩu phải đúng định dạng và từ 3-50 kí tự");
+            return false;
+        }
+        
+    }
+    public boolean checkMaNV(JTextField txt) {
+        txt.setBackground(white);
+        String name = txt.getText();
+        String rgx = "^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ0-9 ]{1,20}$";
+        if (name.matches(rgx)&&!name.contains(" ")) {
+            return true;
+        } else {
+            txt.setBackground(red);
+            MsgBox.alert(this, " Mã nhân viên phải đúng định dạng và từ 1-20 kí tự");
+            return false;
+        }
+        
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -257,7 +284,7 @@ public class QuanLyNV extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Địa chỉ");
 
-        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-add-tag-24.png"))); // NOI18N
+        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-add-24.png"))); // NOI18N
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -265,7 +292,7 @@ public class QuanLyNV extends javax.swing.JInternalFrame {
             }
         });
 
-        btnMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-add-24.png"))); // NOI18N
+        btnMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-delete-24_1.png"))); // NOI18N
         btnMoi.setText("Mới");
         btnMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -421,7 +448,7 @@ public class QuanLyNV extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel8)
                         .addComponent(rdoDiLam)))
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabs.addTab("Cập Nhật", jPanel1);
@@ -441,10 +468,10 @@ public class QuanLyNV extends javax.swing.JInternalFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTimNV, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnTimKiem)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -527,10 +554,10 @@ public class QuanLyNV extends javax.swing.JInternalFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 576, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -580,7 +607,11 @@ public class QuanLyNV extends javax.swing.JInternalFrame {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-        sua();
+        if(checkTrong(txtMaNV)&&checkTrong(txtMatKhau)&&checkTrong(txtHoTen)&&checkTrong(txtDiaChi)){
+            if(checkMaNV(txtMaNV)&&checkMatKhau(txtMatKhau)&&checkHoTen(txtHoTen)){
+                sua();
+            }
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
@@ -594,8 +625,8 @@ public class QuanLyNV extends javax.swing.JInternalFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        if(checkTrong(txtMaNV)&&checkTrong(txtHoTen)&&checkTrong(txtMatKhau)&&checkTrong(txtDiaChi)){
-            if(checkHoTen(txtHoTen)){
+        if(checkTrong(txtMaNV)&&checkTrong(txtMatKhau)&&checkTrong(txtHoTen)&&checkTrong(txtDiaChi)){
+            if(checkMaNV(txtMaNV)&&checkMatKhau(txtMatKhau)&&checkHoTen(txtHoTen)){
                 if(checkTrungMa()){
                     them();
                 }
