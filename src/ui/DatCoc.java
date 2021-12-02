@@ -252,7 +252,7 @@ public class DatCoc extends javax.swing.JInternalFrame {
        index = tblHoaDon.getSelectedRow();
         String mahd = (String) tblHoaDon.getValueAt(index, 0);
         HoaDon hd = dao.selectById(mahd);
-        if (hd.getAnhDatCoc().equalsIgnoreCase("null")) {
+        if (hd.getAnhDatCoc() == null) {
             float x1 = Float.parseFloat(tblHoaDon.getValueAt(index, 4) + "");
             float tiencoc = Float.parseFloat(String.valueOf(x1 * 40 / 100));
             MsgBox.alert(this, "Số tiền quý khách cần đặt cọc là:" + " " + tiencoc);
