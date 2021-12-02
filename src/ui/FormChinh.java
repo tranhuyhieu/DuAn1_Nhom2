@@ -509,7 +509,7 @@ public class FormChinh extends javax.swing.JFrame {
 
     private void mniDangKyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDangKyActionPerformed
         // TODO add your handling code here:
-        
+        new DangKyTaiKhoanMoiJDialog(this, true).setVisible(true);
     }//GEN-LAST:event_mniDangKyActionPerformed
 
     private void btnQLSanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLSanActionPerformed
