@@ -314,7 +314,24 @@ public class TTCaNhan extends javax.swing.JDialog {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
+        String p_sdt= "0[0-9]{9}";
+        String p_email= "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        if(txtSoDienThoai.getText().equals("")){
+            MsgBox.alert(this, "Số điện thoại trống");
+            return;
+        }else if(txtSoDienThoai.getText().matches(p_sdt)==false){
+            MsgBox.alert(this, "Số điện thoại không đúng định dạng");
+            return;
+        }else if(txtEmail.getText().equals("")){
+            MsgBox.alert(this, "Email trống");
+            return;
+        }else if(txtEmail.getText().matches(p_email)==false){
+            MsgBox.alert(this, "Email không đúng định dạng");
+            return;
+        }else{
         sua();
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
