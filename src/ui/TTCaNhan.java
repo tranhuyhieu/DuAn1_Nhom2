@@ -333,7 +333,17 @@ public class TTCaNhan extends javax.swing.JDialog {
 
     private void btnLayMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLayMaActionPerformed
         // TODO add your handling code here:
-        layMa();
+        String p_email = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        if (txtEmail.getText().equals("")) {
+            MsgBox.alert(this, "Email trống");
+            return;
+        } else if (txtEmail.getText().matches(p_email) == false) {
+            MsgBox.alert(this, "Email không đúng định dạng");
+            return;
+        } else {
+            layMa();
+        }
     }//GEN-LAST:event_btnLayMaActionPerformed
 
     /**
