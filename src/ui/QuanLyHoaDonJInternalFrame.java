@@ -21,10 +21,11 @@ import utils.XImage;
  * @author haoca
  */
 public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
+
     HoaDonDao hdDAO = new HoaDonDao();
     int row = -1;
     boolean check = false;
-    
+
     /**
      * Creates new form QuanLyHoaDonJInternalFrame
      */
@@ -32,7 +33,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
         initComponents();
         init();
     }
-    
+
     void init() {
         this.setFrameIcon(new ImageIcon(XImage.getAppIcon()));
         setTitle("HỆ THỐNG QUẢN LÝ HÓA ĐƠN");
@@ -67,7 +68,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
             e.printStackTrace();
             MsgBox.alert(this, "Không có thông tin");
         }
-    }    
+    }
 
     void capNhat() {
         HoaDon model = getForm();
@@ -82,8 +83,8 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
     }
-    
-    String maKH(String id){
+
+    String maKH(String id) {
         String maKH = null;
         HoaDon hd = new HoaDon();
         hd = hdDAO.selectById(id);
@@ -108,11 +109,11 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
             hd.setGiamGia(20);
         }
         hd.setTongTien(Float.parseFloat(txtTongTien.getText()));
-        if(maKH(txtMaHoaDon.getText()) == null){
+        if (maKH(txtMaHoaDon.getText()) == null) {
             hd.setMaKH("KHbot");
-        }else{
+        } else {
             hd.setMaKH(maKH(txtMaHoaDon.getText()));
-        }        
+        }
         hd.setMaNV(Auth.user1.getMaNV());
         hd.setAnhDatCoc(lblAnh.getText());
         if (rdoCho.isSelected()) {
@@ -159,8 +160,11 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
             } else {
                 rdoDaThanhToan.setSelected(true);
             }
-            lblAnh.setIcon(XImage.read(hd.getAnhDatCoc()));
-            lblAnh.setText(hd.getAnhDatCoc());
+            if (hd.getAnhDatCoc() != null) {
+                lblAnh.setIcon(XImage.read(hd.getAnhDatCoc()));
+                lblAnh.setText(hd.getAnhDatCoc());
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -237,7 +241,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
                 + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
         String sdt_regex = "0[0-9\\s.-]{9,13}";
         String hoTen_regex = "(?:[A-Z][a-z]{1,7} )+[A-Z][a-z]{1,7}";
-        
+
         if (txtMaHoaDon.getText().length() == 0) {
             txtMaHoaDon.requestFocus();
             MsgBox.alert(this, "Chưa có mã hóa đơn");
@@ -259,7 +263,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
             MsgBox.alert(this, "họ tên đang để trống");
             check = false;
             return;
-        }else if (!txtTenKH.getText().matches(hoTen_regex)) {
+        } else if (!txtTenKH.getText().matches(hoTen_regex)) {
             txtTenKH.requestFocus();
             MsgBox.alert(this, "Sai định dạng họ tên(chỉ hỗ trợ alphabet)");
             check = false;
@@ -267,7 +271,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
         } else {
             check = true;
         }
-        
+
         if (txtSDT.getText().length() == 0) {
             txtSDT.requestFocus();
 //            txtSDT.setBackground(Color.YELLOW);
@@ -287,7 +291,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
 //            check = false;
 //            return;
         } else {
- //           txtSDT.setBackground(Color.white);
+            //           txtSDT.setBackground(Color.white);
             check = true;
         }
 
@@ -299,27 +303,27 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
             return;
         } else if (!txtEmail.getText().matches(email_regex)) {
             txtEmail.requestFocus();
- //           txtEmail.setBackground(Color.YELLOW);
+            //           txtEmail.setBackground(Color.YELLOW);
             MsgBox.alert(this, "Email bạn vừa nhập không đúng định dạng");
             check = false;
         } else {
 //            txtEmail.setBackground(Color.white);
             check = true;
         }
-        
-        if(txtTongTien.getText().length() == 0){
+
+        if (txtTongTien.getText().length() == 0) {
             txtTongTien.requestFocus();
 //            txtTongTien.setBackground(Color.YELLOW);
             MsgBox.alert(this, "Đang để trống tổng tiền");
             check = false;
-            return ;
-        }else{
+            return;
+        } else {
 //            txtTongTien.setBackground(Color.YELLOW);
             check = true;
         }
-        
+
         try {
-            float tien = Float.parseFloat(txtTongTien.getText());  
+            float tien = Float.parseFloat(txtTongTien.getText());
             System.out.println(tien);
 //            txtTongTien.setBackground(Color.YELLOW);
             check = true;
@@ -328,10 +332,10 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
 //            txtTongTien.setBackground(Color.YELLOW);
             MsgBox.alert(this, "Tổng tiền chỉ nhập ký tự số");
             check = false;
-            return ;
-        }              
+            return;
+        }
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -735,12 +739,12 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
         // TODO add your handling code here:
         check();
-        if(check == true){
+        if (check == true) {
             capNhat();
-            fillTableDanhSach();       
+            fillTableDanhSach();
 
         }
-        
+
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed

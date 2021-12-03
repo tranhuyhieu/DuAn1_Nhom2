@@ -195,7 +195,7 @@ public class FormChinh extends javax.swing.JFrame {
         ToolBar.add(btnDangNhap);
         ToolBar.add(jSeparator4);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/ANHCHAOMAIN8.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/ANHCHAOMAIN8.png"))); // NOI18N
 
         DesktopPane.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 

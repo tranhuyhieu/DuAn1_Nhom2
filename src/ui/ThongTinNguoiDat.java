@@ -257,9 +257,9 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
                     .addComponent(jLabel5)
                     .addComponent(txtGiaSan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnXacNhan)
-                    .addComponent(btnDong))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnDong)
+                    .addComponent(btnXacNhan))
                 .addGap(33, 33, 33))
         );
 
@@ -281,10 +281,26 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
         CheckDL();
         if (check == 1) {
             xacNhan();
+            moi();
         }
 
 
     }//GEN-LAST:event_btnXacNhanActionPerformed
+
+    private void moi() {
+        txtEmail.setText("");
+        txtNguoiDat.setText("");
+        txtSDT.setText("");
+        txtngayThanhToan.setText("");
+        rd01.setEnabled(true);
+        rd02.setEnabled(true);
+        rd03.setEnabled(true);
+        rd04.setEnabled(true);
+        rd05.setEnabled(true);
+        rd06.setEnabled(true);
+        rd07.setEnabled(true);
+        rd08.setEnabled(true);
+    }
 
     private void txtGiaSanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGiaSanActionPerformed
         // TODO add your handling code here:
@@ -369,6 +385,7 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
 
     }
 
+    
     void xacNhan() {
         String Email = txtEmail.getText();
         Date NgayThanhToan = XDate.toDate(txtngayThanhToan.getText());
