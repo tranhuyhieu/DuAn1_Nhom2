@@ -11,6 +11,7 @@ import Entity.SanBong;
 import dao.HoaDonCTDao;
 import dao.HoaDonDao;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -20,15 +21,17 @@ import ui.QuanLyDatSan;
 import utils.Auth;
 import utils.XDate;
 import utils.XImage;
+
 /**
  *
  * @author sonho
  */
 public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
+
     HoaDonCTDao hdctdao = new HoaDonCTDao();
     HoaDonDao hddao = new HoaDonDao();
     int check = 1;
-    
+
     /**
      * Creates new form ThongTinNguoiDat
      */
@@ -69,6 +72,8 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
         txtSDT = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtngayThanhToan = new javax.swing.JTextField();
+
+        setTitle("Thông Tin Người Đặt");
 
         jLabel1.setText("Tên Người Đặt");
 
@@ -169,6 +174,11 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Ngày Thanh Toán");
 
+        txtngayThanhToan.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtngayThanhToanFocusLost(evt);
+            }
+        });
         txtngayThanhToan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtngayThanhToanActionPerformed(evt);
@@ -181,34 +191,41 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtGiaSan, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addGap(56, 56, 56))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(39, 39, 39)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnXacNhan)
+                                .addGap(49, 49, 49)
+                                .addComponent(btnDong))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtNguoiDat, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtSDT, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtEmail))
+                                .addGap(8, 8, 8))))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
-                        .addGap(39, 39, 39)
-                        .addComponent(txtngayThanhToan))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4))
-                            .addGap(56, 56, 56)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btnXacNhan)
-                                    .addGap(87, 87, 87)
-                                    .addComponent(btnDong))
-                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtEmail)
-                                .addComponent(txtNguoiDat)
-                                .addComponent(txtSDT))
-                            .addGap(0, 0, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addGap(91, 91, 91)
-                            .addComponent(txtGiaSan))))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtngayThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,23 +242,25 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtngayThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel4)))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(txtGiaSan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnXacNhan)
                     .addComponent(btnDong))
-                .addGap(19, 19, 19))
+                .addGap(33, 33, 33))
         );
 
         pack();
@@ -260,11 +279,11 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
     private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
         // TODO add your handling code here:
         CheckDL();
-        if (check==1) {
-           xacNhan(); 
+        if (check == 1) {
+            xacNhan();
         }
-        
-        
+
+
     }//GEN-LAST:event_btnXacNhanActionPerformed
 
     private void txtGiaSanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGiaSanActionPerformed
@@ -274,6 +293,38 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
     private void txtngayThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtngayThanhToanActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtngayThanhToanActionPerformed
+
+    private void txtngayThanhToanFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtngayThanhToanFocusLost
+        // TODO add your handling code here:
+        
+        List<HoaDonChiTiet>list = hdctdao.selectHoaDonChiTiet(QuanLyDatSan.sb.getMaSan(),XDate.toDate(txtngayThanhToan.getText(),"yyyy/MM/dd"));
+        for (HoaDonChiTiet x : list) {
+            if (x.getMaKG().equals("KG01")) {
+                rd01.setEnabled(false);
+            }
+            else if (x.getMaKG().equals("KG02")) {
+                rd02.setEnabled(false);
+            }
+            else if (x.getMaKG().equals("KG03")) {
+                rd03.setEnabled(false);
+            }
+            else if (x.getMaKG().equals("KG04")) {
+                rd04.setEnabled(false);
+            }
+            else if (x.getMaKG().equals("KG05")) {
+                rd05.setEnabled(false);
+            }
+            else if (x.getMaKG().equals("KG06")) {
+                rd06.setEnabled(false);
+            }
+            else if (x.getMaKG().equals("KG07")) {
+                rd07.setEnabled(false);
+            }
+            else if (x.getMaKG().equals("KG08")) {
+                rd08.setEnabled(false);
+            }
+        }
+    }//GEN-LAST:event_txtngayThanhToanFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -301,61 +352,33 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtSDT;
     private javax.swing.JTextField txtngayThanhToan;
     // End of variables declaration//GEN-END:variables
-    
-    void init(){
+
+    void init() {
+        System.out.println(QuanLyDatSan.sb.getMaSan());
         this.setFrameIcon(new ImageIcon(XImage.getAppIcon()));
         txtGiaSan.setEnabled(false);
-        txtGiaSan.setText(QuanLyDatSan.sb.getGiaSan()+"");
-        List<HoaDonChiTiet>list = hdctdao.selectAll() ;
-        for (HoaDonChiTiet x : list) {
-            if (x.getMaSan().equals(QuanLyDatSan.sb.getMaSan())&& x.getMaKG().equals("KG01")) {
-                rd01.setEnabled(false);
-            }
-            else if (x.getMaSan().equals(QuanLyDatSan.sb.getMaSan())&& x.getMaKG().equals("KG02")) {
-                rd02.setEnabled(false);
-            }
-            else if (x.getMaSan().equals(QuanLyDatSan.sb.getMaSan())&& x.getMaKG().equals("KG03")) {
-                rd03.setEnabled(false);
-            }
-            else if (x.getMaSan().equals(QuanLyDatSan.sb.getMaSan())&& x.getMaKG().equals("KG04")) {
-                rd04.setEnabled(false);
-            }
-            else if (x.getMaSan().equals(QuanLyDatSan.sb.getMaSan())&& x.getMaKG().equals("KG05")) {
-                rd05.setEnabled(false);
-            }
-            else if (x.getMaSan().equals(QuanLyDatSan.sb.getMaSan())&& x.getMaKG().equals("KG06")) {
-                rd06.setEnabled(false);
-            }
-            else if (x.getMaSan().equals(QuanLyDatSan.sb.getMaSan())&& x.getMaKG().equals("KG07")) {
-                rd07.setEnabled(false);
-            }
-            else if (x.getMaSan().equals(QuanLyDatSan.sb.getMaSan())&& x.getMaKG().equals("KG08")) {
-                rd08.setEnabled(false);
-            }
-            else{
-                rd01.setEnabled(true);
-                rd02.setEnabled(true);
-                rd03.setEnabled(true);
-                rd04.setEnabled(true);
-                rd05.setEnabled(true);
-                rd06.setEnabled(true);
-                rd07.setEnabled(true);
-                rd08.setEnabled(true);
-            }
-            
-        }
-        
+        txtGiaSan.setText(QuanLyDatSan.sb.getGiaSan() + "");
+        rd01.setEnabled(true);
+        rd02.setEnabled(true);
+        rd03.setEnabled(true);
+        rd04.setEnabled(true);
+        rd05.setEnabled(true);
+        rd06.setEnabled(true);
+        rd07.setEnabled(true);
+        rd08.setEnabled(true);
+
     }
-    void xacNhan(){
-        String Email= txtEmail.getText();
+
+    void xacNhan() {
+        String Email = txtEmail.getText();
         Date NgayThanhToan = XDate.toDate(txtngayThanhToan.getText());
-        HoaDon hd = hddao.selecthoaDon(Email,NgayThanhToan);
-        
-        if (hd!=null) {
+        HoaDon hd = hddao.selecthoaDon(Email, NgayThanhToan);
+
+        if (hd != null) {
             HoaDonChiTiet model1 = new HoaDonChiTiet();
             model1.setMaHD(hd.getMaHD());
             model1.setMaSan(QuanLyDatSan.sb.getMaSan());
-            String maKG = null ;
+            String maKG = null;
             if (rd01.isSelected()) {
                 maKG = "KG01";
             }
@@ -386,14 +409,14 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
             model1.setTrangThai(0);
             hdctdao.insert(model1);
             MsgBox.alert(this, "Bạn đã đặt thêm sân thành công");
-        }else{
+        } else {
             HoaDon model = getModel();
             hddao.insert(model);
             HoaDon hd2 = hddao.selectByEmailHoaDon(model.getEmail());
             HoaDonChiTiet model1 = new HoaDonChiTiet();
             model1.setMaHD(hd2.getMaHD());
             model1.setMaSan(QuanLyDatSan.sb.getMaSan());
-            String maKG1 = null ;
+            String maKG1 = null;
             if (rd01.isSelected()) {
                 maKG1 = "KG01";
             }
@@ -425,38 +448,19 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
             hdctdao.insert(model1);
             MsgBox.alert(this, "Bạn đã đặt sân thành công");
         }
-//        HoaDon model=getModel();
-//        
-//        List<HoaDonChiTiet> list1 = hdctdao.selectAll();
-//        HoaDonChiTiet model1=getModel1();
-//        for (HoaDon hoaDon : list) {
-//            for (HoaDonChiTiet hoaDonct : list1) {
-//                if (hoaDon.getSoDienThoai().equals(txtSDT.getText())&& hoaDonct.getNgayDat().equals(XDate.now())) {
-//                    hdctdao.insert(model1);
-//                    break;
-//                }else{
-//                    hddao.insert(model);
-//                    hdctdao.insert(model1);
-//                    break;
-//                }
-//            }
-//            
-//        }
-            
-        
-        
     }
-    HoaDon getModel(){
+
+    HoaDon getModel() {
         HoaDon model = new HoaDon();
-        if (Auth.user1==null) {
+        if (Auth.user1 == null) {
             model.setMaNV("NV01");
-        }else{
+        } else {
             model.setMaNV(Auth.user1.getMaNV());
         }
-        
-        if (Auth.user2==null) {
-            model.setMaKH("KH_Boss");
-        }else{
+
+        if (Auth.user2 == null) {
+            model.setMaKH("KHbot");
+        } else {
             model.setMaKH(Auth.user2.getMaKH());
         }
         model.setHoTenKH(txtNguoiDat.getText());
@@ -468,110 +472,81 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
         model.setNgayThanhToan(XDate.toDate(txtngayThanhToan.getText()));
         model.setTrangThaiHD(0);
         model.setTrangThaiTT(0);
-        return model ;
+        return model;
     }
-//    HoaDonChiTiet getModel1(){
-//        HoaDonChiTiet model1 = new HoaDonChiTiet();
-//        List<HoaDon> list = hddao.selectIDhoaDon();
-//        for (HoaDon x : list) {
-//            model1.setMaHD(x.getMaHD());
-//        }
-//        model1.setGiaTien(Float.valueOf(txtGiaSan.getText()));
-//        if (rd01.isSelected()) {
-//            model1.setMaKG("KG01");
-//        }
-//        else if (rd02.isSelected()) {
-//            model1.setMaKG("KG02");
-//        }
-//        else if (rd03.isSelected()) {
-//            model1.setMaKG("KG03");
-//        }
-//        else if (rd04.isSelected()) {
-//            model1.setMaKG("KG04");
-//        }
-//        else if (rd05.isSelected()) {
-//            model1.setMaKG("KG05");
-//        }
-//        else if (rd06.isSelected()) {
-//            model1.setMaKG("KG06");
-//        }
-//        else if (rd07.isSelected()) {
-//            model1.setMaKG("KG07");
-//        }
-//        else if (rd08.isSelected()) {
-//            model1.setMaKG("KG08");
-//        }
-//        model1.setMaSan(QuanLyDatSan.sb.getMaSan()+"");
-//        model1.setNgayDat(XDate.now());
-//        model1.setTrangThai(0);
-//        return  model1 ;
-//    }
-    void CheckDL(){
+
+    void CheckDL() {
         String hoten = "[a-zA-Z]+";
-        String sdt ="((09|03|07|08|05)+([0-9]{8}))";
+        String sdt = "((09|03|07|08|05)+([0-9]{8}))";
         String email = "^[A-Za-z0-9]+[A-Za-z0-9]*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)$";
         // check hoten
-        if (txtNguoiDat.getText().length()==0) {
+        if (txtNguoiDat.getText().length() == 0) {
             MsgBox.alert(this, "Bạn chưa điền thông tin họ tên");
             txtNguoiDat.requestFocus();
-            check=0;
+            check = 0;
             return;
-        }else if (txtNguoiDat.getText().matches(hoten)==false) {
+        } else if (txtNguoiDat.getText().matches(hoten) == false) {
             MsgBox.alert(this, "Bạn điền sai thông tin email");
             txtNguoiDat.requestFocus();
-            check=0;
+            check = 0;
             return;
-        }else{
-            check=1;
+        } else {
+            check = 1;
         }
         // check sdt
-        if (txtSDT.getText().length()==0) {
+        if (txtSDT.getText().length() == 0) {
             MsgBox.alert(this, "Bạn chưa điền thông tin Số ĐT");
             txtSDT.requestFocus();
-            check=0;
+            check = 0;
             return;
-        }else if (txtSDT.getText().matches(sdt)==false) {
+        } else if (txtSDT.getText().matches(sdt) == false) {
             MsgBox.alert(this, "Bạn điền sai thông tin Số ĐT");
             txtSDT.requestFocus();
-            check=0;
+            check = 0;
             return;
-        }else{
-            check=1;
+        } else {
+            check = 1;
         }
-        // check hoten
-        if (txtEmail.getText().length()==0) {
-            MsgBox.alert(this, "Bạn chưa điền thông tin họ tên");
+        // check email
+        if (txtEmail.getText().length() == 0) {
+            MsgBox.alert(this, "Bạn chưa điền thông tin Email");
             txtEmail.requestFocus();
-            check=0;
+            check = 0;
             return;
-        }else if (txtEmail.getText().matches(email)==false) {
-            MsgBox.alert(this, "Bạn điền sai thông tin họ tên");
+        } else if (txtEmail.getText().matches(email) == false) {
+            MsgBox.alert(this, "Bạn điền sai thông tin Email");
             txtEmail.requestFocus();
-            check=0;
+            check = 0;
             return;
-        }else{
-            check=1;
+        } else {
+            check = 1;
         }
         //check ngày đặt 
-        java.util.Date ns ;
-        SimpleDateFormat df ;
-        if(txtngayThanhToan.getText().length()==0){
-            MsgBox.alert(this,"chưa có dữ liệu ngày sinh");
-            txtngayThanhToan.requestFocus();
-            check=0;
-            return;
-        }else if (txtngayThanhToan.getText()!=null) {
-            df = new SimpleDateFormat("yyyy/MM/dd");
-            String d = txtngayThanhToan.getText();
-            try {
-                ns = df.parse(txtngayThanhToan.getText());
-            } catch (Exception e) {
-                MsgBox.alert(this, "ns k dung ");
+        java.util.Date ns;
+        SimpleDateFormat df;
+        if (txtngayThanhToan.getText().length() == 0) {
+            MsgBox.alert(this, "chưa có dữ liệu ngày sinh");
             txtngayThanhToan.requestFocus();
             check = 0;
             return;
+        } else if (txtngayThanhToan.getText() != null) {
+            df = new SimpleDateFormat("yyyy/MM/dd");
+            Date a = XDate.toDate(txtngayThanhToan.getText(), "yyyy/MM/dd");
+            Date b = XDate.now();
+            try {
+                ns = df.parse(txtngayThanhToan.getText());
+                if (a.before(b)) {
+                    MsgBox.alert(this, "Ngày thanh toán không hợp lệ");
+                    check = 0;
+                    return;
+                }
+            } catch (Exception e) {
+                MsgBox.alert(this, "Ngày thanh toán không đúng ");
+                txtngayThanhToan.requestFocus();
+                check = 0;
+                return;
             }
-        }else{
+        } else {
             check = 1;
         }
     }

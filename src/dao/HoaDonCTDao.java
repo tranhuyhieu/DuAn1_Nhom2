@@ -10,6 +10,7 @@ import Entity.KhachHang;
 import utils.XJdbc;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ import java.util.List;
  */
 public class HoaDonCTDao extends DuAnDao<HoaDonChiTiet, Integer>{
     String INSERT_SQL = "INSERT INTO HOADONCHITIET(Id_HD,Id_San,Id_KG,NgayDat,GiaTien,TrangThai)VALUES(?,?,?,?,?,?)";
-    String UPDATE_SQL = "UPDATE HOADONCHITIET SET Id_HD=?,Id_San=?,Id_KG=?,NgayDat=?, TrongTai=?,GiaTien=?,TrangThai=? WHERE Id_HDCT=?";
+    String UPDATE_SQL = "UPDATE HOADONCHITIET SET Id_HD=?,Id_San=?,Id_KG=?,NgayDat=?,GiaTien=?,TrangThai=? WHERE Id_HDCT=?";
     String DELETE_SQL = "DELETE FROM HOADONCHITIET WHERE Id_HDCT=?";
     String SELECT_ALL_SQL = "SELECT*FROM HOADONCHITIET";
     String SELECT_BY_ID_SQL = "SELECT*FROM HOADONCHITIET WHERE Id_HDCT=?";
@@ -30,7 +31,7 @@ public class HoaDonCTDao extends DuAnDao<HoaDonChiTiet, Integer>{
 
     @Override
     public void update(HoaDonChiTiet entity) {
-        XJdbc.update(UPDATE_SQL, entity.getMaHD(), entity.getMaSan(), entity.getMaKG(), entity.getNgayDat(), entity.getTrongTai(), entity.getGiaTien(), entity.getTrangThai(), entity.getMaHDCT()); 
+        XJdbc.update(UPDATE_SQL, entity.getMaHD(), entity.getMaSan(), entity.getMaKG(), entity.getNgayDat(), entity.getGiaTien(), entity.getTrangThai(), entity.getMaHDCT()); 
     }
 
     @Override
@@ -64,7 +65,6 @@ public class HoaDonCTDao extends DuAnDao<HoaDonChiTiet, Integer>{
                 entity.setMaSan(rs.getString("Id_San"));
                 entity.setMaKG(rs.getString("Id_KG"));
                 entity.setNgayDat(rs.getDate("NgayDat"));
-                entity.setTrongTai(rs.getString("TrongTai"));
                 entity.setGiaTien(rs.getFloat("GiaTien"));
                 entity.setTrangThai(rs.getInt("TrangThai"));
                 list.add(entity);
@@ -85,6 +85,10 @@ public class HoaDonCTDao extends DuAnDao<HoaDonChiTiet, Integer>{
     public  List<HoaDonChiTiet> selectByKeyword(String keyword){
         String sql = "SELECT * FROM HOADONCHITIET WHERE Id_HD LIKE ?";
         return this.selectBySql(sql, "%"+keyword+"%");
+    }
+    public List<HoaDonChiTiet> selectHoaDonChiTiet(String Id_San,Date NgayThanhToan){
+        String sql = "select HOADONCHITIET.* from HOADONCHITIET join HOADON on HOADONCHITIET.Id_HD = HOADON.Id_HD where HOADONCHITIET.Id_San = ? and HOADON.NgayThanhToan = ?";
+        return this.selectBySql(sql,Id_San,NgayThanhToan);
     }
 
     

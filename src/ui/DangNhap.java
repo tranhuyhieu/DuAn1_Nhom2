@@ -45,16 +45,15 @@ public class DangNhap extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        DesktopPane = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Đăng Nhập");
 
         jPanel1.setLayout(null);
         jPanel1.add(txtTaikhoan);
-        txtTaikhoan.setBounds(30, 80, 260, 30);
+        txtTaikhoan.setBounds(30, 50, 260, 30);
         jPanel1.add(txtMatkhau);
-        txtMatkhau.setBounds(30, 160, 260, 30);
+        txtMatkhau.setBounds(30, 140, 260, 30);
 
         btnThoat.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnThoat.setText("Thoát");
@@ -64,7 +63,7 @@ public class DangNhap extends javax.swing.JDialog {
             }
         });
         jPanel1.add(btnThoat);
-        btnThoat.setBounds(170, 220, 120, 40);
+        btnThoat.setBounds(170, 200, 120, 40);
 
         btnDangNhap.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnDangNhap.setText("Đăng nhập");
@@ -74,45 +73,31 @@ public class DangNhap extends javax.swing.JDialog {
             }
         });
         jPanel1.add(btnDangNhap);
-        btnDangNhap.setBounds(30, 220, 120, 40);
+        btnDangNhap.setBounds(30, 200, 120, 40);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Mật khẩu");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(30, 120, 100, 25);
+        jLabel2.setBounds(30, 100, 100, 25);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Tài khoản");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(30, 40, 120, 25);
+        jLabel3.setBounds(30, 10, 120, 25);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/anhbong.jpg"))); // NOI18N
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(0, 0, 500, 300);
-
-        javax.swing.GroupLayout DesktopPaneLayout = new javax.swing.GroupLayout(DesktopPane);
-        DesktopPane.setLayout(DesktopPaneLayout);
-        DesktopPaneLayout.setHorizontalGroup(
-            DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
-        );
-        DesktopPaneLayout.setVerticalGroup(
-            DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(DesktopPane);
-        DesktopPane.setBounds(0, 0, 500, 300);
+        jLabel1.setBounds(0, 0, 454, 260);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -177,7 +162,6 @@ public class DangNhap extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane DesktopPane;
     private javax.swing.JButton btnDangNhap;
     private javax.swing.JButton btnThoat;
     private javax.swing.JLabel jLabel1;
@@ -205,6 +189,9 @@ public class DangNhap extends javax.swing.JDialog {
             MsgBox.alert(this, "Sai Mật Khẩu !");
         }else if(kh !=null && !matkhaukh.equals(kh.getMatKhau())){
             MsgBox.alert(this, "Sai Mật Khẩu !");
+        }
+        if(nv != null && nv.getTrangThai()==false) {
+            MsgBox.alert(this,"Nhân viên đã nghỉ việc");
         }
         else{
                 Auth.user1 = nv;
