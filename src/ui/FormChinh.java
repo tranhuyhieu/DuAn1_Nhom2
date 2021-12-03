@@ -7,12 +7,9 @@ package ui;
 
 import com.edusys.ui.GioiThieuJDialog;
 import java.awt.Component;
-import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
-import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -53,6 +50,7 @@ public class FormChinh extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JToolBar.Separator();
         btnQLSan = new javax.swing.JButton();
         Separator01 = new javax.swing.JToolBar.Separator();
+        jSeparator12 = new javax.swing.JToolBar.Separator();
         btnQLLichSuDatSan = new javax.swing.JButton();
         jSeparator10 = new javax.swing.JToolBar.Separator();
         btnDatCoc = new javax.swing.JButton();
@@ -130,6 +128,7 @@ public class FormChinh extends javax.swing.JFrame {
         });
         ToolBar.add(btnQLSan);
         ToolBar.add(Separator01);
+        ToolBar.add(jSeparator12);
 
         btnQLLichSuDatSan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-order-history-48.png"))); // NOI18N
         btnQLLichSuDatSan.setText("Quản Lý Lịch Sử Đặt Sân");
@@ -196,7 +195,7 @@ public class FormChinh extends javax.swing.JFrame {
         ToolBar.add(btnDangNhap);
         ToolBar.add(jSeparator4);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/ANHCHAOMAIN8.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/ANHCHAOMAIN8.png"))); // NOI18N
 
         DesktopPane.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -268,6 +267,11 @@ public class FormChinh extends javax.swing.JFrame {
 
         mniDangXuat.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         mniDangXuat.setText("Đăng Xuất");
+        mniDangXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniDangXuatActionPerformed(evt);
+            }
+        });
         jMenu1.add(mniDangXuat);
 
         mniketThuc.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.CTRL_DOWN_MASK));
@@ -342,11 +346,6 @@ public class FormChinh extends javax.swing.JFrame {
         jMenu3.setText("Trợ Giúp ");
 
         mniLienHe.setText("Liên Hệ ");
-        mniLienHe.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniLienHeActionPerformed(evt);
-            }
-        });
         jMenu3.add(mniLienHe);
 
         mniGioiThieu.setText("Giới Thiệu Sản Phẩm");
@@ -407,12 +406,20 @@ public class FormChinh extends javax.swing.JFrame {
 
     private void mnidangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnidangNhapActionPerformed
         // TODO add your handling code here:
+        if (Auth.user1!= null && Auth.user2!=null) {
+            MsgBox.alert(this, "Bạn đã đăng nhập trước đó!");
+        }else{
         new DangNhap(this, true).setVisible(true);
+        }
     }//GEN-LAST:event_mnidangNhapActionPerformed
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
         // TODO add your handling code here:
+        if (Auth.user1!= null && Auth.user2!=null) {
+            MsgBox.alert(this, "Bạn đã đăng nhập trước đó!");
+        }else{
         dangnhap();
+        }
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
     private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
@@ -424,19 +431,36 @@ public class FormChinh extends javax.swing.JFrame {
 
     private void btnQuenMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuenMatKhauActionPerformed
         // TODO add your handling code here:
+        if (Auth.user1!= null && Auth.user2!=null) {
+            MsgBox.alert(this, "Bạn đã đăng nhập trước đó!");
+        }else{
         new QuenMatKhauJDialog(this, true).setVisible(true);
+        }
     }//GEN-LAST:event_btnQuenMatKhauActionPerformed
 
     private void mniQLsanBongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLsanBongActionPerformed
         // TODO add your handling code here:
+        if(Auth.user1!=null&&Auth.isManager()){
         QuanLySanBong qlsb= new QuanLySanBong();
         DesktopPane.add(qlsb);
         qlsb.setVisible(true);
+        }
+        if(Auth.user1!=null&&!Auth.isManager()){
+            MsgBox.alert(this, "Bạn không có quyền truy cập");
+        }
+        if(Auth.user2!=null){
+            MsgBox.alert(this, "Bạn không có quyền truy cập");
+        }
+        
     }//GEN-LAST:event_mniQLsanBongActionPerformed
 
     private void btnDangKyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangKyActionPerformed
         // TODO add your handling code here:
+        if (Auth.user1!= null && Auth.user2!=null) {
+            MsgBox.alert(this, "Bạn đã đăng nhập trước đó!");
+        }else{
         new DangKyTaiKhoanMoiJDialog(this, true).setVisible(true);
+        }
     }//GEN-LAST:event_btnDangKyActionPerformed
 
     private void mniGioiThieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniGioiThieuActionPerformed
@@ -446,7 +470,11 @@ public class FormChinh extends javax.swing.JFrame {
 
     private void mnithongTinCaNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnithongTinCaNhanActionPerformed
         // TODO add your handling code here:
+        if (Auth.user1!= null && Auth.user2!=null) {
+            MsgBox.alert(this, "Bạn đã đăng nhập trước đó!");
+        }else{
         new TTCaNhan(this, true).setVisible(true);
+        }
     }//GEN-LAST:event_mnithongTinCaNhanActionPerformed
 
     private void mniNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniNhanVienActionPerformed
@@ -492,19 +520,33 @@ public class FormChinh extends javax.swing.JFrame {
 
     private void mniHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniHoaDonActionPerformed
         // TODO add your handling code here:
+        if(Auth.user1!=null){
         QuanLyHoaDonJInternalFrame qlhd = new QuanLyHoaDonJInternalFrame();
         DesktopPane.add(qlhd);
         qlhd.setVisible(true);
+        }
+        if(Auth.user2!=null){
+            MsgBox.alert(this, "Bạn không có quyền truy cập");
+        }
+        
     }//GEN-LAST:event_mniHoaDonActionPerformed
 
     private void mniDoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDoiMatKhauActionPerformed
         // TODO add your handling code here:
+        if (Auth.user1== null && Auth.user2==null) {
+            MsgBox.alert(this, "Bạn chưa đăng nhập!");
+        }else{
         new DoiMatKhauJDialog(this, true).setVisible(true);
+        }
     }//GEN-LAST:event_mniDoiMatKhauActionPerformed
 
     private void mniQuenMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQuenMatKhauActionPerformed
         // TODO add your handling code here:
+        if (Auth.user1!= null && Auth.user2!=null) {
+            MsgBox.alert(this, "Bạn đã đăng nhập trước đó!");
+        }else{
         new QuenMatKhauJDialog(this, true).setVisible(true);
+        }
     }//GEN-LAST:event_mniQuenMatKhauActionPerformed
 
     private void btnDatCocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatCocActionPerformed
@@ -517,7 +559,11 @@ public class FormChinh extends javax.swing.JFrame {
 
     private void mniDangKyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDangKyActionPerformed
         // TODO add your handling code here:
-        new DangKyTaiKhoanMoiJDialog(this, true).setVisible(true);
+        if (Auth.user1!= null && Auth.user2!=null) {
+            MsgBox.alert(this, "Bạn đã đăng nhập trước đó!");
+        }else{
+            new DangKyTaiKhoanMoiJDialog(this, true).setVisible(true);
+        }
     }//GEN-LAST:event_mniDangKyActionPerformed
 
     private void btnQLSanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLSanActionPerformed
@@ -527,14 +573,14 @@ public class FormChinh extends javax.swing.JFrame {
         qlds.setVisible(true);
     }//GEN-LAST:event_btnQLSanActionPerformed
 
-    private void mniLienHeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniLienHeActionPerformed
+    private void mniDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDangXuatActionPerformed
         // TODO add your handling code here:
-        try {
-            Desktop.getDesktop().browse(new File("help/lienhe.html").toURI());
-        } catch (IOException ex) {
-            MsgBox.alert(this, "Không tìm thấy file hướng dẫn!");
+        if (Auth.user1== null && Auth.user2==null) {
+            MsgBox.alert(this, "Bạn chưa đăng nhập!");
+        }else{
+            new DangNhap(this, true).setVisible(true);
         }
-    }//GEN-LAST:event_mniLienHeActionPerformed
+    }//GEN-LAST:event_mniDangXuatActionPerformed
 
 
     /**
@@ -596,6 +642,7 @@ public class FormChinh extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator10;
     private javax.swing.JToolBar.Separator jSeparator11;
+    private javax.swing.JToolBar.Separator jSeparator12;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
