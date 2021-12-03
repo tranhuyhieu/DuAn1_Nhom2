@@ -414,10 +414,14 @@ public class TTCaNhan extends javax.swing.JDialog {
         ttnvmoi.setEmail(txtEmail.getText());
         ttnvmoi.setSoDienThoai(txtSoDienThoai.getText());
         ttnvmoi.setMaNV(txtMaNguoiDung.getText());
+        if(txtNhapMa.getText().trim().equals(String.valueOf(this.x))){
         dao1.update(ttnvmoi);
         MsgBox.alert(this, "Sửa thành công");
         load();
         moi();
+        }else{
+            MsgBox.alert(this, "Mã xác nhận không chính xác.");
+        }
         }
         if(Auth.user2!=null){
         String idtt= String.valueOf(tblDanhsach.getValueAt(this.index, 0));
@@ -426,10 +430,14 @@ public class TTCaNhan extends javax.swing.JDialog {
         ttkhmoi.setEmail(txtEmail.getText());
         ttkhmoi.setSoDienThoai(txtSoDienThoai.getText());
         ttkhmoi.setMaKH(txtMaNguoiDung.getText());
+        if(txtNhapMa.getText().trim().equals(String.valueOf(this.x))){
         dao2.update(ttkhmoi);
         MsgBox.alert(this, "Sửa thành công");
         load();
         moi();
+        }else{
+            MsgBox.alert(this, "Mã xác nhận không chính xác.");
+        }
         }
     }
     
