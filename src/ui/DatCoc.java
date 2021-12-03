@@ -232,7 +232,7 @@ public class DatCoc extends javax.swing.JInternalFrame {
             MsgBox.alert(this, "Vui lòng chọn hóa đơn để đặt cọc.");
         }else{
             xacNhan();
-            MsgBox.alert(this, "Đặt cọc thành công.");
+            MsgBox.alert(this, "Đặt cọc thành công. Chờ xử lý.");
         }
     }//GEN-LAST:event_btnDatCocActionPerformed
 
