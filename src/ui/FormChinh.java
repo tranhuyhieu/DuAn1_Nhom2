@@ -529,6 +529,7 @@ public class FormChinh extends javax.swing.JFrame {
             MsgBox.alert(this, "Bạn không có quyền truy cập");
         }
         
+        
     }//GEN-LAST:event_mniHoaDonActionPerformed
 
     private void mniDoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDoiMatKhauActionPerformed
