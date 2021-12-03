@@ -71,16 +71,16 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
         txtMaKG.setText(hdct.getMaKG());
         txtNgayDat.setText(XDate.toString(hdct.getNgayDat(), "dd/MM/yyyy"));
         
-        if (hdct.getTrongTai().equalsIgnoreCase("Có")){
-            rdoThueTrongTai.setSelected(true);
-        }else{
+        if (hdct.getTrongTai()== null){
             rdoThueTrongTai.setSelected(false);
+        }else{
+            rdoThueTrongTai.setSelected(true);
         }
         txtTongTien.setText(String.valueOf(hdct.getGiaTien()));
-        if (hdct.getTrangThai() == 1) {
-            rdoXacNhan.setSelected(true);
-        } else {
+        if (hdct.getTrangThai() == 2) {
             rdoHuy.setSelected(true);
+        } else {
+            rdoXacNhan.setSelected(true);
         }
     }
 

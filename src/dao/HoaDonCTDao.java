@@ -31,7 +31,7 @@ public class HoaDonCTDao extends DuAnDao<HoaDonChiTiet, Integer>{
 
     @Override
     public void update(HoaDonChiTiet entity) {
-        XJdbc.update(UPDATE_SQL, entity.getMaHD(), entity.getMaSan(), entity.getMaKG(), entity.getNgayDat(), entity.getGiaTien(), entity.getTrangThai(), entity.getMaHDCT()); 
+        XJdbc.update(UPDATE_SQL, entity.getMaHD(), entity.getMaSan(), entity.getMaKG(), entity.getNgayDat(), entity.getTrongTai(), entity.getGiaTien(), entity.getTrangThai(), entity.getMaHDCT()); 
     }
 
     @Override
@@ -65,6 +65,7 @@ public class HoaDonCTDao extends DuAnDao<HoaDonChiTiet, Integer>{
                 entity.setMaSan(rs.getString("Id_San"));
                 entity.setMaKG(rs.getString("Id_KG"));
                 entity.setNgayDat(rs.getDate("NgayDat"));
+                entity.setTrongTai(rs.getString("TrongTai"));
                 entity.setGiaTien(rs.getFloat("GiaTien"));
                 entity.setTrangThai(rs.getInt("TrangThai"));
                 list.add(entity);
