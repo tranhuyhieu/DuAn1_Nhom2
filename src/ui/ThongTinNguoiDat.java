@@ -279,7 +279,6 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
         CheckDL();
         if (check == 1) {
             xacNhan();
-            moi();
         }
 
 
@@ -418,12 +417,18 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
             if (rd08.isSelected()) {
                 maKG = "KG08";
             }
+            if(!rd01.isSelected()&&!rd02.isSelected()&&!rd03.isSelected()&&!rd04.isSelected()&&!rd05.isSelected()
+                    &&!rd06.isSelected()&&!rd07.isSelected()&&!rd08.isSelected()){
+                MsgBox.alert(this, "Vui lòng chọn khung giờ.");
+                return;
+            }
             model1.setMaKG(maKG);
             model1.setNgayDat(XDate.now());
             model1.setGiaTien(QuanLyDatSan.sb.getGiaSan());
             model1.setTrangThai(0);
             hdctdao.insert(model1);
             MsgBox.alert(this, "Bạn đã đặt thêm sân thành công.");
+            moi();
         } else {
             HoaDon model = getModel();
             hddao.insert(model);
@@ -456,12 +461,18 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
             if (rd08.isSelected()) {
                 maKG1 = "KG08";
             }
+            if(!rd01.isSelected()&&!rd02.isSelected()&&!rd03.isSelected()&&!rd04.isSelected()&&!rd05.isSelected()
+                    &&!rd06.isSelected()&&!rd07.isSelected()&&!rd08.isSelected()){
+                MsgBox.alert(this, "Vui lòng chọn khung giờ.");
+                return;
+            }
             model1.setMaKG(maKG1);
             model1.setNgayDat(XDate.now());
             model1.setGiaTien(QuanLyDatSan.sb.getGiaSan());
             model1.setTrangThai(0);
             hdctdao.insert(model1);
             MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
+            moi();
         }
     }
 
@@ -540,7 +551,7 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
         java.util.Date ns;
         SimpleDateFormat df;
         if (txtngayThanhToan.getText().length() == 0) {
-            MsgBox.alert(this, "chưa có dữ liệu ngày sinh");
+            MsgBox.alert(this, "Chưa có dữ liệu ngày thanh toán");
             txtngayThanhToan.requestFocus();
             check = 0;
             return;
