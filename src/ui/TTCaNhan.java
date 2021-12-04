@@ -62,9 +62,9 @@ public class TTCaNhan extends javax.swing.JDialog {
             }
         }
         if(Auth.user2!=null){
-            txtMaNguoiDung.setText(Auth.user2.getMaNV());
+            txtMaNguoiDung.setText(Auth.user2.getMaKH());
             txtHoTen.setText(Auth.user2.getHoTen());
-            List<ThongTinKH> list= dao2.selectEmail(Auth.user2.getMaNV());
+            List<ThongTinKH> list= dao2.selectEmail(Auth.user2.getMaKH());
             for (ThongTinKH ttkh : list) {
                 mol.addRow(new Object[]{ttkh.getMaThongTin(),Auth.user2.getHoTen(),ttkh.getMaKH(),ttkh.getSoDienThoai(),ttkh.getEmail()});
             }
