@@ -92,5 +92,17 @@ public class HoaDonCTDao extends DuAnDao<HoaDonChiTiet, Integer>{
         return this.selectBySql(sql,Id_San,NgayThanhToan);
     }
 
-    
+    public double getTongTien(Object...args){
+        double tien = 0;
+        String sql = "select sum(GiaTien) as TongTien from HOADONCHITIET where ID_HD = ?";
+        try {
+            ResultSet rs = XJdbc.query(sql, args);
+            while(rs.next()){
+                tien = rs.getFloat("TongTien");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tien;
+    }
 }

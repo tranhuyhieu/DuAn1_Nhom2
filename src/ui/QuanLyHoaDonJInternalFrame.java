@@ -6,6 +6,7 @@
 package ui;
 
 import Entity.HoaDon;
+import dao.HoaDonCTDao;
 import dao.HoaDonDao;
 import java.awt.Color;
 import java.util.List;
@@ -21,10 +22,12 @@ import utils.XImage;
  * @author haoca
  */
 public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
-
+    HoaDonCTDao hdctDAO = new HoaDonCTDao();
     HoaDonDao hdDAO = new HoaDonDao();
     int row = -1;
     boolean check = false;
+    double tienHienTai = 0;
+    double tinhTien = 0;
 
     /**
      * Creates new form QuanLyHoaDonJInternalFrame
@@ -83,6 +86,11 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
     }
+    
+    double getTongTien(String id){
+        double tien = hdctDAO.getTongTien(id);
+        return tien;
+    }
 
     String maKH(String id) {
         String maKH = null;
@@ -138,7 +146,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
             txtTenKH.setText(hd.getHoTenKH());
             txtSDT.setText(hd.getSoDienThoai().trim());
             txtEmail.setText(hd.getEmail());
-            txtTongTien.setText(hd.getTongTien() + "");
+            txtTongTienCu.setText(hd.getTongTien() + "");
             if (hd.getGiamGia() == 0) {
                 rdo0.setSelected(true);
             } else if (hd.getGiamGia() == 5) {
@@ -175,6 +183,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
         txtEmail.setText("");
         txtSDT.setText("");
         txtTenKH.setText("");
+        txtTongTienCu.setText("");
         txtTongTien.setText("");
         rdo0.setSelected(true);
         rdoCho.setSelected(true);
@@ -366,7 +375,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
         rdo5 = new javax.swing.JRadioButton();
         rdo15 = new javax.swing.JRadioButton();
         rdo20 = new javax.swing.JRadioButton();
-        txtTongTien = new javax.swing.JTextField();
+        txtTongTienCu = new javax.swing.JTextField();
         rdoCho = new javax.swing.JRadioButton();
         rdoDa = new javax.swing.JRadioButton();
         rdoHuy = new javax.swing.JRadioButton();
@@ -380,6 +389,9 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
         btnMoi = new javax.swing.JButton();
         btnDong = new javax.swing.JButton();
         btnMoHoaDonCT = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        txtTongTien = new javax.swing.JTextField();
+        btnLayTongTien = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -454,7 +466,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Giảm giá");
 
-        jLabel7.setText("Tổng tiền");
+        jLabel7.setText("Tổng tiền cũ");
 
         jLabel8.setText("Trạng thái hóa đơn");
 
@@ -465,15 +477,38 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
 
         buttonGroup1.add(rdo0);
         rdo0.setText("0%");
+        rdo0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdo0ActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(rdo5);
         rdo5.setText("5%");
+        rdo5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdo5ActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(rdo15);
         rdo15.setText("15%");
+        rdo15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdo15ActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(rdo20);
         rdo20.setText("20%");
+        rdo20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdo20ActionPerformed(evt);
+            }
+        });
+
+        txtTongTienCu.setEditable(false);
+        txtTongTienCu.setBackground(new java.awt.Color(204, 204, 204));
 
         buttonGroup2.add(rdoCho);
         rdoCho.setText("Chờ xác nhận");
@@ -550,6 +585,18 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel10.setText("Tổng tiền");
+
+        txtTongTien.setEditable(false);
+        txtTongTien.setBackground(new java.awt.Color(204, 204, 204));
+
+        btnLayTongTien.setText("Lấy");
+        btnLayTongTien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLayTongTienActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -578,13 +625,16 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
                         .addGap(14, 14, 14)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtEmail)
-                            .addComponent(txtTongTien)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(rdoCho)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(rdoHuy))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(8, 8, 8)
                                 .addComponent(rdo0)
@@ -594,11 +644,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
                                 .addComponent(rdo15)
                                 .addGap(18, 18, 18)
                                 .addComponent(rdo20)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(rdoCho)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(rdoHuy))))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnDau)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -609,24 +655,38 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(0, 36, Short.MAX_VALUE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                        .addComponent(btnMoHoaDonCT, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(19, 19, 19))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(btnMoi)
-                                            .addComponent(btnLui))
-                                        .addGap(101, 101, 101)
-                                        .addComponent(btnTien)
-                                        .addGap(66, 66, 66)))
+                                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addGap(0, 51, Short.MAX_VALUE)
+                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(btnMoi)
+                                                    .addComponent(btnLui)))
+                                            .addComponent(txtTongTienCu))
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addGap(101, 101, 101)
+                                                .addComponent(btnTien)
+                                                .addGap(66, 66, 66))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel10)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(8, 8, 8))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
+                                        .addComponent(btnMoHoaDonCT, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(19, 19, 19)))
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGap(12, 12, 12)
                                         .addComponent(btnCuoi)
                                         .addGap(12, 12, 12))
-                                    .addComponent(btnDong, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(btnLayTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnDong, javax.swing.GroupLayout.Alignment.TRAILING))))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(rdoChoThanhToan)
                                 .addGap(88, 88, 88)
@@ -668,7 +728,11 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTongTienCu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel10)
+                        .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnLayTongTien)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -696,7 +760,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
                                 .addComponent(btnDong)
                                 .addComponent(btnMoHoaDonCT, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(btnDau))
-                .addGap(0, 7, Short.MAX_VALUE))
+                .addGap(0, 8, Short.MAX_VALUE))
             .addComponent(lblAnh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -742,7 +806,9 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
         if (check == true) {
             capNhat();
             fillTableDanhSach();
-
+            txtTongTien.setText("");
+            tienHienTai = 0;
+            tinhTien = 0;
         }
 
     }//GEN-LAST:event_btnCapNhatActionPerformed
@@ -750,6 +816,8 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
         // TODO add your handling code here:
         clearForm();
+        tienHienTai = 0;
+        tinhTien = 0;
     }//GEN-LAST:event_btnMoiActionPerformed
 
     private void btnDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongActionPerformed
@@ -777,12 +845,52 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
         ql.setVisible(true);
     }//GEN-LAST:event_btnMoHoaDonCTActionPerformed
 
+    private void btnLayTongTienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLayTongTienActionPerformed
+        // TODO add your handling code here:
+        
+        if(txtMaHoaDon.getText().length()!=0){
+            txtTongTien.setText(String.valueOf(getTongTien(txtMaHoaDon.getText())));
+            tienHienTai = getTongTien(txtMaHoaDon.getText());
+        }else{
+            MsgBox.alert(this, "Chưa có mã hóa đơn");
+        }
+        
+    }//GEN-LAST:event_btnLayTongTienActionPerformed
+
+    private void rdo0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo0ActionPerformed
+        // TODO add your handling code here:
+        tinhTien = tienHienTai;
+        txtTongTien.setText(String.valueOf(tinhTien));
+    }//GEN-LAST:event_rdo0ActionPerformed
+
+    private void rdo5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo5ActionPerformed
+        // TODO add your handling code here:
+        tinhTien = (tienHienTai*95)/100;
+        System.out.println(tinhTien);
+        txtTongTien.setText(String.valueOf(tinhTien));
+    }//GEN-LAST:event_rdo5ActionPerformed
+
+    private void rdo15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo15ActionPerformed
+        // TODO add your handling code here:
+        tinhTien = (tienHienTai*85)/100;
+        System.out.println(tinhTien);
+        txtTongTien.setText(String.valueOf(tinhTien));
+    }//GEN-LAST:event_rdo15ActionPerformed
+
+    private void rdo20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo20ActionPerformed
+        // TODO add your handling code here:
+        tinhTien = (tienHienTai*80)/100;
+        System.out.println(tinhTien);
+        txtTongTien.setText(String.valueOf(tinhTien));
+    }//GEN-LAST:event_rdo20ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
     private javax.swing.JButton btnCuoi;
     private javax.swing.JButton btnDau;
     private javax.swing.JButton btnDong;
+    private javax.swing.JButton btnLayTongTien;
     private javax.swing.JButton btnLui;
     private javax.swing.JButton btnMoHoaDonCT;
     private javax.swing.JButton btnMoi;
@@ -791,6 +899,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -820,5 +929,6 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtTenKH;
     private javax.swing.JTextField txtTimKiem;
     private javax.swing.JTextField txtTongTien;
+    private javax.swing.JTextField txtTongTienCu;
     // End of variables declaration//GEN-END:variables
 }
