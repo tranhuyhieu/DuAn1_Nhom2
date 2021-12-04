@@ -51,11 +51,9 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
         model.setRowCount(0);
         try {
             List<HoaDonChiTiet> list = dao.selectAll();
-            for (int i = 0; i < list.size(); i++) {
-                HoaDonChiTiet hdct = list.get(i);
-                String khungGio = kgDao.selectById(hdct.getMaKG()).getKhungGio();
+            for (HoaDonChiTiet hdct: list) {
                 Object[] row = {hdct.getMaHDCT(), hdct.getMaHD(), hdct.getMaSan(),
-                    khungGio, hdct.getNgayDat(), hdct.getTrongTai(),hdct.getGiaTien(), hdct.getTrangThai()
+                    hdct.getMaKG(), hdct.getNgayDat(), hdct.getTrongTai(),hdct.getGiaTien(), hdct.getTrangThai()
                 };
                 model.addRow(row);
             }
@@ -174,9 +172,9 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
             mol = (DefaultTableModel) tblHDCT.getModel();
             mol.setRowCount(0);
             for (HoaDonChiTiet x : list) {
-                String khungGio = kgDao.selectById(x.getMaKG()).getKhungGio();
+
                 mol.addRow(new Object[]{x.getMaHDCT(), x.getMaHD(), x.getMaSan(),
-                    khungGio, x.getNgayDat(), x.getGiaTien(), x.getTrangThai()});
+                    x.getMaKG(), x.getNgayDat(), x.getTrongTai(),x.getGiaTien(), x.getTrangThai()});
             }
         } else {
             fillTable();
