@@ -63,8 +63,8 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
                     x.getGiamGia(),
                     x.getTongTien(),
                     x.getNgayThanhToan(),
-                    x.getTrangThaiHD(),
-                    x.getTrangThaiTT()});
+                    x.getTrangThaiHD() == 1 ? "Chờ xác nhận" : x.getTrangThaiHD() == 2 ? "Đã xác nhận" : "Đã hủy",
+                    x.getTrangThaiTT() == 1 ? "Chờ thanh toán" : "Đã thanh toán"});
                 System.out.println(x.toString() + "\n");
             }
         } catch (ClassCastException e) {
@@ -249,7 +249,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
         String email_regex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                 + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
         String sdt_regex = "0[0-9\\s.-]{9,13}";
-        String hoTen_regex = "(?:[A-Z][a-z]{1,7} )+[A-Z][a-z]{1,7}";
+        String hoTen_regex = "^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ ]{3,50}$";
 
         if (txtMaHoaDon.getText().length() == 0) {
             txtMaHoaDon.requestFocus();
@@ -267,14 +267,19 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
             check = true;
         }
 
-        if (txtTenKH.getText().equals("")) {
+        if (txtTenKH.getText().length() == 0) {
             txtTenKH.requestFocus();
             MsgBox.alert(this, "họ tên đang để trống");
             check = false;
             return;
-        } else if (!txtTenKH.getText().matches(hoTen_regex)) {
+        }else if (txtTenKH.getText().equals(" ")) {
             txtTenKH.requestFocus();
-            MsgBox.alert(this, "Sai định dạng họ tên(chỉ hỗ trợ alphabet)");
+            MsgBox.alert(this, "họ tên không để khoảng trống");
+            check = false;
+            return;
+        }else if (!txtTenKH.getText().matches(hoTen_regex)) {
+            txtTenKH.requestFocus();
+            MsgBox.alert(this, "Sai định dạng họ tên");
             check = false;
             return;
         } else {
@@ -632,8 +637,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtEmail)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(rdoCho)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(rdoHuy))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(8, 8, 8)
@@ -688,8 +692,11 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
                                         .addComponent(btnLayTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(btnDong, javax.swing.GroupLayout.Alignment.TRAILING))))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(rdoChoThanhToan)
-                                .addGap(88, 88, 88)
+                                .addGap(10, 10, 10)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(rdoCho)
+                                    .addComponent(rdoChoThanhToan))
+                                .addGap(78, 78, 78)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(rdoDaThanhToan)
@@ -726,13 +733,14 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
                     .addComponent(rdo15)
                     .addComponent(rdo20))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txtTongTienCu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel10)
                         .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnLayTongTien)))
+                        .addComponent(btnLayTongTien))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel7)
+                        .addComponent(txtTongTienCu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -760,7 +768,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
                                 .addComponent(btnDong)
                                 .addComponent(btnMoHoaDonCT, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(btnDau))
-                .addGap(0, 8, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
             .addComponent(lblAnh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
