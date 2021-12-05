@@ -23,6 +23,7 @@ public class HoaDonCTDao extends DuAnDao<HoaDonChiTiet, Integer>{
     String DELETE_SQL = "DELETE FROM HOADONCHITIET WHERE Id_HDCT=?";
     String SELECT_ALL_SQL = "SELECT*FROM HOADONCHITIET";
     String SELECT_BY_ID_SQL = "SELECT*FROM HOADONCHITIET WHERE Id_HDCT=?";
+    String SELECT_BY_ID_HD = "SELECT*FROM HOADONCHITIET Where Id_HD=?";
 
     @Override
     public void insert(HoaDonChiTiet entity) {
@@ -104,5 +105,9 @@ public class HoaDonCTDao extends DuAnDao<HoaDonChiTiet, Integer>{
             e.printStackTrace();
         }
         return tien;
+    }
+    
+    public List<HoaDonChiTiet> selectByIdHD(Integer id) {
+        return this.selectBySql(SELECT_BY_ID_HD, id);  
     }
 }

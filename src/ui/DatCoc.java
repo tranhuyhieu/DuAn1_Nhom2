@@ -38,7 +38,7 @@ public class DatCoc extends javax.swing.JInternalFrame {
         if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
             XImage.save(file);
-            ImageIcon icon = XImage.read(file.getName());
+            ImageIcon icon = new ImageIcon(XImage.read(file.getName()).getImage().getScaledInstance(lblHinh.getWidth(), lblHinh.getHeight(), 5));
             lblHinh.setIcon(icon);
             lblHinh.setToolTipText(file.getName());
         }
@@ -70,8 +70,7 @@ public class DatCoc extends javax.swing.JInternalFrame {
 
     
     void xoaForm() {
-        lblHinh.setText("");
-        txtNoiDung.setText("");
+        lblHinh.getToolTipText();
     }
 
     void xacNhan(){
@@ -93,9 +92,6 @@ public class DatCoc extends javax.swing.JInternalFrame {
 
         lblHinh = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtNoiDung = new javax.swing.JTextArea();
         btnDatCoc = new javax.swing.JButton();
         btnMoi = new javax.swing.JButton();
         btnXemHoaDon = new javax.swing.JLabel();
@@ -115,12 +111,6 @@ public class DatCoc extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        jLabel2.setText("Nội dung đặt cọc(Họ tên - số điện thoại)");
-
-        txtNoiDung.setColumns(20);
-        txtNoiDung.setRows(5);
-        jScrollPane1.setViewportView(txtNoiDung);
 
         btnDatCoc.setText("Đặt cọc");
         btnDatCoc.addActionListener(new java.awt.event.ActionListener() {
@@ -168,57 +158,47 @@ public class DatCoc extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblHinh, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnXemHoaDon, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(jButton1)
-                        .addGap(304, 304, 304)
-                        .addComponent(btnDatCoc)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnMoi)
-                        .addGap(52, 52, 52)))
+                .addGap(82, 82, 82)
+                .addComponent(jButton1)
+                .addGap(304, 304, 304)
+                .addComponent(btnDatCoc)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnMoi)
+                .addContainerGap(105, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblHinh, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnXemHoaDon, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn)))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(lblHinh, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
+                    .addComponent(lblHinh, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(btnXemHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnMoi)
                         .addComponent(btnDatCoc)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -233,10 +213,8 @@ public class DatCoc extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if (index == -1) {
             MsgBox.alert(this, "Vui lòng chọn hóa đơn để đặt cọc.");
-        } else if (lblHinh.getIcon().equals("")) {
+        } else if (lblHinh.getToolTipText() == null) {
             MsgBox.alert(this, "Vui lòng chọn ảnh đặt cọc.");
-        } else if (txtNoiDung.getText().equals("")){
-            MsgBox.alert(this, "Đang để trống nội dung đặt cọc.");
         } else {
             xacNhan();
             MsgBox.alert(this, "Đặt cọc thành công. Chờ xử lý.");
@@ -263,6 +241,7 @@ public class DatCoc extends javax.swing.JInternalFrame {
             float x1 = Float.parseFloat(tblHoaDon.getValueAt(index, 4) + "");
             float tiencoc = Float.parseFloat(String.valueOf(x1 * 40 / 100));
             MsgBox.alert(this, "Số tiền quý khách cần đặt cọc là:" + " " + tiencoc);
+            lblHinh.setIcon(new ImageIcon(hd.getAnhDatCoc()));
         }else{
             lblHinh.setIcon(XImage.read(hd.getAnhDatCoc()));
         }
@@ -275,12 +254,9 @@ public class DatCoc extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnMoi;
     private javax.swing.JLabel btnXemHoaDon;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblHinh;
     private javax.swing.JTable tblHoaDon;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextArea txtNoiDung;
     // End of variables declaration//GEN-END:variables
 }

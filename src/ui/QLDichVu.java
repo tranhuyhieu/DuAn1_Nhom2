@@ -144,13 +144,13 @@ public class QLDichVu extends javax.swing.JInternalFrame {
 
         tblDanhsach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Mã dịch vụ", "Tên dịch vụ", "Số lượng", "Trọng tài", "Giá tiền", "Trạng thái DV"
+                "Mã dịch vụ", "Tên dịch vụ", "Số lượng", "Giá tiền", "Trạng thái DV"
             }
         ));
         tblDanhsach.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -203,12 +203,13 @@ public class QLDichVu extends javax.swing.JInternalFrame {
         txtSoLuong.setEnabled(false);
         txtGiaTien.setEnabled(false);
         loadData();
+        tabs.setSelectedIndex(1);
     }
     
     void loadData(){
         mol= (DefaultTableModel)tblDanhsach.getModel();
         mol.setRowCount(0);
-        List<DichVu> list= dao.selectAll();
+        List<DichVu> list= dao.selectByIdHDCT(QLHoaDonChiTiet.maHDCT);
         for (DichVu dv : list) {
             mol.addRow(new Object[]{dv.getMaDV(),dv.getTenDV(),dv.getSoLuong(),dv.getGiaTien(),dv.getTrangThaiDichVu()});
         }
