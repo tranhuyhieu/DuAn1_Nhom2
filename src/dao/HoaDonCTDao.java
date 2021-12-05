@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class HoaDonCTDao extends DuAnDao<HoaDonChiTiet, Integer>{
     String INSERT_SQL = "INSERT INTO HOADONCHITIET(Id_HD,Id_San,Id_KG,NgayDat,GiaTien,TrangThai)VALUES(?,?,?,?,?,?)";
-    String UPDATE_SQL = "UPDATE HOADONCHITIET SET Id_HD=?,Id_San=?,Id_KG=?,NgayDat=?,GiaTien=?,TrangThai=? WHERE Id_HDCT=?";
+    String UPDATE_SQL = "UPDATE HOADONCHITIET SET Id_HD=?,Id_San=?,Id_KG=?,NgayDat=?, TrongTai=?, GiaTien=?,TrangThai=? WHERE Id_HDCT=?";
     String DELETE_SQL = "DELETE FROM HOADONCHITIET WHERE Id_HDCT=?";
     String SELECT_ALL_SQL = "SELECT*FROM HOADONCHITIET";
     String SELECT_BY_ID_SQL = "SELECT*FROM HOADONCHITIET WHERE Id_HDCT=?";

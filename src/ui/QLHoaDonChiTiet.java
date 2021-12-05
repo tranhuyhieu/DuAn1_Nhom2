@@ -184,9 +184,9 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
 
     void update() {
         HoaDonChiTiet hdct = getModel();
-        dao.update(hdct);
-        MsgBox.alert(this, "Cập nhật trạng thái thành công");
-        fillTable();
+            dao.update(hdct);
+            MsgBox.alert(this, "Cập nhật trạng thái thành công");
+            fillTable();
     }
 
     DichVu getModeldv() {
@@ -581,11 +581,18 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
+        String p_sl= "[0-9]{1,100}";
         if (txtTTDV.getText().equals("")) {
             MsgBox.alert(this, "Vui lòng chọn dịch vụ");
+            return;
+        } else {
+            if (txtSoLuong.getText().matches(p_sl) == false) {
+            MsgBox.alert(this, "Số lượng không đúng định dạng");
+            return;
         } else {
             update();
             insertDV();
+            }
         }
     }//GEN-LAST:event_btnSuaActionPerformed
 
@@ -681,11 +688,16 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
 
     private void txtSoLuongFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSoLuongFocusLost
         // TODO add your handling code here:
-        if (Integer.parseInt(txtSoLuong.getText()) > 0) {
+        if(txtSoLuong.getText() != null){
+            return;
+        }else if(Float.parseFloat(txtSoLuong.getText()) > 0){
+            return;
+        }
+        else if (Integer.parseInt(txtSoLuong.getText()) > 0) {
             int sl = Integer.parseInt(txtSoLuong.getText());
             txtTongTien.setText(String.valueOf(this.tongTien + (this.x1 * sl)));
         } else {
-            MsgBox.alert(this, "Số lượng sai địng dạng");
+            MsgBox.alert(this, "Số lượng không đúng định dạng");
         }
     }//GEN-LAST:event_txtSoLuongFocusLost
 
