@@ -67,9 +67,8 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
         txtHD.setText(hdct.getMaHD());
         txtMaSan.setText(hdct.getMaSan());
         txtMaKG.setText(hdct.getMaKG());
-        txtNgayDat.setText(XDate.toString(hdct.getNgayDat(), "dd/MM/yyyy"));
-        
-        if (hdct.getTrongTai()== null){
+        txtNgayDat.setText(XDate.toString(hdct.getNgayDat(), "dd/MM/yyyy"));        
+        if (hdct.getTrongTai() == null || hdct.getTrongTai().equals("")){
             rdoThueTrongTai.setSelected(false);
         }else{
             rdoThueTrongTai.setSelected(true);
@@ -92,7 +91,7 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
         if (rdoThueTrongTai.isSelected()) {
             hdct.setTrongTai("Có");
         } else {
-            hdct.setTrongTai("Không");
+            hdct.setTrongTai("");
         }
         hdct.setGiaTien(Float.parseFloat(txtTongTien.getText()));
         if (rdoXacNhan.isSelected()) {
@@ -248,6 +247,7 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
         rdoHuy = new javax.swing.JRadioButton();
         btnXemDV = new javax.swing.JButton();
         rdoThueTrongTai = new javax.swing.JRadioButton();
+        btnThemDV = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         txtTimKiem = new javax.swing.JTextField();
@@ -387,6 +387,13 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
             }
         });
 
+        btnThemDV.setText("Thêm dịch vụ");
+        btnThemDV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemDVActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -451,7 +458,9 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnXemDV)
-                .addGap(199, 199, 199))
+                .addGap(43, 43, 43)
+                .addComponent(btnThemDV)
+                .addGap(83, 83, 83))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -510,7 +519,9 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
                     .addComponent(btnSua)
                     .addComponent(btnMoi))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnXemDV)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnXemDV)
+                    .addComponent(btnThemDV))
                 .addContainerGap())
         );
 
@@ -581,19 +592,7 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-        String p_sl= "[0-9]{1,100}";
-        if (txtTTDV.getText().equals("")) {
-            MsgBox.alert(this, "Vui lòng chọn dịch vụ");
-            return;
-        } else {
-            if (txtSoLuong.getText().matches(p_sl) == false) {
-            MsgBox.alert(this, "Số lượng không đúng định dạng");
-            return;
-        } else {
             update();
-            insertDV();
-            }
-        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
@@ -625,6 +624,7 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
             if (rdoHuy.isSelected()) {
                 btnSua.setEnabled(false);
                 btnXemDV.setEnabled(false);
+                btnThemDV.setEnabled(false);
             } else {
                 btnXemDV.setEnabled(true);
             }
@@ -681,7 +681,7 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
 
     private void btnXemDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemDVActionPerformed
         // TODO add your handling code here:
-        QLDichVu dv= new QLDichVu();
+        QLDichVu dv = new QLDichVu();
         this.getDesktopPane().add(dv);
         dv.setVisible(true);
     }//GEN-LAST:event_btnXemDVActionPerformed
@@ -701,6 +701,22 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtSoLuongFocusLost
 
+    private void btnThemDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDVActionPerformed
+        // TODO add your handling code here:
+        String p_sl = "[0-9]{1,100}";
+        if (txtTTDV.getText().equals("")) {
+            MsgBox.alert(this, "Vui lòng chọn dịch vụ");
+            return;
+        } else {
+            if (txtSoLuong.getText().matches(p_sl) == false) {
+                MsgBox.alert(this, "Số lượng không đúng định dạng");
+                return;
+            } else {
+                insertDV();
+            }
+        }
+    }//GEN-LAST:event_btnThemDVActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFirst;
@@ -709,6 +725,7 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPrev;
     private javax.swing.JButton btnSua;
+    private javax.swing.JButton btnThemDV;
     private javax.swing.JButton btnTimKiem;
     private javax.swing.JButton btnXemDV;
     private javax.swing.ButtonGroup buttonGroup1;
