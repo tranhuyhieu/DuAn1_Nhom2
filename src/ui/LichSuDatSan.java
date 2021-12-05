@@ -238,6 +238,8 @@ public class LichSuDatSan extends javax.swing.JInternalFrame {
                 dao.update(hdct2);
                 MsgBox.alert(this, "Hủy sân thành công");
                 xem();
+            }else{
+                MsgBox.alert(this, "Mã xác nhận không chính xác.");
             }
         }
         }
