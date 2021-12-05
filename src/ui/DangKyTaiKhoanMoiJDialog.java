@@ -40,7 +40,7 @@ public class DangKyTaiKhoanMoiJDialog extends javax.swing.JDialog {
         kh.setMaNV("NV01");
         kh.setMatKhau(String.valueOf(txtMK.getPassword()).trim());
         kh.setNgayDK(XDate.now());
-        kh.setHoTen(txtHoTen.getText());
+        kh.setHoTen(txtHoTen.getText().trim());
         return kh;
     }
 
@@ -71,7 +71,7 @@ public class DangKyTaiKhoanMoiJDialog extends javax.swing.JDialog {
 
     void kiemTraForm() {
         //String tenTK_regex = "/^[a-z0-9]{3,20}$/";
-        String hoTen_regex = "(?:[A-Z][a-z]{1,7} )+[A-Z][a-z]{1,7}";
+        String hoTen_regex = "^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ ]{3,50}$";
         if (txtTaiKhoan.getText().length()==0) {
             txtTaiKhoan.requestFocus();
             MsgBox.alert(this, "Tài khoản đang để trống");
@@ -96,10 +96,15 @@ public class DangKyTaiKhoanMoiJDialog extends javax.swing.JDialog {
             MsgBox.alert(this, "Không để trống họ tên");
             check = false;
             return;
+        }else if (txtHoTen.getText().equals(" ")) {
+            txtHoTen.requestFocus();
+            MsgBox.alert(this, "Không để tên là khoảng trống");
+            check = false;
+            return;
         }else if (txtHoTen.getText().matches(hoTen_regex) == false) {
             System.out.println(txtHoTen.getText().matches(hoTen_regex));
             txtHoTen.requestFocus();
-            MsgBox.alert(this, "Sai định dạng họ tên (ký tự alphabet)");
+            MsgBox.alert(this, "Sai định dạng họ tên");
             check = false;
             return;
         }else{
