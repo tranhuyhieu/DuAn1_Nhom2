@@ -50,22 +50,25 @@ public class DatCoc extends javax.swing.JInternalFrame {
         String email = txtEmail.getText();
         String p_email = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                 + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        List<HoaDon> list = dao.selectByEmail(email);
         if (txtEmail.getText().equals("")) {
             MsgBox.alert(this, "Email trống");
             return;
         } else if (txtEmail.getText().matches(p_email) == false) {
             MsgBox.alert(this, "Email không đúng định dạng");
             return;
-        } else {
-            List<HoaDon> list = dao.selectByEmail(email);
+        } else if(list.size() > 0){
             DefaultTableModel mol = (DefaultTableModel) tblHoaDon.getModel();
             mol.setRowCount(0);
             for (HoaDon x : list) {
                 mol.addRow(new Object[]{x.getMaHD(), x.getHoTenKH(), x.getEmail(), x.getSoDienThoai(), x.getTongTien()});
             }
+        }else{
+            MsgBox.alert(this, "Email không tồn tại.");
         }
     }
 
+    
     void xoaForm() {
         lblHinh.setText("");
         txtNoiDung.setText("");
@@ -228,9 +231,13 @@ public class DatCoc extends javax.swing.JInternalFrame {
 
     private void btnDatCocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatCocActionPerformed
         // TODO add your handling code here:
-        if(index == -1){
+        if (index == -1) {
             MsgBox.alert(this, "Vui lòng chọn hóa đơn để đặt cọc.");
-        }else{
+        } else if (lblHinh.getIcon().equals("")) {
+            MsgBox.alert(this, "Vui lòng chọn ảnh đặt cọc.");
+        } else if (txtNoiDung.getText().equals("")){
+            MsgBox.alert(this, "Đang để trống nội dung đặt cọc.");
+        } else {
             xacNhan();
             MsgBox.alert(this, "Đặt cọc thành công. Chờ xử lý.");
         }
