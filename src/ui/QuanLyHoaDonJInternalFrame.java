@@ -28,7 +28,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
     boolean check = false;
     double tienHienTai = 0;
     double tinhTien = 0;
-
+    static int maHD;
     /**
      * Creates new form QuanLyHoaDonJInternalFrame
      */
@@ -842,6 +842,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if (evt.getClickCount() == 2) {
             this.row = tblDanhSach.rowAtPoint(evt.getPoint());
+            this.maHD = Integer.parseInt(String.valueOf(tblDanhSach.getValueAt(row, 0)));
             edit();
         }
     }//GEN-LAST:event_tblDanhSachMousePressed

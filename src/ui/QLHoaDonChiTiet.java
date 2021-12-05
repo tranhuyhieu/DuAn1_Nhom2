@@ -39,6 +39,7 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
 
     int index = 0;
     int row = -1;
+    static int maHDCT;
 
     void init() {
         setFrameIcon(new ImageIcon(XImage.getAppIcon()));
@@ -51,7 +52,7 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
         DefaultTableModel model = (DefaultTableModel) tblHDCT.getModel();
         model.setRowCount(0);
         try {
-            List<HoaDonChiTiet> list = dao.selectAll();
+            List<HoaDonChiTiet> list = dao.selectByIdHD(QuanLyHoaDonJInternalFrame.maHD);
             for (HoaDonChiTiet hdct: list) {
                 Object[] row = {hdct.getMaHDCT(), hdct.getMaHD(), hdct.getMaSan(),
                     hdct.getMaKG(), hdct.getNgayDat(), hdct.getTrongTai(),hdct.getGiaTien(), hdct.getTrangThai() == 2 ? "Hủy" : "Xác nhận"
@@ -620,6 +621,7 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if (evt.getClickCount() == 2) {
             this.row = tblHDCT.rowAtPoint(evt.getPoint());
+            this.maHDCT = Integer.parseInt(String.valueOf(tblHDCT.getValueAt(row, 0)));
             edit();
             updateStatus();
             if (rdoHuy.isSelected()) {
@@ -681,11 +683,9 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
     float x1;
     float tongTien;
 
-    static int maHDCT;
     private void btnXemDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemDVActionPerformed
         // TODO add your handling code here:
         QLDichVu dv = new QLDichVu();
-        this.maHDCT = Integer.parseInt(txtHDCT.getText());
         this.getDesktopPane().add(dv);
         dv.setVisible(true);
     }//GEN-LAST:event_btnXemDVActionPerformed
