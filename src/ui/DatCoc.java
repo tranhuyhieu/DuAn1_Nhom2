@@ -243,7 +243,7 @@ public class DatCoc extends javax.swing.JInternalFrame {
             MsgBox.alert(this, "Số tiền quý khách cần đặt cọc là:" + " " + tiencoc);
             lblHinh.setIcon(new ImageIcon(hd.getAnhDatCoc()));
         }else{
-            lblHinh.setIcon(XImage.read(hd.getAnhDatCoc()));
+            lblHinh.setIcon(new ImageIcon(XImage.read(hd.getAnhDatCoc()).getImage().getScaledInstance(lblHinh.getWidth(), lblHinh.getHeight(), 5)));
         }
     }//GEN-LAST:event_tblHoaDonMouseClicked
 
