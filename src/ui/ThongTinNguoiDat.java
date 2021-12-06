@@ -72,6 +72,7 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
         txtSDT = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtngayThanhToan = new javax.swing.JTextField();
+        rdo9 = new javax.swing.JRadioButton();
 
         setTitle("Thông Tin Người Đặt");
 
@@ -134,7 +135,7 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
                         .addComponent(rd05)
                         .addGap(29, 29, 29)
                         .addComponent(rd06)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, Short.MAX_VALUE)
                         .addComponent(rd07)
                         .addGap(20, 20, 20)
                         .addComponent(rd08)))
@@ -149,7 +150,7 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
                     .addComponent(rd02)
                     .addComponent(rd03)
                     .addComponent(rd04))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rd05)
                     .addComponent(rd06)
@@ -185,6 +186,8 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonGroup1.add(rdo9);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -203,26 +206,27 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGap(39, 39, 39)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(38, 38, 38))
-                    .addComponent(jLabel5))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5)
+                            .addComponent(rdo9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtGiaSan)
                         .addGap(10, 10, 10))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnXacNhan)
-                            .addGap(49, 49, 49)
-                            .addComponent(btnDong))
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtngayThanhToan)
-                                .addComponent(txtNguoiDat)
-                                .addComponent(txtSDT)
-                                .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addGap(8, 8, 8))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnXacNhan)
+                        .addGap(49, 49, 49)
+                        .addComponent(btnDong))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtngayThanhToan)
+                            .addComponent(txtNguoiDat)
+                            .addComponent(txtSDT)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(8, 8, 8)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -240,17 +244,20 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtngayThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel4)))
-                .addGap(18, 18, 18)
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(rdo9))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(txtGiaSan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -279,24 +286,21 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
         CheckDL();
         if (check == 1) {
             xacNhan();
+            moi();
         }
-
-
     }//GEN-LAST:event_btnXacNhanActionPerformed
 
     private void moi() {
-        txtEmail.setText("");
-        txtNguoiDat.setText("");
-        txtSDT.setText("");
-        txtngayThanhToan.setText("");
-        rd01.setEnabled(true);
-        rd02.setEnabled(true);
-        rd03.setEnabled(true);
-        rd04.setEnabled(true);
-        rd05.setEnabled(true);
-        rd06.setEnabled(true);
-        rd07.setEnabled(true);
-        rd08.setEnabled(true);
+        txtngayThanhToan.requestFocus();
+        rd01.setSelected(false);
+        rd02.setSelected(false);
+        rd03.setSelected(false);
+        rd04.setSelected(false);
+        rd05.setSelected(false);
+        rd06.setSelected(false);
+        rd07.setSelected(false);
+        rd08.setSelected(false);
+        rdo9.setSelected(true);
     }
 
     private void txtGiaSanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGiaSanActionPerformed
@@ -309,33 +313,35 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
 
     private void txtngayThanhToanFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtngayThanhToanFocusLost
         // TODO add your handling code here:
-        
-        List<HoaDonChiTiet>list = hdctdao.selectHoaDonChiTiet(QuanLyDatSan.sb.getMaSan(),XDate.toDate(txtngayThanhToan.getText(),"yyyy/MM/dd"));
+        checkDate1();
+        if (check ==1 ) {
+        List<HoaDonChiTiet>list = hdctdao.selectHoaDonChiTiet(QuanLyDatSan.sb.getMaSan().trim(),XDate.toDate(txtngayThanhToan.getText().trim(),"yyyy/MM/dd"));
         for (HoaDonChiTiet x : list) {
             if (x.getMaKG().equals("KG01")) {
                 rd01.setEnabled(false);
             }
-            else if (x.getMaKG().equals("KG02")) {
+             if (x.getMaKG().equals("KG02")) {
                 rd02.setEnabled(false);
             }
-            else if (x.getMaKG().equals("KG03")) {
+             if (x.getMaKG().equals("KG03")) {
                 rd03.setEnabled(false);
             }
-            else if (x.getMaKG().equals("KG04")) {
+             if (x.getMaKG().equals("KG04")) {
                 rd04.setEnabled(false);
             }
-            else if (x.getMaKG().equals("KG05")) {
+             if (x.getMaKG().equals("KG05")) {
                 rd05.setEnabled(false);
             }
-            else if (x.getMaKG().equals("KG06")) {
+             if (x.getMaKG().equals("KG06")) {
                 rd06.setEnabled(false);
             }
-            else if (x.getMaKG().equals("KG07")) {
+             if (x.getMaKG().equals("KG07")) {
                 rd07.setEnabled(false);
             }
-            else if (x.getMaKG().equals("KG08")) {
+             if (x.getMaKG().equals("KG08")) {
                 rd08.setEnabled(false);
             }
+        }
         }
     }//GEN-LAST:event_txtngayThanhToanFocusLost
 
@@ -359,6 +365,7 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton rd06;
     private javax.swing.JRadioButton rd07;
     private javax.swing.JRadioButton rd08;
+    private javax.swing.JRadioButton rdo9;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtGiaSan;
     private javax.swing.JTextField txtNguoiDat;
@@ -381,13 +388,10 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
         rd08.setEnabled(true);
 
     }
-
-    
     void xacNhan() {
         String Email = txtEmail.getText();
         Date NgayThanhToan = XDate.toDate(txtngayThanhToan.getText());
         HoaDon hd = hddao.selecthoaDon(Email, NgayThanhToan);
-
         if (hd != null) {
             HoaDonChiTiet model1 = new HoaDonChiTiet();
             model1.setMaHD(hd.getMaHD());
@@ -466,7 +470,7 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
                 MsgBox.alert(this, "Vui lòng chọn khung giờ.");
                 return;
             }
-            model1.setMaKG(maKG1);
+model1.setMaKG(maKG1);
             model1.setNgayDat(XDate.now());
             model1.setGiaTien(QuanLyDatSan.sb.getGiaSan());
             model1.setTrangThai(0);
@@ -483,7 +487,6 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
         } else {
             model.setMaNV(Auth.user1.getMaNV());
         }
-
         if (Auth.user2 == null) {
             model.setMaKH("KHbot");
         } else {
@@ -502,7 +505,7 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
     }
 
     void CheckDL() {
-        String hoten = "[a-zA-Z]+";
+        String hoten = "^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ ]{3,50}$";
         String sdt = "((09|03|07|08|05)+([0-9]{8}))";
         String email = "^[A-Za-z0-9]+[A-Za-z0-9]*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)$";
         // check hoten
@@ -512,7 +515,7 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
             check = 0;
             return;
         } else if (txtNguoiDat.getText().matches(hoten) == false) {
-            MsgBox.alert(this, "Bạn điền sai thông tin email");
+            MsgBox.alert(this, "Bạn điền sai thông tin họ tên");
             txtNguoiDat.requestFocus();
             check = 0;
             return;
@@ -547,33 +550,66 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
         } else {
             check = 1;
         }
-        //check ngày đặt 
-        java.util.Date ns;
+        if (checkDate()) return;
+    }
+
+    private boolean checkDate() {
+        //check ngày đặt
         SimpleDateFormat df;
         if (txtngayThanhToan.getText().length() == 0) {
             MsgBox.alert(this, "Chưa có dữ liệu ngày thanh toán");
             txtngayThanhToan.requestFocus();
             check = 0;
-            return;
+            return false;
         } else if (txtngayThanhToan.getText() != null) {
             df = new SimpleDateFormat("yyyy/MM/dd");
-            Date a = XDate.toDate(txtngayThanhToan.getText(), "yyyy/MM/dd");
-            Date b = XDate.now();
             try {
-                ns = df.parse(txtngayThanhToan.getText());
-                if (a.before(b)) {
-                    MsgBox.alert(this, "Ngày thanh toán không hợp lệ");
-                    check = 0;
-                    return;
-                }
+                Date ngaytt = df.parse(txtngayThanhToan.getText());
+                
             } catch (Exception e) {
                 MsgBox.alert(this, "Ngày thanh toán không đúng ");
                 txtngayThanhToan.requestFocus();
                 check = 0;
-                return;
+                return false;
             }
+            Date a = XDate.toDate(txtngayThanhToan.getText(), "yyyy/MM/dd");
+            Date b = XDate.now();
+            if (a.before(b)) {
+                    MsgBox.alert(this, "Ngày thanh toán không hợp lệ");
+                    check = 0;
+                    return false;
+                }
         } else {
             check = 1;
         }
+        return true;
+    }
+    private boolean checkDate1() {
+        //check ngày đặt
+        SimpleDateFormat df;
+        if (txtngayThanhToan.getText().length() == 0) {
+            txtngayThanhToan.requestFocus();
+            check = 0;
+            return false;
+        } else if (txtngayThanhToan.getText() != null) {
+            df = new SimpleDateFormat("yyyy/MM/dd");
+            try {
+                Date ngaytt = df.parse(txtngayThanhToan.getText());
+                
+            } catch (Exception e) {
+                txtngayThanhToan.requestFocus();
+                check = 0;
+                return false;
+            }
+            Date a = XDate.toDate(txtngayThanhToan.getText(), "yyyy/MM/dd");
+            Date b = XDate.now();
+            if (a.before(b)) {
+                    check = 0;
+                    return false;
+                }
+        } else {
+            check = 1;
+        }
+        return true;
     }
 }
