@@ -63,8 +63,8 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
                     x.getGiamGia(),
                     x.getTongTien(),
                     x.getNgayThanhToan(),
-                    x.getTrangThaiHD() == 1 ? "Chờ xác nhận" : x.getTrangThaiHD() == 2 ? "Đã xác nhận" : "Đã hủy",
-                    x.getTrangThaiTT() == 1 ? "Chờ thanh toán" : "Đã thanh toán"});
+                    x.getTrangThaiHD() == 0 ? "Chờ xác nhận" : x.getTrangThaiHD() == 1 ? "Đã xác nhận" : "Đã hủy",
+                    x.getTrangThaiTT() == 0 ? "Chờ thanh toán" : "Đã thanh toán"});
                 System.out.println(x.toString() + "\n");
             }
         } catch (ClassCastException e) {
@@ -125,16 +125,16 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
         hd.setMaNV(Auth.user1.getMaNV());
         hd.setAnhDatCoc(lblAnh.getText());
         if (rdoCho.isSelected()) {
-            hd.setTrangThaiHD(1);
+            hd.setTrangThaiHD(0);
         } else if (rdoDa.isSelected()) {
-            hd.setTrangThaiHD(2);
+            hd.setTrangThaiHD(1);
         } else {
-            hd.setTrangThaiHD(3);
+            hd.setTrangThaiHD(2);
         }
         if (rdoChoThanhToan.isSelected()) {
-            hd.setTrangThaiTT(1);
+            hd.setTrangThaiTT(0);
         } else {
-            hd.setTrangThaiTT(2);
+            hd.setTrangThaiTT(1);
         }
         hd.setNgayThanhToan(XDate.now());
         return hd;
@@ -156,14 +156,14 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
             } else {
                 rdo20.setSelected(true);
             }
-            if (hd.getTrangThaiHD() == 1) {
+            if (hd.getTrangThaiHD() == 0) {
                 rdoCho.setSelected(true);
-            } else if (hd.getTrangThaiHD() == 2) {
+            } else if (hd.getTrangThaiHD() == 1) {
                 rdoDa.setSelected(true);
             } else {
                 rdoHuy.setSelected(true);
             }
-            if (hd.getTrangThaiTT() == 1) {
+            if (hd.getTrangThaiTT() == 0) {
                 rdoChoThanhToan.setSelected(true);
             } else {
                 rdoDaThanhToan.setSelected(true);
@@ -860,6 +860,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
         if(txtMaHoaDon.getText().length()!=0){
             txtTongTien.setText(String.valueOf(getTongTien(txtMaHoaDon.getText())));
             tienHienTai = getTongTien(txtMaHoaDon.getText());
+            rdo0.setSelected(true);
         }else{
             MsgBox.alert(this, "Chưa có mã hóa đơn");
         }
