@@ -6,6 +6,7 @@
 package dao;
 
 import Entity.HoaDon;
+import Entity.HoaDonChiTiet;
 import utils.XDate;
 import utils.XJdbc;
 import java.sql.ResultSet;
@@ -117,22 +118,5 @@ public class HoaDonDao extends DuAnDao<HoaDon, String>{
         return this.selectBySql(sql, email);
     }
     
-    public String getTenNV(Object...args){
-        String ten = "Unknown";
-        String sql = "select HoTen  from NHANVIEN where Id_NV = ?";
-        try {
-            ResultSet rs = XJdbc.query(sql, args);
-            while(rs.next()){
-                ten = rs.getString("HoTen");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return ten;
-    }
-    
-    public List<HoaDon> selectAllByTTHD(int TTHD) {
-        return this.selectBySql(SELECT_ALL_BY_TTHD_SQL,TTHD); 
-    }
-    
+
 }

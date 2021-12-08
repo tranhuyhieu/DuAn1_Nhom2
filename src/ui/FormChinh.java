@@ -276,6 +276,11 @@ public class FormChinh extends javax.swing.JFrame {
 
         mniketThuc.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         mniketThuc.setText("Kết Thúc");
+        mniketThuc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniketThucActionPerformed(evt);
+            }
+        });
         jMenu1.add(mniketThuc);
 
         MenuBar.add(jMenu1);
@@ -401,12 +406,14 @@ public class FormChinh extends javax.swing.JFrame {
         }
         if(Auth.user2!=null){
             MsgBox.alert(this, "Bạn không có quyền truy cập");
+        }if (Auth.user1==null && Auth.user2==null) {
+            MsgBox.alert(this, "Bạn chưa đăng nhập");
         }
     }//GEN-LAST:event_mniKhachHangActionPerformed
 
     private void mnidangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnidangNhapActionPerformed
         // TODO add your handling code here:
-        if (Auth.user1!= null && Auth.user2!=null) {
+        if (Auth.user1!= null || Auth.user2!=null) {
             MsgBox.alert(this, "Bạn đã đăng nhập trước đó!");
         }else{
         new DangNhap(this, true).setVisible(true);
@@ -415,23 +422,27 @@ public class FormChinh extends javax.swing.JFrame {
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
         // TODO add your handling code here:
-        if (Auth.user1!= null && Auth.user2!=null) {
+        if (Auth.user1!= null || Auth.user2!=null) {
             MsgBox.alert(this, "Bạn đã đăng nhập trước đó!");
         }else{
-        dangnhap();
+        new DangNhap(this, true).setVisible(true);
         }
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
     private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
         // TODO add your handling code here:
-        Auth.user1=null;
-        Auth.user2=null;
-        dangnhap();
+        if (Auth.user1== null && Auth.user2==null) {
+            MsgBox.alert(this, "Bạn chưa đăng nhập!");
+        }else{
+            new DangNhap(this, true).setVisible(true);
+            Auth.user1 = null ;
+            Auth.user2 = null ;
+        }
     }//GEN-LAST:event_btnDangXuatActionPerformed
 
     private void btnQuenMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuenMatKhauActionPerformed
         // TODO add your handling code here:
-        if (Auth.user1!= null && Auth.user2!=null) {
+        if (Auth.user1!= null || Auth.user2!=null) {
             MsgBox.alert(this, "Bạn đã đăng nhập trước đó!");
         }else{
         new QuenMatKhauJDialog(this, true).setVisible(true);
@@ -450,16 +461,18 @@ public class FormChinh extends javax.swing.JFrame {
         }
         if(Auth.user2!=null){
             MsgBox.alert(this, "Bạn không có quyền truy cập");
+        }if (Auth.user1==null && Auth.user2==null) {
+            MsgBox.alert(this, "Bạn chưa đăng nhập");
         }
         
     }//GEN-LAST:event_mniQLsanBongActionPerformed
 
     private void btnDangKyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangKyActionPerformed
         // TODO add your handling code here:
-        if (Auth.user1!= null && Auth.user2!=null) {
+        if (Auth.user1!= null || Auth.user2!=null) {
             MsgBox.alert(this, "Bạn đã đăng nhập trước đó!");
         }else{
-        new DangKyTaiKhoanMoiJDialog(this, true).setVisible(true);
+            new DangKyTaiKhoanMoiJDialog(this, true).setVisible(true);
         }
     }//GEN-LAST:event_btnDangKyActionPerformed
 
@@ -470,7 +483,7 @@ public class FormChinh extends javax.swing.JFrame {
 
     private void mnithongTinCaNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnithongTinCaNhanActionPerformed
         // TODO add your handling code here:
-        if (Auth.user1!= null && Auth.user2!=null) {
+        if (Auth.user1!= null || Auth.user2!=null) {
             MsgBox.alert(this, "Bạn đã đăng nhập trước đó!");
         }else{
         new TTCaNhan(this, true).setVisible(true);
@@ -486,6 +499,8 @@ public class FormChinh extends javax.swing.JFrame {
         }
         if(Auth.user2!=null||!Auth.isManager()){
             MsgBox.alert(this, "Bạn không có quyền truy cập");
+        }if (Auth.user1==null && Auth.user2==null) {
+            MsgBox.alert(this, "Bạn chưa đăng nhập");
         }
     }//GEN-LAST:event_mniNhanVienActionPerformed
 
@@ -515,6 +530,8 @@ public class FormChinh extends javax.swing.JFrame {
         }
         if(Auth.user2!=null){
             MsgBox.alert(this, "Bạn không có quyền truy cập");
+        }if (Auth.user1 == null && Auth.user2== null) {
+            MsgBox.alert(this, "Bạn chưa đăng nhập");
         }
     }//GEN-LAST:event_mniQLThongKeActionPerformed
 
@@ -527,6 +544,8 @@ public class FormChinh extends javax.swing.JFrame {
         }
         if(Auth.user2!=null){
             MsgBox.alert(this, "Bạn không có quyền truy cập");
+        }if (Auth.user1==null && Auth.user2==null) {
+            MsgBox.alert(this, "Bạn chưa đăng nhập");
         }
         
         
@@ -534,16 +553,16 @@ public class FormChinh extends javax.swing.JFrame {
 
     private void mniDoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDoiMatKhauActionPerformed
         // TODO add your handling code here:
-        if (Auth.user1== null && Auth.user2==null) {
-            MsgBox.alert(this, "Bạn chưa đăng nhập!");
+        if (Auth.user1 != null || Auth.user2 !=null) {
+            new DoiMatKhauJDialog(this, true).setVisible(true);
         }else{
-        new DoiMatKhauJDialog(this, true).setVisible(true);
+        MsgBox.alert(this, "Bạn chưa đăng nhập");
         }
     }//GEN-LAST:event_mniDoiMatKhauActionPerformed
 
     private void mniQuenMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQuenMatKhauActionPerformed
         // TODO add your handling code here:
-        if (Auth.user1!= null && Auth.user2!=null) {
+        if (Auth.user1!= null || Auth.user2!=null) {
             MsgBox.alert(this, "Bạn đã đăng nhập trước đó!");
         }else{
         new QuenMatKhauJDialog(this, true).setVisible(true);
@@ -560,7 +579,7 @@ public class FormChinh extends javax.swing.JFrame {
 
     private void mniDangKyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDangKyActionPerformed
         // TODO add your handling code here:
-        if (Auth.user1!= null && Auth.user2!=null) {
+        if (Auth.user1!= null || Auth.user2!=null) {
             MsgBox.alert(this, "Bạn đã đăng nhập trước đó!");
         }else{
             new DangKyTaiKhoanMoiJDialog(this, true).setVisible(true);
@@ -580,8 +599,15 @@ public class FormChinh extends javax.swing.JFrame {
             MsgBox.alert(this, "Bạn chưa đăng nhập!");
         }else{
             new DangNhap(this, true).setVisible(true);
+            Auth.user1 = null ;
+            Auth.user2 = null ;
         }
     }//GEN-LAST:event_mniDangXuatActionPerformed
+
+    private void mniketThucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniketThucActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_mniketThucActionPerformed
 
 
     /**

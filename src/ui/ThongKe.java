@@ -6,8 +6,15 @@
 package ui;
 
 import dao.ThongKeDao;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.data.category.DefaultCategoryDataset;
 import utils.MsgBox;
 
 /**
@@ -58,6 +65,26 @@ public class ThongKe extends javax.swing.JInternalFrame {
             fillTableTongSoLanDat();
         }
     }
+    public void setDataToChart(){
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        int index;
+        for(index=0;index<tblDoanhThu.getRowCount();index++){
+        String maSan=tblDoanhThu.getValueAt(index,0)+"";
+        Float tongTien=(Float)tblDoanhThu.getValueAt(index,3);
+            dataset.addValue(tongTien,"Doanh thu",maSan);
+        }
+         JFreeChart barChart = ChartFactory.createBarChart(
+                "BIỂU ĐỒ THỐNG KÊ DOANH THU",
+                "Mã sân", "Tổng tiền",
+                dataset);
+         CategoryPlot barchrt= barChart.getCategoryPlot();
+         barchrt.setRangeGridlinePaint(Color.ORANGE);
+        ChartPanel chartPanel = new ChartPanel(barChart);
+        chartPanel.setPreferredSize(new java.awt.Dimension(jpn1.getWidth(), jpn1.getHeight()));
+        jpn1.removeAll();
+        jpn1.add(chartPanel,BorderLayout.CENTER);
+        jpn1.validate();
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -66,6 +93,7 @@ public class ThongKe extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDoanhThu = new javax.swing.JTable();
+        jpn1 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblTongSoLanDat = new javax.swing.JTable();
@@ -106,15 +134,21 @@ public class ThongKe extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tblDoanhThu);
 
+        jpn1.setLayout(new java.awt.BorderLayout());
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
+            .addComponent(jpn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Thống Kê Doanh Thu", jPanel2);
@@ -165,7 +199,7 @@ public class ThongKe extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
@@ -173,7 +207,7 @@ public class ThongKe extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Thống Kê Tổng Số Lần Đặt Sân", jPanel1);
@@ -186,7 +220,7 @@ public class ThongKe extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
 
         pack();
@@ -196,6 +230,7 @@ public class ThongKe extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         fillTableDoanhThu();
         fillTableTongSoLanDat();
+        setDataToChart();
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
@@ -212,6 +247,7 @@ public class ThongKe extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JPanel jpn1;
     private javax.swing.JTable tblDoanhThu;
     private javax.swing.JTable tblTongSoLanDat;
     private javax.swing.JTextField txtTimKH;

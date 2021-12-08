@@ -38,12 +38,6 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
     boolean check = false;
     double tienHienTai = 0;
     double tinhTien = 0;
-    String maHD, tenNV, tenKH, SDT, TongTien;
-    float giamGia;
-    Date ngayTT;
-    String spoil;
-    DefaultTableModel model;
-    List<HoaDon> lst;
 
     public QuanLyHoaDonJInternalFrame() {
         initComponents();
@@ -1021,9 +1015,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if (evt.getClickCount() == 2) {
             this.row = tblDanhSach.rowAtPoint(evt.getPoint());
-            if (!tblDanhSach.getValueAt(row, 7).equals("Đã hủy")) {
-                edit();
-            }
+
         }
     }//GEN-LAST:event_tblDanhSachMousePressed
 

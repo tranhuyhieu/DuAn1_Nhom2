@@ -29,7 +29,7 @@ public class SanBongDao extends DuAnDao<SanBong, String>{
 
     @Override
     public void update(SanBong entity) {
-        XJdbc.update(UPDATE_SQL, entity.getMaSan(), entity.getLoaiSan(),entity.getTrangThaiSan(),entity.getGiaSan());
+        XJdbc.update(UPDATE_SQL, entity.getLoaiSan(),entity.getTrangThaiSan(),entity.getGiaSan(),entity.getMaSan());
     }
 
     @Override
