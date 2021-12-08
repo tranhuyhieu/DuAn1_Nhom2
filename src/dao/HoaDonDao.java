@@ -26,7 +26,7 @@ public class HoaDonDao extends DuAnDao<HoaDon, String>{
     String SELECT_ALL_SQL = "SELECT*FROM HOADON";
     String SELECT_BY_ID_SQL = "SELECT *FROM HOADON WHERE Id_HD=?";
     String SELECT_BY_ID = "SELECT * FROM HOADON WHERE EMAIL = ?";
-    
+    String SELECT_ALL_BY_TTHD_SQL = "SELECT*FROM HOADON where TrangThaiHD = ?";
     @Override
     public void insert(HoaDon entity) {
         XJdbc.update(INSERT_SQL, entity.getMaNV(), entity.getMaKH(), entity.getHoTenKH(), entity.getSoDienThoai(),entity.getEmail(), entity.getAnhDatCoc(),entity.getGiamGia(),entity.getTongTien(),entity.getNgayThanhToan(),entity.getTrangThaiHD(),entity.getTrangThaiTT()); 
@@ -56,9 +56,15 @@ public class HoaDonDao extends DuAnDao<HoaDon, String>{
         return list.get(0); 
     }
 
+    /**
+     *
+     * @param sql
+     * @param args
+     * @return
+     */
     @Override
-    protected List<HoaDon> selectBySql(String sql, Object... args) {
-        List<HoaDon> list = new ArrayList<HoaDon>();
+    public List<HoaDon> selectBySql(String sql, Object... args) {
+        List<HoaDon> list = new ArrayList<>();
         try {
             ResultSet rs = XJdbc.query(sql, args);
             while(rs.next()){
@@ -112,8 +118,5 @@ public class HoaDonDao extends DuAnDao<HoaDon, String>{
         return this.selectBySql(sql, email);
     }
     
-    public List<HoaDon> selectByMaSan(String Id_San){
-        String sql= "select HOADON.* From HOADON Where Id_HD in(Select Id_HD From HOADONCHITIET Where Id_San=? AND TrangThai=0)";
-        return this.selectBySql(sql, Id_San);
-    }
+
 }
