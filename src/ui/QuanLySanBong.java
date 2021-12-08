@@ -27,6 +27,7 @@ public class QuanLySanBong extends javax.swing.JInternalFrame {
     HoaDonCTDao dao2 = new HoaDonCTDao();
     int check = 0;
     int index = -1;
+    static String maSan;
 
     /**
      * Creates new form QuanLySanBong
@@ -70,6 +71,7 @@ public class QuanLySanBong extends javax.swing.JInternalFrame {
         btnNext1 = new javax.swing.JButton();
         btnLast1 = new javax.swing.JButton();
         btnMoi1 = new javax.swing.JButton();
+        btnXemhoadon = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblSanBong = new javax.swing.JTable();
@@ -102,7 +104,7 @@ public class QuanLySanBong extends javax.swing.JInternalFrame {
         cboTrangThai1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sẵn sàng", "Hết khung giờ đặt", "Bảo trì" }));
 
         btnThem1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnThem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-update-tag-24.png"))); // NOI18N
+        btnThem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-add-24_1.png"))); // NOI18N
         btnThem1.setText("Thêm");
         btnThem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,11 +159,18 @@ public class QuanLySanBong extends javax.swing.JInternalFrame {
         });
 
         btnMoi1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnMoi1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-add-24.png"))); // NOI18N
+        btnMoi1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-new-24.png"))); // NOI18N
         btnMoi1.setText("Mới");
         btnMoi1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMoi1ActionPerformed(evt);
+            }
+        });
+
+        btnXemhoadon.setText("Xem hóa đơn");
+        btnXemhoadon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXemhoadonActionPerformed(evt);
             }
         });
 
@@ -180,13 +189,17 @@ public class QuanLySanBong extends javax.swing.JInternalFrame {
                             .addComponent(jLabel8))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtGiaSan1)
+                            .addComponent(txtMaSan1)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(rdo3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(rdo4))
-                            .addComponent(cboTrangThai1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtGiaSan1)
-                            .addComponent(txtMaSan1)))
+                                .addComponent(rdo4)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(cboTrangThai1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnXemhoadon, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnThem1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -195,7 +208,7 @@ public class QuanLySanBong extends javax.swing.JInternalFrame {
                         .addComponent(btnXoa1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnMoi1)
-                        .addGap(23, 23, 23)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                         .addComponent(btnFirst1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPrev1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -237,9 +250,11 @@ public class QuanLySanBong extends javax.swing.JInternalFrame {
                                 .addGap(3, 3, 3)
                                 .addComponent(jLabel8))
                             .addComponent(cboTrangThai1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(63, Short.MAX_VALUE))
+                        .addContainerGap(67, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnXemhoadon, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(btnFirst1)
@@ -409,6 +424,13 @@ public class QuanLySanBong extends javax.swing.JInternalFrame {
         timkiem();
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
+    private void btnXemhoadonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemhoadonActionPerformed
+        // TODO add your handling code here:
+        BaoTri bt= new BaoTri();
+        this.getDesktopPane().add(bt);
+        bt.setVisible(true);
+    }//GEN-LAST:event_btnXemhoadonActionPerformed
+
     void loadData() {
         DecimalFormat dcf= new DecimalFormat("###,###,### VNĐ");
         List<SanBong> list = dao.selectAll();
@@ -561,11 +583,12 @@ public class QuanLySanBong extends javax.swing.JInternalFrame {
     }
 
     void click(java.awt.event.MouseEvent evt) {
-        DecimalFormat dcf= new DecimalFormat("###,###,### VNĐ");
+        DecimalFormat dcf= new DecimalFormat("###");
         if (evt.getClickCount() == 2) {
             this.index = tblSanBong.rowAtPoint(evt.getPoint());
             tblSanBong.setRowSelectionInterval(this.index, this.index);
             String masan = String.valueOf(tblSanBong.getValueAt(this.index, 0));
+            this.maSan= masan;
             SanBong sb = dao.selectById(masan);
             txtMaSan1.setText(sb.getMaSan());
             if (sb.getLoaiSan().equals("sân 7")) {
@@ -604,6 +627,7 @@ public class QuanLySanBong extends javax.swing.JInternalFrame {
             btnPrev1.setEnabled(false);
             btnNext1.setEnabled(false);
             btnLast1.setEnabled(false);
+            btnXemhoadon.setEnabled(false);
         } else if (this.index == 0) {
             btnThem1.setEnabled(false);
             btnSua1.setEnabled(true);
@@ -613,6 +637,7 @@ public class QuanLySanBong extends javax.swing.JInternalFrame {
             btnPrev1.setEnabled(false);
             btnNext1.setEnabled(true);
             btnLast1.setEnabled(true);
+            btnXemhoadon.setEnabled(true);
         } else if (this.index > 0 && this.index < tblSanBong.getRowCount() - 1) {
             btnThem1.setEnabled(false);
             btnSua1.setEnabled(true);
@@ -622,6 +647,7 @@ public class QuanLySanBong extends javax.swing.JInternalFrame {
             btnPrev1.setEnabled(true);
             btnNext1.setEnabled(true);
             btnLast1.setEnabled(true);
+            btnXemhoadon.setEnabled(true);
         } else if (this.index == tblSanBong.getRowCount() - 1) {
             btnThem1.setEnabled(false);
             btnSua1.setEnabled(true);
@@ -631,6 +657,7 @@ public class QuanLySanBong extends javax.swing.JInternalFrame {
             btnPrev1.setEnabled(true);
             btnNext1.setEnabled(false);
             btnLast1.setEnabled(false);
+            btnXemhoadon.setEnabled(true);
         }
     }
 
@@ -643,6 +670,7 @@ public class QuanLySanBong extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSua1;
     private javax.swing.JButton btnThem1;
     private javax.swing.JButton btnTimKiem;
+    private javax.swing.JButton btnXemhoadon;
     private javax.swing.JButton btnXoa1;
     private javax.swing.JComboBox<String> cboTrangThai1;
     private javax.swing.JLabel jLabel5;

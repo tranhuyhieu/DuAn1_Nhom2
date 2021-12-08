@@ -6,6 +6,7 @@
 package dao;
 
 import Entity.HoaDon;
+import Entity.HoaDonChiTiet;
 import utils.XDate;
 import utils.XJdbc;
 import java.sql.ResultSet;
@@ -109,5 +110,10 @@ public class HoaDonDao extends DuAnDao<HoaDon, String>{
     public List<HoaDon> selectByEmail(String email){
         String sql = "SELECT * FROM HOADON WHERE EMAIL = ?";
         return this.selectBySql(sql, email);
+    }
+    
+    public List<HoaDon> selectByMaSan(String Id_San){
+        String sql= "select HOADON.* From HOADON Where Id_HD in(Select Id_HD From HOADONCHITIET Where Id_San=? AND TrangThai=0)";
+        return this.selectBySql(sql, Id_San);
     }
 }
