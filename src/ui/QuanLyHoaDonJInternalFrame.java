@@ -104,9 +104,8 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
             } else if (cboTrangThai.getSelectedIndex() == 3) {
                 lst = hdDAO.selectAllByTTHD(2);
             } else{
+                lst = hdDAO.selectAll();
                 txtTimKiem.setText("");
-                fillTableDanhSach();
-                
             }
             for (HoaDon x : lst) {
                 model.addRow(new Object[]{
