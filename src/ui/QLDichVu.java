@@ -6,7 +6,9 @@
 package ui;
 
 import Entity.DichVu;
+import Entity.HoaDonChiTiet;
 import dao.DichVuDao;
+import dao.HoaDonCTDao;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import utils.MsgBox;
@@ -37,6 +39,7 @@ public class QLDichVu extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         tabs = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -68,11 +71,14 @@ public class QLDichVu extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Trạng thái: ");
 
+        buttonGroup1.add(rdo1);
         rdo1.setText("Sẵn sàng");
 
+        buttonGroup1.add(rdo2);
         rdo2.setText("Đã hủy");
 
-        btnSua.setText("Sửa");
+        btnSua.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnSua.setText("Cập nhật");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSuaActionPerformed(evt);
@@ -86,27 +92,23 @@ public class QLDichVu extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtMaDV)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
+                        .addComponent(rdo1)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(rdo1)
-                                .addGap(18, 18, 18)
-                                .addComponent(rdo2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtTenDV)
-                            .addComponent(txtSoLuong)
-                            .addComponent(txtGiaTien)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                        .addComponent(txtMaDV, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(rdo2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
+                        .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTenDV)
+                    .addComponent(txtSoLuong)
+                    .addComponent(txtGiaTien))
                 .addGap(22, 22, 22))
         );
         jPanel2Layout.setVerticalGroup(
@@ -130,14 +132,12 @@ public class QLDichVu extends javax.swing.JInternalFrame {
                     .addComponent(txtGiaTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(rdo1)
-                            .addComponent(rdo2))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(btnSua, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(rdo1)
+                        .addComponent(rdo2))
+                    .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         tabs.addTab("Cập nhật", jPanel2);
@@ -168,7 +168,7 @@ public class QLDichVu extends javax.swing.JInternalFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
         );
 
         tabs.addTab("Danh sách", jPanel1);
@@ -181,7 +181,7 @@ public class QLDichVu extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(tabs)
         );
 
         pack();
@@ -235,6 +235,16 @@ public class QLDichVu extends javax.swing.JInternalFrame {
         }
     }
     
+    HoaDonCTDao hdctDao = new HoaDonCTDao();
+    
+    void moi(){
+        txtGiaTien.setText("");
+        txtMaDV.setText("");
+        txtSoLuong.setText("");
+        txtTenDV.setText("");
+        rdo1.setSelected(true);
+    }
+    
     void sua(){
         int madv= Integer.valueOf(tblDanhsach.getValueAt(this.index, 0)+"");
         DichVu dv= dao.selectById(madv);
@@ -242,14 +252,19 @@ public class QLDichVu extends javax.swing.JInternalFrame {
             dv.setTrangThaiDichVu(true);
         }else{
             dv.setTrangThaiDichVu(false);
+            HoaDonChiTiet hdct = hdctDao.selectById(dv.getMaHDCT());
+            hdct.setGiaTien(hdct.getGiaTien()- (Float.valueOf(txtGiaTien.getText())*Float.valueOf(txtSoLuong.getText())));
+            hdctDao.update(hdct);
         }
         dao.update(dv);
+        moi();
         loadData();
         MsgBox.alert(this, "Sửa dịch vụ thành công");
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSua;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
