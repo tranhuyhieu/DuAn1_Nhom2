@@ -38,7 +38,16 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
     boolean check = false;
     double tienHienTai = 0;
     double tinhTien = 0;
-
+    String maHoaDon, tenNV, tenKH, SDT, TongTien,tenKhachHang;
+    float giamGia;
+    Date ngayTT;
+    String spoil,spoil1;
+    DefaultTableModel model;
+    List<HoaDon> lst;
+    static int maHD;
+    /**
+     * Creates new form QuanLyHoaDonJInternalFrame
+     */
     public QuanLyHoaDonJInternalFrame() {
         initComponents();
         init();
@@ -54,7 +63,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
         cboTrangThai.addItem("Đã xác nhận");
         cboTrangThai.addItem("Đã hủy");
     }
-
+     
     void fillTableDanhSach() {
         model = (DefaultTableModel) tblDanhSach.getModel();
         model.setRowCount(0);
@@ -76,10 +85,11 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
                     x.getTrangThaiHD() == 0 ? "Chờ xác nhận" : x.getTrangThaiHD() == 1 ? "Đã xác nhận" : "Đã hủy",
                     x.getTrangThaiTT() == 0 ? "Chờ thanh toán" : "Đã thanh toán"});
                 System.out.println(x.toString() + "\n");
+                tblDanhSach.setRowSelectionInterval(0, 0);
             }
         } catch (ClassCastException e) {
-            e.printStackTrace();
             MsgBox.alert(this, "Không có thông tin");
+            e.printStackTrace();
         }
     }
 
@@ -93,8 +103,10 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
                 lst = hdDAO.selectAllByTTHD(1);
             } else if (cboTrangThai.getSelectedIndex() == 3) {
                 lst = hdDAO.selectAllByTTHD(2);
-            } else {
+            } else{
+                txtTimKiem.setText("");
                 fillTableDanhSach();
+                
             }
             for (HoaDon x : lst) {
                 model.addRow(new Object[]{
@@ -119,12 +131,11 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
         HoaDon model = getForm();
         try {
             hdDAO.update(model);
-            this.fillTableDanhSach();
+            this.fillTableDanhSach1();
             System.out.println("->" + (Object) model);
             MsgBox.alert(this, "Cập nhật thành công");
-            fillTableDanhSach();
         } catch (Exception e) {
-            MsgBox.alert(this, "Cập nhật thất bạn ( lỗi : " + e + ")");
+            MsgBox.alert(this, "Cập nhật thất bạn ( lỗi CSDL )");
             e.printStackTrace();
         }
     }
@@ -157,7 +168,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
     }
 
     HoaDon getForm() {
-        this.row = 0;
+        //this.row = 0;
         HoaDon hd = new HoaDon();
         hd.setMaHD(txtMaHoaDon.getText());
         hd.setHoTenKH(txtTenKH.getText());
@@ -279,7 +290,9 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
     void lui() {
         if (row > 0) {
             row--;
-            setCapNhat();
+            while(tblDanhSach.getValueAt(row, 7).equals("Đã hủy")){
+            row-=1;            
+        }
             edit();
         }
     }
@@ -410,11 +423,11 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
         }
     }
 
-    void xuatHoaDon(String maHD, String tenNV, Date ngayTT, String tenKH, String SDT, float giamGia, String tongTien) {
+    void xuatHoaDon() {
         Document document = new Document();
         try {
 
-            PdfWriter.getInstance(document, new FileOutputStream("iTextHelloWorld.pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream("HoaDonSanBong-" + tenKhachHang + ".pdf"));
             document.open();
 
             Font font = FontFactory.getFont(FontFactory.TIMES_ROMAN, 16, BaseColor.BLACK);
@@ -424,20 +437,20 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
             Chunk chunk = new Chunk("          Invoice for payment of yard booking", font1);
             Chunk chunkA = new Chunk(" ");
             Chunk chunkB = new Chunk(" ");
-            Chunk chunk1 = new Chunk("Invoice code :              " + maHD, font);
+            Chunk chunk1 = new Chunk("Invoice code :              " + maHoaDon, font);
             Chunk chunk2 = new Chunk("Staff's name :              " + tenNV, font);
             Chunk chunk3 = new Chunk("Date of payment :       " + ngayTT, font);
             Chunk chunk4 = new Chunk("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
             Chunk chunk5 = new Chunk("Customer's name :       " + tenKH, font);
             Chunk chunk6 = new Chunk(".Phone number :           " + SDT, font);
             Chunk chunk7 = new Chunk("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-            Chunk chunk8 = new Chunk("discount :     " + giamGia, font);
+            Chunk chunk8 = new Chunk("discount :     " + giamGia + "%", font);
             Chunk chunk9 = new Chunk(" ");
             Chunk chunk10 = new Chunk(" ");
             Chunk chunk11 = new Chunk(" ");
             Chunk chunk12 = new Chunk(" ");
             Chunk chunk13 = new Chunk("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-            Chunk chunk14 = new Chunk("                                                                             Total payment :    " + tongTien, font);
+            Chunk chunk14 = new Chunk("                                                                             Total payment : " + TongTien + "(Dong)", font);
             Chunk chunk15 = new Chunk("Confirm", font2);
             document.add(new Paragraph(chunk));
             document.add(new Paragraph(chunkA));
@@ -831,7 +844,6 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(49, 49, 49)
@@ -867,7 +879,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
                             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(53, 53, 53)
@@ -943,7 +955,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         tabs1.addTab("Cập nhật", jPanel2);
@@ -987,9 +999,9 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
         check();
         if (check == true) {
             capNhat();
-            fillTableDanhSach();
             tienHienTai = 0;
             tinhTien = 0;
+            //cboTrangThai.setSelectedIndex(0);
         }
 
     }//GEN-LAST:event_btnCapNhatActionPerformed
@@ -1015,7 +1027,10 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if (evt.getClickCount() == 2) {
             this.row = tblDanhSach.rowAtPoint(evt.getPoint());
-
+            if (!tblDanhSach.getValueAt(row, 7).equals("Đã hủy")) {
+                this.maHD = Integer.parseInt(String.valueOf(tblDanhSach.getValueAt(row, 0)));
+                edit();
+            } 
         }
     }//GEN-LAST:event_tblDanhSachMousePressed
 
@@ -1065,16 +1080,18 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if (evt.getClickCount() == 1) {
             this.row = tblDanhSach.rowAtPoint(evt.getPoint());
+            tenKhachHang = (String)tblDanhSach.getValueAt(row, 1);
         }
         spoil = (String) tblDanhSach.getValueAt(row, 7);
+        spoil1 = (String) tblDanhSach.getValueAt(row, 8);
     }//GEN-LAST:event_tblDanhSachMouseClicked
 
     private void btnXuatHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatHoaDonActionPerformed
         // TODO add your handling code here:
-        System.out.println(spoil);
+        System.out.println(spoil1);
         try {
-            if (!spoil.equals("Đã hủy")) {
-                maHD = (String) tblDanhSach.getValueAt(row, 0);
+            if (spoil.equals("Đã xác nhận") && spoil1.equals("Đã thanh toán")) {
+                maHoaDon = (String) tblDanhSach.getValueAt(row, 0);
                 tenKH = (String) tblDanhSach.getValueAt(row, 1);
                 SDT = (String) tblDanhSach.getValueAt(row, 2);
                 giamGia = (float) tblDanhSach.getValueAt(row, 4);
@@ -1082,10 +1099,10 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
                 tenNV = hdDAO.getTenNV(Auth.user1.getMaNV());
                 ngayTT = (Date) tblDanhSach.getValueAt(row, 6);
                 System.out.println(maHD + tenNV + ngayTT + tenKH + SDT + giamGia + TongTien);
-                xuatHoaDon(maHD, tenNV, ngayTT, tenKH, SDT, giamGia, TongTien);
+                xuatHoaDon();
                 MsgBox.alert(this, "Đã xuất hóa đơn, hãy kiểm tra");
             } else {
-                MsgBox.alert(this, "Hóa đơn này đã bị hủy");
+                MsgBox.alert(this, "Chỉ hóa đơn đã thanh toán");
             }
         } catch (Exception e) {
             MsgBox.alert(this, "Chưa chọn thông tin");
@@ -1096,7 +1113,6 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
     private void cboTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTrangThaiActionPerformed
         // TODO add your handling code here:
         fillTableDanhSach1();
-        txtTimKiem.setText("");
     }//GEN-LAST:event_cboTrangThaiActionPerformed
 
     private void tabs1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabs1MouseClicked

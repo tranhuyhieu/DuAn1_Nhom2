@@ -117,6 +117,29 @@ public class HoaDonDao extends DuAnDao<HoaDon, String>{
         String sql = "SELECT * FROM HOADON WHERE EMAIL = ?";
         return this.selectBySql(sql, email);
     }
-    
 
+    public List<HoaDon> selectByMaSan(String Id_San){
+        String sql= "select HOADON.* From HOADON Where Id_HD in(Select Id_HD From HOADONCHITIET Where Id_San=? AND TrangThai=0)";
+        return this.selectBySql(sql, Id_San);
+    }
+    
+        
+    public String getTenNV(Object...args){
+        String ten = "Unknown";
+        String sql = "select HoTen  from NHANVIEN where Id_NV = ?";
+        try {
+            ResultSet rs = XJdbc.query(sql, args);
+            while(rs.next()){
+                ten = rs.getString("HoTen");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ten;
+    }
+    
+    public List<HoaDon> selectAllByTTHD(int TTHD) {
+        return this.selectBySql(SELECT_ALL_BY_TTHD_SQL,TTHD); 
+    }
+    
 }
