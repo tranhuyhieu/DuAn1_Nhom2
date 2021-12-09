@@ -89,7 +89,7 @@ public class HoaDonCTDao extends DuAnDao<HoaDonChiTiet, Integer>{
         return this.selectBySql(sql, "%"+keyword+"%");
     }
     public List<HoaDonChiTiet> selectHoaDonChiTiet(String Id_San,Date NgayThanhToan){
-        String sql = "select HOADONCHITIET.* from HOADONCHITIET join HOADON on HOADONCHITIET.Id_HD = HOADON.Id_HD where HOADONCHITIET.Id_San = ? and HOADON.NgayThanhToan = ?";
+        String sql = "select HOADONCHITIET.* from HOADONCHITIET join HOADON on HOADONCHITIET.Id_HD = HOADON.Id_HD where HOADONCHITIET.Id_San = ? and HOADON.NgayThanhToan = ? and HOADONCHITIET.TrangThai = 0";
         return this.selectBySql(sql,Id_San,NgayThanhToan);
     }
 

@@ -211,9 +211,10 @@ public class QLDichVu extends javax.swing.JInternalFrame {
         mol.setRowCount(0);
         List<DichVu> list= dao.selectByIdHDCT(QLHoaDonChiTiet.maHDCT);
         for (DichVu dv : list) {
-            mol.addRow(new Object[]{dv.getMaDV(),dv.getTenDV(),dv.getSoLuong(),dv.getGiaTien(),dv.getTrangThaiDichVu()});
+            mol.addRow(new Object[]{dv.getMaDV(),dv.getTenDV(),dv.getSoLuong(),dv.getGiaTien(),dv.getTrangThaiDichVu() == true ? "Sẵn sàng" : "Đã hủy"});
         }
     }
+    
     
     void click(java.awt.event.MouseEvent evt){
         if(evt.getClickCount()==2){
