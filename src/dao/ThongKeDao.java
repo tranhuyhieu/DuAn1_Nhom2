@@ -20,10 +20,11 @@ public class ThongKeDao {
 "		sb.Id_San SANBONG,\n" +
 "		MIN(hd.NgayThanhToan) NgayDau,\n" +
 "		MAX(hd.NgayThanhToan) NgayCuoi,\n" +
-"		SUM(hd.TongTien) TongTien\n" +
+"		SUM(hdct.GiaTien) TongTien\n" +
 "	FROM HOADON hd\n" +
 "		JOIN HOADONCHITIET hdct ON hd.Id_HD=hdct.Id_HD\n" +
 "		JOIN SANBONG sb ON sb.Id_San=hdct.Id_San\n" +
+"               WHERE hd.TrangThaiTT=1\n" +
 "	GROUP BY sb.Id_San";
     
     String SELECT_TONGSOLANDAT="SELECT\n" +
@@ -32,6 +33,7 @@ public class ThongKeDao {
 "		kh.NgayDK,\n" +
 "		COUNT(hd.Id_HD) TongSoLanDatSan\n" +
 "	FROM HOADON hd JOIN KHACHHANG kh ON kh.Id_KH=hd.Id_KH\n" +
+"               WHERE hd.TrangThaiTT=1\n" +
 "	GROUP BY hd.SoDienThoai, hd.HoTenKH, kh.NgayDK";
      
     public List<Object[]> getDoanhThu(){
