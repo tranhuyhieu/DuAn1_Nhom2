@@ -17,7 +17,7 @@ import java.util.List;
  * @author PC
  */
 public class DichVuDao extends DuAnDao<DichVu, Integer>{
-    String INSERT_SQL = "INSERT INTO DichVu(Id_HDCT,TenDV,SoLuong,GiaTien)VALUES(?,?,?,?)";
+    String INSERT_SQL = "INSERT INTO DichVu(Id_HDCT,TenDV,SoLuong,GiaTien,TrangThaiDV)VALUES(?,?,?,?,?)";
     String UPDATE_SQL = "UPDATE DichVu SET Id_HDCT=?,TenDV=?,SoLuong=?,GiaTien=?,TrangThaiDV=? WHERE Id_DV=?";
     String DELETE_SQL = "DELETE FROM DichVu WHERE Id_DV=?";
     String SELECT_ALL_SQL = "SELECT*FROM DichVu";
@@ -26,7 +26,7 @@ public class DichVuDao extends DuAnDao<DichVu, Integer>{
 
     @Override
     public void insert(DichVu entity) {
-        XJdbc.update(INSERT_SQL, entity.getMaHDCT(), entity.getTenDV(), entity.getSoLuong(), entity.getGiaTien()); 
+        XJdbc.update(INSERT_SQL, entity.getMaHDCT(), entity.getTenDV(), entity.getSoLuong(), entity.getGiaTien(), entity.getTrangThaiDichVu()); 
     }
 
     @Override

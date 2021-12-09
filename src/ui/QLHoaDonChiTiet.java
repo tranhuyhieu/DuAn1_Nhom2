@@ -45,6 +45,7 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
         setFrameIcon(new ImageIcon(XImage.getAppIcon()));
         updateStatus();
         this.fillTable();
+        this.fillDV();
         tabs.setSelectedIndex(1);
     }
 
@@ -64,6 +65,14 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
         }
     }
 
+    void fillDV(){
+       DefaultTableModel model = (DefaultTableModel) tblDichVu.getModel();
+       model.setRowCount(0);
+       model.addRow(new Object[]{"Đồ uống", 15000});
+       model.addRow(new Object[]{"Thuê giày", 20000});
+       model.addRow(new Object[]{"Thuê áo lưới", 10000});
+    }
+    
     void setForm(HoaDonChiTiet hdct) {
         txtHDCT.setText(String.valueOf(hdct.getMaHDCT()));
         txtHD.setText(hdct.getMaHD());
@@ -186,7 +195,6 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
     void update() {
         HoaDonChiTiet hdct = getModel();
             dao.update(hdct);
-            MsgBox.alert(this, "Cập nhật trạng thái thành công");
             fillTable();
     }
 
@@ -197,6 +205,7 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
         dv.setTenDV(String.valueOf(tblDichVu.getValueAt(this.index, 0)));
         dv.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
         dv.setGiaTien(Float.parseFloat(String.valueOf(tblDichVu.getValueAt(this.index, 1))));
+        dv.setTrangThaiDichVu(true);
         return dv;
     }
 
@@ -318,8 +327,6 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Danh sách dịch vụ:");
 
-        txtMaKG.setEnabled(false);
-
         tblDichVu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Đồ uống", "15000"},
@@ -355,8 +362,6 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
 
         buttonGroup1.add(rdoXacNhan);
         rdoXacNhan.setText("Xác nhận");
-
-        txtMaSan.setEnabled(false);
 
         jLabel10.setText("Mã hóa đơn chi tiết:");
 
@@ -594,7 +599,14 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
+        if(rdoHuy.isSelected()){
+            txtTongTien.setText("0");
             update();
+            MsgBox.alert(this, "Cập nhật trạng thái thành công");
+        }else{
+            update();
+            MsgBox.alert(this, "Cập nhật trạng thái thành công");
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
@@ -717,6 +729,9 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
                 return;
             } else {
                 insertDV();
+                update();
+                this.fillDV();
+                clearForm();
             }
         }
     }//GEN-LAST:event_btnThemDVActionPerformed
