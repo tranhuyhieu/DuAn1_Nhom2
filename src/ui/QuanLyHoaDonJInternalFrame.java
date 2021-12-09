@@ -67,6 +67,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
     void fillTableDanhSach() {
         model = (DefaultTableModel) tblDanhSach.getModel();
         model.setRowCount(0);
+        
         try {
             if (txtTimKiem.getText().trim().length()==0) {
                 lst = hdDAO.selectAll();
@@ -80,7 +81,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
                     x.getSoDienThoai(),
                     x.getEmail(),
                     x.getGiamGia(),
-                    x.getTongTien(),
+                    hdctDAO.getTongTien(x.getMaHD()),
                     x.getNgayThanhToan(),
                     x.getTrangThaiHD() == 0 ? "Chờ xác nhận" : x.getTrangThaiHD() == 1 ? "Đã xác nhận" : "Đã hủy",
                     x.getTrangThaiTT() == 0 ? "Chờ thanh toán" : "Đã thanh toán"});
@@ -212,7 +213,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
             txtTenKH.setText(hd.getHoTenKH());
             txtSDT.setText(hd.getSoDienThoai().trim());
             txtEmail.setText(hd.getEmail());
-            txtTongTien.setText(hd.getTongTien() + "");
+            txtTongTien.setText(String.valueOf(hdctDAO.getTongTien(hd.getMaHD())));
             if (hd.getGiamGia() == 0) {
                 rdo0.setSelected(true);
             } else if (hd.getGiamGia() == 5) {
@@ -622,7 +623,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
 
         tabs1.addTab("Danh sách hóa đơn", jPanel1);
 
-        lblAnh.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lblAnh.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 0), 2));
 
         jLabel2.setText("Mã hóa đơn");
 
@@ -701,7 +702,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
 
         buttonGroup1.add(rdo20);
         rdo20.setText("20%");
@@ -762,7 +763,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 51), 2));
 
         buttonGroup3.add(rdoDaThanhToan);
         rdoDaThanhToan.setText("Đã thanh toán");
@@ -793,7 +794,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Giảm giá");
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 51), 2));
 
         buttonGroup2.add(rdoHuy);
         rdoHuy.setText("Đã hủy");
@@ -922,15 +923,13 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))
-                        .addGap(5, 5, 5)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(15, 15, 15)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
                                 .addComponent(jLabel8)
                                 .addGap(33, 33, 33)
-                                .addComponent(jLabel9))
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
                                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -954,7 +953,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         tabs1.addTab("Cập nhật", jPanel2);

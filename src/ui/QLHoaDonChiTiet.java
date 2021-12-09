@@ -93,12 +93,9 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
     }
 
     HoaDonChiTiet getModel() {
-        HoaDonChiTiet hdct = new HoaDonChiTiet();
-        hdct.setMaHDCT(Integer.parseInt(txtHDCT.getText()));
-        hdct.setMaHD(txtHD.getText());
-        hdct.setMaSan(txtMaSan.getText());
+        HoaDonChiTiet hdct = dao.selectById(Integer.parseInt(txtHDCT.getText()));
+        hdct.setMaSan(txtMaSan.getText());      
         hdct.setMaKG(txtMaKG.getText());
-        hdct.setNgayDat(XDate.now());
         if (rdoThueTrongTai.isSelected()) {
             hdct.setTrongTai("Có");
         } else {
@@ -129,8 +126,7 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
     }
 
     void edit() {
-        int mahdct = (Integer) tblHDCT.getValueAt(this.row, 0);
-        HoaDonChiTiet hdct = dao.selectById(mahdct);
+        HoaDonChiTiet hdct = dao.selectById(this.maHDCT);
         this.setForm(hdct);
         tabs.setSelectedIndex(0);
         this.updateStatus();
@@ -194,8 +190,8 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
 
     void update() {
         HoaDonChiTiet hdct = getModel();
-            dao.update(hdct);
-            fillTable();
+        dao.update(hdct);
+        fillTable();
     }
 
     DichVu getModeldv() {
@@ -213,7 +209,6 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
         DichVu model = getModeldv();
         dvdao = new DichVuDao();
         dvdao.insert(model);
-
     }
 
     /**
@@ -265,6 +260,7 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
         btnTimKiem = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblHDCT = new javax.swing.JTable();
+        btnLoadData = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Quản lý hóa đơn chi tiết");
@@ -327,6 +323,8 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Danh sách dịch vụ:");
 
+        txtMaKG.setEnabled(false);
+
         tblDichVu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Đồ uống", "15000"},
@@ -362,6 +360,8 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
 
         buttonGroup1.add(rdoXacNhan);
         rdoXacNhan.setText("Xác nhận");
+
+        txtMaSan.setEnabled(false);
 
         jLabel10.setText("Mã hóa đơn chi tiết:");
 
@@ -574,7 +574,16 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
         }
 
         jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(5, 62, 630, 500);
+        jScrollPane1.setBounds(-5, 82, 640, 480);
+
+        btnLoadData.setText("Load Data");
+        btnLoadData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoadDataActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnLoadData);
+        btnLoadData.setBounds(521, 60, 110, 23);
 
         tabs.addTab("Danh Sách", jPanel2);
 
@@ -655,21 +664,27 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
     int index1 = -1;
     private void tblDichVuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDichVuMouseClicked
         // TODO add your handling code here:
+
         if (evt.getClickCount() == 2) {
             txtSoLuong.setText(1 + "");
-
             this.index = tblDichVu.getSelectedRow();
             tblDichVu.setRowSelectionInterval(index, index);
-
+                    
+            
+            
             if (this.index != index1) {
                 if (index1 >= 0) {
                     float x2 = Float.parseFloat(tblDichVu.getValueAt(index1, 1) + "");
                     float tongTien2 = Float.parseFloat(txtTongTien.getText());
                     txtTongTien.setText(String.valueOf(tongTien2 - x2));
                 }
+            }else{
+                MsgBox.alert(this, "Bạn đã chọn dịch vụ này. Vui lòng chọn số lượng");
+                return;
             }
-            if (this.index >= 0) {
 
+            
+            if (this.index >= 0) {
                 x1 = Float.parseFloat(tblDichVu.getValueAt(this.index, 1) + "");
                 txtTTDV.setText(String.valueOf(x1));
                 tongTien = Float.parseFloat(txtTongTien.getText());
@@ -678,6 +693,7 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
                 index1 = this.index;
             }
         }
+        
 
     }//GEN-LAST:event_tblDichVuMouseClicked
 
@@ -704,17 +720,8 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
 
     private void txtSoLuongFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSoLuongFocusLost
         // TODO add your handling code here:
-        if(txtSoLuong.getText() != null){
-            return;
-        }else if(Float.parseFloat(txtSoLuong.getText()) > 0){
-            return;
-        }
-        else if (Integer.parseInt(txtSoLuong.getText()) > 0) {
-            int sl = Integer.parseInt(txtSoLuong.getText());
-            txtTongTien.setText(String.valueOf(this.tongTien + (this.x1 * sl)));
-        } else {
-            MsgBox.alert(this, "Số lượng không đúng định dạng");
-        }
+        int sl = Integer.parseInt(txtSoLuong.getText());
+        txtTongTien.setText(String.valueOf(this.tongTien + (this.x1 * sl)));
     }//GEN-LAST:event_txtSoLuongFocusLost
 
     private void btnThemDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDVActionPerformed
@@ -725,21 +732,30 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
             return;
         } else {
             if (txtSoLuong.getText().matches(p_sl) == false) {
+                txtSoLuong.setText(1+"");
                 MsgBox.alert(this, "Số lượng không đúng định dạng");
+                
                 return;
             } else {
                 insertDV();
                 update();
+                MsgBox.alert(this, "Thêm dịch vụ thành công.");
                 this.fillDV();
-                clearForm();
+                clearForm();         
             }
         }
     }//GEN-LAST:event_btnThemDVActionPerformed
+
+    private void btnLoadDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadDataActionPerformed
+        // TODO add your handling code here:
+        fillTable();
+    }//GEN-LAST:event_btnLoadDataActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFirst;
     private javax.swing.JButton btnLast;
+    private javax.swing.JButton btnLoadData;
     private javax.swing.JButton btnMoi;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPrev;
