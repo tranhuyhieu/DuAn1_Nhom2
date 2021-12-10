@@ -123,4 +123,13 @@ public class HoaDonCTDao extends DuAnDao<HoaDonChiTiet, Integer>{
         }
         return Id_HD ;
     }
+    
+    public HoaDonChiTiet selectHDCTByKG(String Id_KG){
+        String sql="select * from HOADONCHITIET Where Id_KG=?";
+        List<HoaDonChiTiet> list= this.selectBySql(sql, Id_KG);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list.get(0);
+    }
 }
