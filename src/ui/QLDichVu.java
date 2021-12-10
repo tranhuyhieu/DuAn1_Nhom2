@@ -228,8 +228,10 @@ public class QLDichVu extends javax.swing.JInternalFrame {
             txtGiaTien.setText(dv.getGiaTien()+"");
             if(dv.getTrangThaiDichVu()==true){
                 rdo1.setSelected(true);
+                btnSua.setEnabled(true);
             }else{
                 rdo2.setSelected(true);
+                btnSua.setEnabled(false);
             }
             tabs.setSelectedIndex(0);
         }
