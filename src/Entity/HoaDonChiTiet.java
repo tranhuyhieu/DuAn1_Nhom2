@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class HoaDonChiTiet {
     private int maHDCT;
-    private String maHD;
+    private int maHD;
     private String maSan;
     private String maKG;
     private Date ngayDat;
@@ -24,7 +24,7 @@ public class HoaDonChiTiet {
     public HoaDonChiTiet() {
     }
 
-    public HoaDonChiTiet(int maHDCT, String maHD, String maSan, String maKG, Date ngayDat, String trongTai, float giaTien, int trangThai) {
+    public HoaDonChiTiet(int maHDCT, int maHD, String maSan, String maKG, Date ngayDat, String trongTai, float giaTien, int trangThai) {
         this.maHDCT = maHDCT;
         this.maHD = maHD;
         this.maSan = maSan;
@@ -43,11 +43,11 @@ public class HoaDonChiTiet {
         this.maHDCT = maHDCT;
     }
 
-    public String getMaHD() {
+    public int getMaHD() {
         return maHD;
     }
 
-    public void setMaHD(String maHD) {
+    public void setMaHD(int maHD) {
         this.maHD = maHD;
     }
 

@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author PC
  */
-public class HoaDonDao extends DuAnDao<HoaDon, String>{
+public class HoaDonDao extends DuAnDao<HoaDon, Integer>{
 
     String INSERT_SQL = "INSERT INTO HOADON(Id_NV ,Id_KH,HoTenKH,SoDienThoai,Email,AnhDatCoc,GiamGia,TongTien,NgayThanhToan,TrangThaiHD,TrangThaiTT)VALUES(?,?,?,?,?,?,?,?,?,?,?)";
     String UPDATE_SQL = "UPDATE HOADON SET Id_NV=? ,Id_KH=?,HoTenKH=?,SoDienThoai=?,Email=?,AnhDatCoc=?,GiamGia=?,TongTien=?,NgayThanhToan=?,TrangThaiHD=?,TrangThaiTT=? WHERE Id_HD=?";
@@ -38,7 +38,7 @@ public class HoaDonDao extends DuAnDao<HoaDon, String>{
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Integer id) {
         XJdbc.update(DELETE_SQL, id); 
     }
 
@@ -48,7 +48,7 @@ public class HoaDonDao extends DuAnDao<HoaDon, String>{
     }
 
     @Override
-    public HoaDon selectById(String id) {
+    public HoaDon selectById(Integer id) {
         List<HoaDon> list = this.selectBySql(SELECT_BY_ID_SQL, id);
         if(list.isEmpty()){
             return null;
@@ -69,7 +69,7 @@ public class HoaDonDao extends DuAnDao<HoaDon, String>{
             ResultSet rs = XJdbc.query(sql, args);
             while(rs.next()){
                 HoaDon entity = new HoaDon();
-                entity.setMaHD(rs.getString("Id_HD"));
+                entity.setMaHD(rs.getInt("Id_HD"));
                 entity.setMaKH(rs.getString("Id_KH"));
                 entity.setMaNV(rs.getString("Id_NV"));
                 entity.setHoTenKH(rs.getString("HoTenKH"));

@@ -12,6 +12,7 @@ import dao.HoaDonCTDao;
 import dao.HoaDonDao;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -31,6 +32,7 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
     HoaDonCTDao hdctdao = new HoaDonCTDao();
     HoaDonDao hddao = new HoaDonDao();
     int check = 1;
+    float diff;
 
     /**
      * Creates new form ThongTinNguoiDat
@@ -176,6 +178,9 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
         jLabel6.setText("Ngày Thanh Toán");
 
         txtngayThanhToan.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtngayThanhToanFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtngayThanhToanFocusLost(evt);
             }
@@ -314,36 +319,49 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
     private void txtngayThanhToanFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtngayThanhToanFocusLost
         // TODO add your handling code here:
         checkDate1();
-        if (check ==1 ) {
-        List<HoaDonChiTiet>list = hdctdao.selectHoaDonChiTiet(QuanLyDatSan.sb.getMaSan().trim(),XDate.toDate(txtngayThanhToan.getText().trim(),"yyyy/MM/dd"));
-        for (HoaDonChiTiet x : list) {
-            if (x.getMaKG().equals("KG01")) {
-                rd01.setEnabled(false);
+        if (check == 1) {
+            List<HoaDonChiTiet> list = hdctdao.selectHoaDonChiTiet(QuanLyDatSan.sb.getMaSan().trim(), XDate.toDate(txtngayThanhToan.getText().trim(), "yyyy/MM/dd"));
+            for (HoaDonChiTiet x : list) {
+                if (x.getMaKG().equals("KG01")) {
+                    rd01.setEnabled(false);
+                }
+                if (x.getMaKG().equals("KG02")) {
+                    rd02.setEnabled(false);
+                }
+                if (x.getMaKG().equals("KG03")) {
+                    rd03.setEnabled(false);
+                }
+                if (x.getMaKG().equals("KG04")) {
+                    rd04.setEnabled(false);
+                }
+                if (x.getMaKG().equals("KG05")) {
+                    rd05.setEnabled(false);
+                }
+                if (x.getMaKG().equals("KG06")) {
+                    rd06.setEnabled(false);
+                }
+                if (x.getMaKG().equals("KG07")) {
+                    rd07.setEnabled(false);
+                }
+                if (x.getMaKG().equals("KG08")) {
+                    rd08.setEnabled(false);
+                }
             }
-             if (x.getMaKG().equals("KG02")) {
-                rd02.setEnabled(false);
-            }
-             if (x.getMaKG().equals("KG03")) {
-                rd03.setEnabled(false);
-            }
-             if (x.getMaKG().equals("KG04")) {
-                rd04.setEnabled(false);
-            }
-             if (x.getMaKG().equals("KG05")) {
-                rd05.setEnabled(false);
-            }
-             if (x.getMaKG().equals("KG06")) {
-                rd06.setEnabled(false);
-            }
-             if (x.getMaKG().equals("KG07")) {
-                rd07.setEnabled(false);
-            }
-             if (x.getMaKG().equals("KG08")) {
-                rd08.setEnabled(false);
-            }
-        }
         }
     }//GEN-LAST:event_txtngayThanhToanFocusLost
+
+    private void txtngayThanhToanFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtngayThanhToanFocusGained
+        // TODO add your handling code here:
+        moi();
+        rd01.setEnabled(true);
+        rd02.setEnabled(true);
+        rd03.setEnabled(true);
+        rd04.setEnabled(true);
+        rd05.setEnabled(true);
+        rd06.setEnabled(true);
+        rd07.setEnabled(true);
+        rd08.setEnabled(true);
+    }//GEN-LAST:event_txtngayThanhToanFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -388,96 +406,134 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
         rd08.setEnabled(true);
 
     }
+//    void checkKG(){
+//        if (!rd01.isSelected()==true || !rd02.isSelected()==true) {
+//            xacNhan();
+//        }else{
+//            xacNhan();
+//        }
+//    }
+
     void xacNhan() {
-        String Email = txtEmail.getText();
-        Date NgayThanhToan = XDate.toDate(txtngayThanhToan.getText());
-        HoaDon hd = hddao.selecthoaDon(Email, NgayThanhToan);
-        if (hd != null) {
-            HoaDonChiTiet model1 = new HoaDonChiTiet();
-            model1.setMaHD(hd.getMaHD());
-            model1.setMaSan(QuanLyDatSan.sb.getMaSan());
-            String maKG = null;
-            if (rd01.isSelected()) {
-                maKG = "KG01";
-            }
-            if (rd02.isSelected()) {
-                maKG = "KG02";
-            }
-            if (rd03.isSelected()) {
-                maKG = "KG03";
-            }
-            if (rd04.isSelected()) {
-                maKG = "KG04";
-            }
-            if (rd05.isSelected()) {
-                maKG = "KG05";
-            }
-            if (rd06.isSelected()) {
-                maKG = "KG06";
-            }
-            if (rd07.isSelected()) {
-                maKG = "KG07";
-            }
-            if (rd08.isSelected()) {
-                maKG = "KG08";
-            }
-            if(!rd01.isSelected()&&!rd02.isSelected()&&!rd03.isSelected()&&!rd04.isSelected()&&!rd05.isSelected()
-                    &&!rd06.isSelected()&&!rd07.isSelected()&&!rd08.isSelected()){
+            if (!rd01.isSelected() && !rd02.isSelected() && !rd03.isSelected() && !rd04.isSelected() && !rd05.isSelected()
+                    && !rd06.isSelected() && !rd07.isSelected() && !rd08.isSelected()) {
                 MsgBox.alert(this, "Vui lòng chọn khung giờ.");
                 return;
             }
-            model1.setMaKG(maKG);
-            model1.setNgayDat(XDate.now());
-            model1.setGiaTien(QuanLyDatSan.sb.getGiaSan());
-            model1.setTrangThai(0);
-            hdctdao.insert(model1);
-            MsgBox.alert(this, "Bạn đã đặt thêm sân thành công.");
-            moi();
-        } else {
-            HoaDon model = getModel();
-            hddao.insert(model);
-            HoaDon hd2 = hddao.selectByEmailHoaDon(model.getEmail());
-            HoaDonChiTiet model1 = new HoaDonChiTiet();
-            model1.setMaHD(hd2.getMaHD());
-            model1.setMaSan(QuanLyDatSan.sb.getMaSan());
-            String maKG1 = null;
             if (rd01.isSelected()) {
-                maKG1 = "KG01";
+                        HoaDon model = getModel();
+                        hddao.insert(model);
+                        int maHD = hdctdao.selectMaxIdHoaDon(model.getEmail());
+                        HoaDon hd2 = hddao.selectById(maHD);
+                        HoaDonChiTiet model1 = new HoaDonChiTiet();
+                        model1.setMaHD(hd2.getMaHD());
+                        model1.setMaSan(QuanLyDatSan.sb.getMaSan());
+                        model1.setMaKG("KG01");
+                        model1.setNgayDat(XDate.now());
+                        model1.setGiaTien(QuanLyDatSan.sb.getGiaSan());
+                        model1.setTrangThai(0);
+                        hdctdao.insert(model1);
+                        MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
+                        moi();
+                        return;
+            }else if (rd02.isSelected()) {
+                
+                        HoaDon model = getModel();
+                        hddao.insert(model);
+                        int maHD = hdctdao.selectMaxIdHoaDon(model.getEmail());
+                        HoaDon hd2 = hddao.selectById(maHD);
+                        HoaDonChiTiet model1 = new HoaDonChiTiet();
+                        model1.setMaHD(hd2.getMaHD());
+                        model1.setMaSan(QuanLyDatSan.sb.getMaSan());
+                        model1.setMaKG("KG02");
+                        model1.setNgayDat(XDate.now());
+                        model1.setGiaTien(QuanLyDatSan.sb.getGiaSan());
+                        model1.setTrangThai(0);
+                        hdctdao.insert(model1);
+                        MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
+                        moi();
+                        return;
+            }else if (rd03.isSelected()) {
+                        HoaDon model = getModel();
+                        hddao.insert(model);
+                        int maHD = hdctdao.selectMaxIdHoaDon(model.getEmail());
+                        HoaDon hd2 = hddao.selectById(maHD);
+                        HoaDonChiTiet model1 = new HoaDonChiTiet();
+                        model1.setMaHD(hd2.getMaHD());
+                        model1.setMaSan(QuanLyDatSan.sb.getMaSan());
+                        model1.setMaKG("KG03");
+                        model1.setNgayDat(XDate.now());
+                        model1.setGiaTien(QuanLyDatSan.sb.getGiaSan());
+                        model1.setTrangThai(0);
+                        hdctdao.insert(model1);
+                        MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
+                        moi();
+                        return;
+            }else if (rd04.isSelected()) {
+                        HoaDon model = getModel();
+                        hddao.insert(model);
+                        int maHD = hdctdao.selectMaxIdHoaDon(model.getEmail());
+                        HoaDon hd2 = hddao.selectById(maHD);
+                        HoaDonChiTiet model1 = new HoaDonChiTiet();
+                        model1.setMaHD(hd2.getMaHD());
+                        model1.setMaSan(QuanLyDatSan.sb.getMaSan());
+                        model1.setMaKG("KG05");
+                        model1.setNgayDat(XDate.now());
+                        model1.setGiaTien(QuanLyDatSan.sb.getGiaSan());
+                        model1.setTrangThai(0);
+                        hdctdao.insert(model1);
+                        MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
+                        moi();
+                        return;
+            }else if (rd06.isSelected()) {
+                        HoaDon model = getModel();
+                        hddao.insert(model);
+                        int maHD = hdctdao.selectMaxIdHoaDon(model.getEmail());
+                        HoaDon hd2 = hddao.selectById(maHD);
+                        HoaDonChiTiet model1 = new HoaDonChiTiet();
+                        model1.setMaHD(hd2.getMaHD());
+                        model1.setMaSan(QuanLyDatSan.sb.getMaSan());
+                        model1.setMaKG("KG06");
+                        model1.setNgayDat(XDate.now());
+                        model1.setGiaTien(QuanLyDatSan.sb.getGiaSan());
+                        model1.setTrangThai(0);
+                        hdctdao.insert(model1);
+                        MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
+                        moi();
+                        return;
+            }else if (rd07.isSelected()) {
+                        HoaDon model = getModel();
+                        hddao.insert(model);
+                        int maHD = hdctdao.selectMaxIdHoaDon(model.getEmail());
+                        HoaDon hd2 = hddao.selectById(maHD);
+                        HoaDonChiTiet model1 = new HoaDonChiTiet();
+                        model1.setMaHD(hd2.getMaHD());
+                        model1.setMaSan(QuanLyDatSan.sb.getMaSan());
+                        model1.setMaKG("KG07");
+                        model1.setNgayDat(XDate.now());
+                        model1.setGiaTien(QuanLyDatSan.sb.getGiaSan());
+                        model1.setTrangThai(0);
+                        hdctdao.insert(model1);
+                        MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
+                        moi();
+                        return;
+            }else if (rd08.isSelected()) {
+                        HoaDon model = getModel();
+                        hddao.insert(model);
+                        int maHD = hdctdao.selectMaxIdHoaDon(model.getEmail());
+                        HoaDon hd2 = hddao.selectById(maHD);
+                        HoaDonChiTiet model1 = new HoaDonChiTiet();
+                        model1.setMaHD(hd2.getMaHD());
+                        model1.setMaSan(QuanLyDatSan.sb.getMaSan());
+                        model1.setMaKG("KG08");
+                        model1.setNgayDat(XDate.now());
+                        model1.setGiaTien(QuanLyDatSan.sb.getGiaSan());
+                        model1.setTrangThai(0);
+                        hdctdao.insert(model1);
+                        MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
+                        moi();
+                        return;
             }
-            if (rd02.isSelected()) {
-                maKG1 = "KG02";
-            }
-            if (rd03.isSelected()) {
-                maKG1 = "KG03";
-            }
-            if (rd04.isSelected()) {
-                maKG1 = "KG04";
-            }
-            if (rd05.isSelected()) {
-                maKG1 = "KG05";
-            }
-            if (rd06.isSelected()) {
-                maKG1 = "KG06";
-            }
-            if (rd07.isSelected()) {
-                maKG1 = "KG07";
-            }
-            if (rd08.isSelected()) {
-                maKG1 = "KG08";
-            }
-            if(!rd01.isSelected()&&!rd02.isSelected()&&!rd03.isSelected()&&!rd04.isSelected()&&!rd05.isSelected()
-                    &&!rd06.isSelected()&&!rd07.isSelected()&&!rd08.isSelected()){
-                MsgBox.alert(this, "Vui lòng chọn khung giờ.");
-                return;
-            }
-model1.setMaKG(maKG1);
-            model1.setNgayDat(XDate.now());
-            model1.setGiaTien(QuanLyDatSan.sb.getGiaSan());
-            model1.setTrangThai(0);
-            hdctdao.insert(model1);
-            MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
-            moi();
-        }
     }
 
     HoaDon getModel() {
@@ -550,7 +606,9 @@ model1.setMaKG(maKG1);
         } else {
             check = 1;
         }
-        if (checkDate()) return;
+        if (checkDate()) {
+            return;
+        }
     }
 
     private boolean checkDate() {
@@ -565,7 +623,7 @@ model1.setMaKG(maKG1);
             df = new SimpleDateFormat("yyyy/MM/dd");
             try {
                 Date ngaytt = df.parse(txtngayThanhToan.getText());
-                
+
             } catch (Exception e) {
                 MsgBox.alert(this, "Ngày thanh toán không đúng ");
                 txtngayThanhToan.requestFocus();
@@ -575,16 +633,33 @@ model1.setMaKG(maKG1);
             Date a = XDate.toDate(txtngayThanhToan.getText(), "yyyy/MM/dd");
             Date b = XDate.now();
             if (a.before(b)) {
-                    MsgBox.alert(this, "Ngày thanh toán không hợp lệ");
-                    check = 0;
-                    return false;
-                }
+                MsgBox.alert(this, "Ngày thanh toán không hợp lệ");
+                check = 0;
+                return false;
+            }
+            try {
+                diff = a.getDate() - b.getDate();
+                System.out.println(diff);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (a.before(b)) {
+                MsgBox.alert(this, "Ngày thanh toán không hợp lệ");
+                check = 0;
+                return false;
+            } else if (diff > 10) {
+                MsgBox.alert(this, "Ngày thanh toán không quá 10 ngày");
+                check = 0;
+                return false;
+            }
         } else {
             check = 1;
         }
         return true;
     }
+
     private boolean checkDate1() {
+
         //check ngày đặt
         SimpleDateFormat df;
         if (txtngayThanhToan.getText().length() == 0) {
@@ -595,7 +670,7 @@ model1.setMaKG(maKG1);
             df = new SimpleDateFormat("yyyy/MM/dd");
             try {
                 Date ngaytt = df.parse(txtngayThanhToan.getText());
-                
+
             } catch (Exception e) {
                 txtngayThanhToan.requestFocus();
                 check = 0;
@@ -603,10 +678,20 @@ model1.setMaKG(maKG1);
             }
             Date a = XDate.toDate(txtngayThanhToan.getText(), "yyyy/MM/dd");
             Date b = XDate.now();
+            try {
+                diff = a.getDate() - b.getDate();
+                System.out.println(diff);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             if (a.before(b)) {
-                    check = 0;
-                    return false;
-                }
+                check = 0;
+                return false;
+            } else if (diff > 10) {
+                MsgBox.alert(this, "Ngày thanh toán không quá 10 ngày");
+                check = 0;
+                return false;
+            }
         } else {
             check = 1;
         }

@@ -14,7 +14,7 @@ import utils.XDate;
  */
 public class HoaDon {
 
-    private String maHD;
+    private int maHD;
     private String maNV;
     private String maKH;
     private String hoTenKH;
@@ -30,7 +30,7 @@ public class HoaDon {
     public HoaDon() {
     }
 
-    public HoaDon(String maHD, String maNV, String maKH, String hoTenKH, String soDienThoai, String email, String anhDatCoc, float giamGia, float tongTien, Date ngayThanhToan, int trangThaiHD, int trangThaiTT) {
+    public HoaDon(int maHD, String maNV, String maKH, String hoTenKH, String soDienThoai, String email, String anhDatCoc, float giamGia, float tongTien, Date ngayThanhToan, int trangThaiHD, int trangThaiTT) {
         this.maHD = maHD;
         this.maNV = maNV;
         this.maKH = maKH;
@@ -45,11 +45,11 @@ public class HoaDon {
         this.trangThaiTT = trangThaiTT;
     }
 
-    public String getMaHD() {
+    public int getMaHD() {
         return maHD;
     }
 
-    public void setMaHD(String maHD) {
+    public void setMaHD(int maHD) {
         this.maHD = maHD;
     }
 
