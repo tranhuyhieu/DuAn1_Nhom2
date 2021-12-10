@@ -62,7 +62,7 @@ public class HoaDonCTDao extends DuAnDao<HoaDonChiTiet, Integer>{
             while(rs.next()){
                 HoaDonChiTiet entity = new HoaDonChiTiet();
                 entity.setMaHDCT(rs.getInt("Id_HDCT"));
-                entity.setMaHD(rs.getString("Id_HD"));
+                entity.setMaHD(rs.getInt("Id_HD"));
                 entity.setMaSan(rs.getString("Id_San"));
                 entity.setMaKG(rs.getString("Id_KG"));
                 entity.setNgayDat(rs.getDate("NgayDat"));
@@ -109,5 +109,18 @@ public class HoaDonCTDao extends DuAnDao<HoaDonChiTiet, Integer>{
     
     public List<HoaDonChiTiet> selectByIdHD(Integer id) {
         return this.selectBySql(SELECT_BY_ID_HD, id);  
+    }
+    public int selectMaxIdHoaDon(String Email){
+        int Id_HD = 0 ;
+        String sql = "select MAX(Id_HD) from HOADON where Email = ?";
+        try {
+            ResultSet rs = XJdbc.query(sql,Email);
+            while (rs.next()) {                
+                Id_HD = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Id_HD ;
     }
 }

@@ -75,7 +75,7 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
     
     void setForm(HoaDonChiTiet hdct) {
         txtHDCT.setText(String.valueOf(hdct.getMaHDCT()));
-        txtHD.setText(hdct.getMaHD());
+        txtHD.setText(String.valueOf(hdct.getMaHD()));
         txtMaSan.setText(hdct.getMaSan());
         txtMaKG.setText(hdct.getMaKG());
         txtNgayDat.setText(XDate.toString(hdct.getNgayDat(), "dd/MM/yyyy"));        

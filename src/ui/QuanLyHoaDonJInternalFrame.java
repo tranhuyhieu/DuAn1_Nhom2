@@ -151,7 +151,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
         return tien;
     }
 
-    String maKH(String id) {
+    String maKH(Integer id) {
         String maKH = null;
         HoaDon hd = new HoaDon();
         hd = hdDAO.selectById(id);
@@ -162,7 +162,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
     String getAnh() {
         String anh = null;
         HoaDon hd = new HoaDon();
-        hd = hdDAO.selectById(txtMaHoaDon.getText());
+        hd = hdDAO.selectById(Integer.valueOf(txtMaHoaDon.getText()));
         anh = hd.getAnhDatCoc();
         return anh;
     }
@@ -170,7 +170,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
     HoaDon getForm() {
         //this.row = 0;
         HoaDon hd = new HoaDon();
-        hd.setMaHD(txtMaHoaDon.getText());
+        hd.setMaHD(Integer.valueOf(txtMaHoaDon.getText()));
         hd.setHoTenKH(txtTenKH.getText());
         hd.setSoDienThoai(txtSDT.getText().trim());
         hd.setEmail(txtEmail.getText());
@@ -184,10 +184,10 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
             hd.setGiamGia(20);
         }
         hd.setTongTien(Float.parseFloat(txtTongTien.getText()));
-        if (maKH(txtMaHoaDon.getText()) == null) {
+        if (maKH(Integer.valueOf(txtMaHoaDon.getText())) == null) {
             hd.setMaKH("KHbot");
         } else {
-            hd.setMaKH(maKH(txtMaHoaDon.getText()));
+            hd.setMaKH(maKH(Integer.valueOf(txtMaHoaDon.getText())));
         }
         hd.setMaNV(Auth.user1.getMaNV());
         hd.setAnhDatCoc(getAnh());
@@ -209,7 +209,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
 
     void setForm(HoaDon hd) {
         try {
-            txtMaHoaDon.setText(hd.getMaHD());
+            txtMaHoaDon.setText(String.valueOf(hd.getMaHD()));
             txtTenKH.setText(hd.getHoTenKH());
             txtSDT.setText(hd.getSoDienThoai().trim());
             txtEmail.setText(hd.getEmail());
@@ -262,7 +262,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
 
     void edit() {
         try {
-            String maHD = (String) tblDanhSach.getValueAt(this.row, 0);
+            int maHD = (Integer) tblDanhSach.getValueAt(this.row, 0);
             HoaDon nh = hdDAO.selectById(maHD);
             if (nh != null) {
                 setForm(nh);
