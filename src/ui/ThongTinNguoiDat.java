@@ -415,18 +415,22 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
 //    }
 
     void xacNhan() {
+        String Email = txtEmail.getText();
+        Date NgayThanhToan = XDate.toDate(txtngayThanhToan.getText());
+        HoaDon hd = hddao.selecthoaDon(Email, NgayThanhToan);
+        if (hd != null) {
             if (!rd01.isSelected() && !rd02.isSelected() && !rd03.isSelected() && !rd04.isSelected() && !rd05.isSelected()
                     && !rd06.isSelected() && !rd07.isSelected() && !rd08.isSelected()) {
                 MsgBox.alert(this, "Vui lòng chọn khung giờ.");
                 return;
             }
             if (rd01.isSelected()) {
-                        HoaDon model = getModel();
-                        hddao.insert(model);
-                        int maHD = hdctdao.selectMaxIdHoaDon(model.getEmail());
-                        HoaDon hd2 = hddao.selectById(maHD);
+                List<HoaDonChiTiet> list = hdctdao.selectHoaDonChiTietByHoaDon(hd.getEmail());
+                for (HoaDonChiTiet x : list) {
+                    if (x.getMaKG().equals("KG02")) {
+                        HoaDonChiTiet hdct = hdctdao.selectHDCTByKG("KG02");
                         HoaDonChiTiet model1 = new HoaDonChiTiet();
-                        model1.setMaHD(hd2.getMaHD());
+                        model1.setMaHD(hdct.getMaHD());
                         model1.setMaSan(QuanLyDatSan.sb.getMaSan());
                         model1.setMaKG("KG01");
                         model1.setNgayDat(XDate.now());
@@ -436,14 +440,32 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
                         MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
                         moi();
                         return;
-            }else if (rd02.isSelected()) {
-                
-                        HoaDon model = getModel();
-                        hddao.insert(model);
-                        int maHD = hdctdao.selectMaxIdHoaDon(model.getEmail());
-                        HoaDon hd2 = hddao.selectById(maHD);
+                    }
+                }
+                HoaDon model = getModel();
+                hddao.insert(model);
+                int mahd = hdctdao.selectMaxIdHoaDon(model.getEmail());
+                HoaDon hd2 = hddao.selectById(mahd);
+                HoaDonChiTiet model1 = new HoaDonChiTiet();
+                model1.setMaHD(hd2.getMaHD());
+                model1.setMaSan(QuanLyDatSan.sb.getMaSan());
+                String maKG1 = null;
+                maKG1 = "KG01";
+                model1.setMaKG(maKG1);
+                model1.setNgayDat(XDate.now());
+                model1.setGiaTien(QuanLyDatSan.sb.getGiaSan());
+                model1.setTrangThai(0);
+                hdctdao.insert(model1);
+                MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
+                moi();
+                return;
+            } else if (rd02.isSelected()) {
+                List<HoaDonChiTiet> list = hdctdao.selectHoaDonChiTietByHoaDon(hd.getEmail());
+                for (HoaDonChiTiet x : list) {
+                    if (x.getMaKG().equals("KG01")) {
+                        HoaDonChiTiet hdct = hdctdao.selectHDCTByKG("KG01");
                         HoaDonChiTiet model1 = new HoaDonChiTiet();
-                        model1.setMaHD(hd2.getMaHD());
+                        model1.setMaHD(hdct.getMaHD());
                         model1.setMaSan(QuanLyDatSan.sb.getMaSan());
                         model1.setMaKG("KG02");
                         model1.setNgayDat(XDate.now());
@@ -453,13 +475,45 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
                         MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
                         moi();
                         return;
-            }else if (rd03.isSelected()) {
-                        HoaDon model = getModel();
-                        hddao.insert(model);
-                        int maHD = hdctdao.selectMaxIdHoaDon(model.getEmail());
-                        HoaDon hd2 = hddao.selectById(maHD);
+                    } else if (x.getMaKG().equals("KG03")) {
+                        HoaDonChiTiet hdct = hdctdao.selectHDCTByKG("KG03");
                         HoaDonChiTiet model1 = new HoaDonChiTiet();
-                        model1.setMaHD(hd2.getMaHD());
+                        model1.setMaHD(hdct.getMaHD());
+                        model1.setMaSan(QuanLyDatSan.sb.getMaSan());
+                        model1.setMaKG("KG02");
+                        model1.setNgayDat(XDate.now());
+                        model1.setGiaTien(QuanLyDatSan.sb.getGiaSan());
+                        model1.setTrangThai(0);
+                        hdctdao.insert(model1);
+                        MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
+                        moi();
+                        return;
+                    }
+                }
+                HoaDon model = getModel();
+                hddao.insert(model);
+                int mahd = hdctdao.selectMaxIdHoaDon(model.getEmail());
+                HoaDon hd2 = hddao.selectById(mahd);
+                HoaDonChiTiet model1 = new HoaDonChiTiet();
+                model1.setMaHD(hd2.getMaHD());
+                model1.setMaSan(QuanLyDatSan.sb.getMaSan());
+                String maKG1 = null;
+                maKG1 = "KG02";
+                model1.setMaKG(maKG1);
+                model1.setNgayDat(XDate.now());
+                model1.setGiaTien(QuanLyDatSan.sb.getGiaSan());
+                model1.setTrangThai(0);
+                hdctdao.insert(model1);
+                MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
+                moi();
+                return;
+            } else if (rd03.isSelected()) {
+                List<HoaDonChiTiet> list = hdctdao.selectHoaDonChiTietByHoaDon(hd.getEmail());
+                for (HoaDonChiTiet x : list) {
+                    if (x.getMaKG().equals("KG02")) {
+                        HoaDonChiTiet hdct = hdctdao.selectHDCTByKG("KG02");
+                        HoaDonChiTiet model1 = new HoaDonChiTiet();
+                        model1.setMaHD(hdct.getMaHD());
                         model1.setMaSan(QuanLyDatSan.sb.getMaSan());
                         model1.setMaKG("KG03");
                         model1.setNgayDat(XDate.now());
@@ -469,13 +523,93 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
                         MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
                         moi();
                         return;
-            }else if (rd04.isSelected()) {
-                        HoaDon model = getModel();
-                        hddao.insert(model);
-                        int maHD = hdctdao.selectMaxIdHoaDon(model.getEmail());
-                        HoaDon hd2 = hddao.selectById(maHD);
+                    } else if (x.getMaKG().equals("KG04")) {
+                        HoaDonChiTiet hdct = hdctdao.selectHDCTByKG("KG04");
                         HoaDonChiTiet model1 = new HoaDonChiTiet();
-                        model1.setMaHD(hd2.getMaHD());
+                        model1.setMaHD(hdct.getMaHD());
+                        model1.setMaSan(QuanLyDatSan.sb.getMaSan());
+                        model1.setMaKG("KG03");
+                        model1.setNgayDat(XDate.now());
+                        model1.setGiaTien(QuanLyDatSan.sb.getGiaSan());
+                        model1.setTrangThai(0);
+                        hdctdao.insert(model1);
+                        MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
+                        moi();
+                        return;
+                    }
+                }
+                HoaDon model = getModel();
+                hddao.insert(model);
+                int mahd = hdctdao.selectMaxIdHoaDon(model.getEmail());
+                HoaDon hd2 = hddao.selectById(mahd);
+                HoaDonChiTiet model1 = new HoaDonChiTiet();
+                model1.setMaHD(hd2.getMaHD());
+                model1.setMaSan(QuanLyDatSan.sb.getMaSan());
+                String maKG1 = null;
+                maKG1 = "KG03";
+                model1.setMaKG(maKG1);
+                model1.setNgayDat(XDate.now());
+                model1.setGiaTien(QuanLyDatSan.sb.getGiaSan());
+                model1.setTrangThai(0);
+                hdctdao.insert(model1);
+                MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
+                moi();
+                return;
+            } else if (rd04.isSelected()) {
+                List<HoaDonChiTiet> list = hdctdao.selectHoaDonChiTietByHoaDon(hd.getEmail());
+                for (HoaDonChiTiet x : list) {
+                    if (x.getMaKG().equals("KG03")) {
+                        HoaDonChiTiet hdct = hdctdao.selectHDCTByKG("KG03");
+                        HoaDonChiTiet model1 = new HoaDonChiTiet();
+                        model1.setMaHD(hdct.getMaHD());
+                        model1.setMaSan(QuanLyDatSan.sb.getMaSan());
+                        model1.setMaKG("KG04");
+                        model1.setNgayDat(XDate.now());
+                        model1.setGiaTien(QuanLyDatSan.sb.getGiaSan());
+                        model1.setTrangThai(0);
+                        hdctdao.insert(model1);
+                        MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
+                        moi();
+                        return;
+                    } else if (x.getMaKG().equals("KG05")) {
+                        HoaDonChiTiet hdct = hdctdao.selectHDCTByKG("KG05");
+                        HoaDonChiTiet model1 = new HoaDonChiTiet();
+                        model1.setMaHD(hdct.getMaHD());
+                        model1.setMaSan(QuanLyDatSan.sb.getMaSan());
+                        model1.setMaKG("KG04");
+                        model1.setNgayDat(XDate.now());
+                        model1.setGiaTien(QuanLyDatSan.sb.getGiaSan());
+                        model1.setTrangThai(0);
+                        hdctdao.insert(model1);
+                        MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
+                        moi();
+                        return;
+                    }
+                }
+                HoaDon model = getModel();
+                hddao.insert(model);
+                int mahd = hdctdao.selectMaxIdHoaDon(model.getEmail());
+                HoaDon hd2 = hddao.selectById(mahd);
+                HoaDonChiTiet model1 = new HoaDonChiTiet();
+                model1.setMaHD(hd2.getMaHD());
+                model1.setMaSan(QuanLyDatSan.sb.getMaSan());
+                String maKG1 = null;
+                maKG1 = "KG04";
+                model1.setMaKG(maKG1);
+                model1.setNgayDat(XDate.now());
+                model1.setGiaTien(QuanLyDatSan.sb.getGiaSan());
+                model1.setTrangThai(0);
+                hdctdao.insert(model1);
+                MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
+                moi();
+                return;
+            } else if (rd05.isSelected()) {
+                List<HoaDonChiTiet> list = hdctdao.selectHoaDonChiTietByHoaDon(hd.getEmail());
+                for (HoaDonChiTiet x : list) {
+                    if (x.getMaKG().equals("KG04")) {
+                        HoaDonChiTiet hdct = hdctdao.selectHDCTByKG("KG04");
+                        HoaDonChiTiet model1 = new HoaDonChiTiet();
+                        model1.setMaHD(hdct.getMaHD());
                         model1.setMaSan(QuanLyDatSan.sb.getMaSan());
                         model1.setMaKG("KG05");
                         model1.setNgayDat(XDate.now());
@@ -485,13 +619,45 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
                         MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
                         moi();
                         return;
-            }else if (rd06.isSelected()) {
-                        HoaDon model = getModel();
-                        hddao.insert(model);
-                        int maHD = hdctdao.selectMaxIdHoaDon(model.getEmail());
-                        HoaDon hd2 = hddao.selectById(maHD);
+                    } else if (x.getMaKG().equals("KG06")) {
+                        HoaDonChiTiet hdct = hdctdao.selectHDCTByKG("KG06");
                         HoaDonChiTiet model1 = new HoaDonChiTiet();
-                        model1.setMaHD(hd2.getMaHD());
+                        model1.setMaHD(hdct.getMaHD());
+                        model1.setMaSan(QuanLyDatSan.sb.getMaSan());
+                        model1.setMaKG("KG05");
+                        model1.setNgayDat(XDate.now());
+                        model1.setGiaTien(QuanLyDatSan.sb.getGiaSan());
+                        model1.setTrangThai(0);
+                        hdctdao.insert(model1);
+                        MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
+                        moi();
+                        return;
+                    }
+                }
+                HoaDon model = getModel();
+                hddao.insert(model);
+                int mahd = hdctdao.selectMaxIdHoaDon(model.getEmail());
+                HoaDon hd2 = hddao.selectById(mahd);
+                HoaDonChiTiet model1 = new HoaDonChiTiet();
+                model1.setMaHD(hd2.getMaHD());
+                model1.setMaSan(QuanLyDatSan.sb.getMaSan());
+                String maKG1 = null;
+                maKG1 = "KG05";
+                model1.setMaKG(maKG1);
+                model1.setNgayDat(XDate.now());
+                model1.setGiaTien(QuanLyDatSan.sb.getGiaSan());
+                model1.setTrangThai(0);
+                hdctdao.insert(model1);
+                MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
+                moi();
+                return;
+            } else if (rd06.isSelected()) {
+                List<HoaDonChiTiet> list = hdctdao.selectHoaDonChiTietByHoaDon(hd.getEmail());
+                for (HoaDonChiTiet x : list) {
+                    if (x.getMaKG().equals("KG05")) {
+                        HoaDonChiTiet hdct = hdctdao.selectHDCTByKG("KG05");
+                        HoaDonChiTiet model1 = new HoaDonChiTiet();
+                        model1.setMaHD(hdct.getMaHD());
                         model1.setMaSan(QuanLyDatSan.sb.getMaSan());
                         model1.setMaKG("KG06");
                         model1.setNgayDat(XDate.now());
@@ -501,13 +667,45 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
                         MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
                         moi();
                         return;
-            }else if (rd07.isSelected()) {
-                        HoaDon model = getModel();
-                        hddao.insert(model);
-                        int maHD = hdctdao.selectMaxIdHoaDon(model.getEmail());
-                        HoaDon hd2 = hddao.selectById(maHD);
+                    } else if (x.getMaKG().equals("KG07")) {
+                        HoaDonChiTiet hdct = hdctdao.selectHDCTByKG("KG07");
                         HoaDonChiTiet model1 = new HoaDonChiTiet();
-                        model1.setMaHD(hd2.getMaHD());
+                        model1.setMaHD(hdct.getMaHD());
+                        model1.setMaSan(QuanLyDatSan.sb.getMaSan());
+                        model1.setMaKG("KG06");
+                        model1.setNgayDat(XDate.now());
+                        model1.setGiaTien(QuanLyDatSan.sb.getGiaSan());
+                        model1.setTrangThai(0);
+                        hdctdao.insert(model1);
+                        MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
+                        moi();
+                        return;
+                    }
+                }
+                HoaDon model = getModel();
+                hddao.insert(model);
+                int mahd = hdctdao.selectMaxIdHoaDon(model.getEmail());
+                HoaDon hd2 = hddao.selectById(mahd);
+                HoaDonChiTiet model1 = new HoaDonChiTiet();
+                model1.setMaHD(hd2.getMaHD());
+                model1.setMaSan(QuanLyDatSan.sb.getMaSan());
+                String maKG1 = null;
+                maKG1 = "KG06";
+                model1.setMaKG(maKG1);
+                model1.setNgayDat(XDate.now());
+                model1.setGiaTien(QuanLyDatSan.sb.getGiaSan());
+                model1.setTrangThai(0);
+                hdctdao.insert(model1);
+                MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
+                moi();
+                return;
+            } else if (rd07.isSelected()) {
+                List<HoaDonChiTiet> list = hdctdao.selectHoaDonChiTietByHoaDon(hd.getEmail());
+                for (HoaDonChiTiet x : list) {
+                    if (x.getMaKG().equals("KG06")) {
+                        HoaDonChiTiet hdct = hdctdao.selectHDCTByKG("KG06");
+                        HoaDonChiTiet model1 = new HoaDonChiTiet();
+                        model1.setMaHD(hdct.getMaHD());
                         model1.setMaSan(QuanLyDatSan.sb.getMaSan());
                         model1.setMaKG("KG07");
                         model1.setNgayDat(XDate.now());
@@ -517,13 +715,45 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
                         MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
                         moi();
                         return;
-            }else if (rd08.isSelected()) {
-                        HoaDon model = getModel();
-                        hddao.insert(model);
-                        int maHD = hdctdao.selectMaxIdHoaDon(model.getEmail());
-                        HoaDon hd2 = hddao.selectById(maHD);
+                    } else if (x.getMaKG().equals("KG08")) {
+                        HoaDonChiTiet hdct = hdctdao.selectHDCTByKG("KG08");
                         HoaDonChiTiet model1 = new HoaDonChiTiet();
-                        model1.setMaHD(hd2.getMaHD());
+                        model1.setMaHD(hdct.getMaHD());
+                        model1.setMaSan(QuanLyDatSan.sb.getMaSan());
+                        model1.setMaKG("KG07");
+                        model1.setNgayDat(XDate.now());
+                        model1.setGiaTien(QuanLyDatSan.sb.getGiaSan());
+                        model1.setTrangThai(0);
+                        hdctdao.insert(model1);
+                        MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
+                        moi();
+                        return;
+                    }
+                }
+                HoaDon model = getModel();
+                hddao.insert(model);
+                int mahd = hdctdao.selectMaxIdHoaDon(model.getEmail());
+                HoaDon hd2 = hddao.selectById(mahd);
+                HoaDonChiTiet model1 = new HoaDonChiTiet();
+                model1.setMaHD(hd2.getMaHD());
+                model1.setMaSan(QuanLyDatSan.sb.getMaSan());
+                String maKG1 = null;
+                maKG1 = "KG07";
+                model1.setMaKG(maKG1);
+                model1.setNgayDat(XDate.now());
+                model1.setGiaTien(QuanLyDatSan.sb.getGiaSan());
+                model1.setTrangThai(0);
+                hdctdao.insert(model1);
+                MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
+                moi();
+                return;
+            } else if (rd08.isSelected()) {
+                List<HoaDonChiTiet> list = hdctdao.selectHoaDonChiTietByHoaDon(hd.getEmail());
+                for (HoaDonChiTiet x : list) {
+                    if (x.getMaKG().equals("KG07")) {
+                        HoaDonChiTiet hdct = hdctdao.selectHDCTByKG("KG07");
+                        HoaDonChiTiet model1 = new HoaDonChiTiet();
+                        model1.setMaHD(hdct.getMaHD());
                         model1.setMaSan(QuanLyDatSan.sb.getMaSan());
                         model1.setMaKG("KG08");
                         model1.setNgayDat(XDate.now());
@@ -533,7 +763,71 @@ public class ThongTinNguoiDat extends javax.swing.JInternalFrame {
                         MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
                         moi();
                         return;
+                    }
+                }
+                HoaDon model = getModel();
+                hddao.insert(model);
+                int mahd = hdctdao.selectMaxIdHoaDon(model.getEmail());
+                HoaDon hd2 = hddao.selectById(mahd);
+                HoaDonChiTiet model1 = new HoaDonChiTiet();
+                model1.setMaHD(hd2.getMaHD());
+                model1.setMaSan(QuanLyDatSan.sb.getMaSan());
+                String maKG1 = null;
+                maKG1 = "KG08";
+                model1.setMaKG(maKG1);
+                model1.setNgayDat(XDate.now());
+                model1.setGiaTien(QuanLyDatSan.sb.getGiaSan());
+                model1.setTrangThai(0);
+                hdctdao.insert(model1);
+                MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
+                moi();
+                return;
             }
+        } else {
+            HoaDon model = getModel();
+            hddao.insert(model);
+            HoaDon hd2 = hddao.selectByEmailHoaDon(model.getEmail());
+            HoaDonChiTiet model1 = new HoaDonChiTiet();
+            model1.setMaHD(hd2.getMaHD());
+            model1.setMaSan(QuanLyDatSan.sb.getMaSan());
+            String maKG1 = null;
+            if (rd01.isSelected()) {
+                maKG1 = "KG01";
+            }
+            if (rd02.isSelected()) {
+                maKG1 = "KG02";
+            }
+            if (rd03.isSelected()) {
+                maKG1 = "KG03";
+            }
+            if (rd04.isSelected()) {
+                maKG1 = "KG04";
+            }
+            if (rd05.isSelected()) {
+                maKG1 = "KG05";
+            }
+            if (rd06.isSelected()) {
+                maKG1 = "KG06";
+            }
+            if (rd07.isSelected()) {
+                maKG1 = "KG07";
+            }
+            if (rd08.isSelected()) {
+                maKG1 = "KG08";
+            }
+            if (!rd01.isSelected() && !rd02.isSelected() && !rd03.isSelected() && !rd04.isSelected() && !rd05.isSelected()
+                    && !rd06.isSelected() && !rd07.isSelected() && !rd08.isSelected()) {
+                MsgBox.alert(this, "Vui lòng chọn khung giờ");
+                return;
+            }
+            model1.setMaKG(maKG1);
+            model1.setNgayDat(XDate.now());
+            model1.setGiaTien(QuanLyDatSan.sb.getGiaSan());
+            model1.setTrangThai(0);
+            hdctdao.insert(model1);
+            MsgBox.alert(this, "Bạn đã đặt sân thành công. Vui lòng đặt cọc.");
+            moi();
+        }
     }
 
     HoaDon getModel() {
