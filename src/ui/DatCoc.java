@@ -74,7 +74,7 @@ public class DatCoc extends javax.swing.JInternalFrame {
     }
 
     void xacNhan(){
-        String mahd = (String) tblHoaDon.getValueAt(index, 0);
+        int mahd = (Integer) tblHoaDon.getValueAt(index, 0);
         HoaDon hd = dao.selectById(mahd);
         hd.setAnhDatCoc(lblHinh.getToolTipText());
         dao.update(hd);
@@ -235,7 +235,7 @@ public class DatCoc extends javax.swing.JInternalFrame {
     private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
         // TODO add your handling code here:      
        index = tblHoaDon.getSelectedRow();
-        String mahd = (String) tblHoaDon.getValueAt(index, 0);
+        int mahd = (Integer) tblHoaDon.getValueAt(index, 0);
         HoaDon hd = dao.selectById(mahd);
         if (hd.getAnhDatCoc() == null || hd.getAnhDatCoc().equals("")) {
             float x1 = Float.parseFloat(tblHoaDon.getValueAt(index, 4) + "");
