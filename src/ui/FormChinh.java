@@ -195,7 +195,7 @@ public class FormChinh extends javax.swing.JFrame {
         ToolBar.add(btnDangNhap);
         ToolBar.add(jSeparator4);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/ANHCHAOMAIN8.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/20e5364117fedfa086ef (1).jpg"))); // NOI18N
 
         DesktopPane.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -434,9 +434,9 @@ public class FormChinh extends javax.swing.JFrame {
         if (Auth.user1== null && Auth.user2==null) {
             MsgBox.alert(this, "Bạn chưa đăng nhập!");
         }else{
-            new DangNhap(this, true).setVisible(true);
             Auth.user1 = null ;
             Auth.user2 = null ;
+            new DangNhap(this, true).setVisible(true);
         }
     }//GEN-LAST:event_btnDangXuatActionPerformed
 
