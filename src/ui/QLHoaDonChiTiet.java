@@ -282,7 +282,7 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
 
         txtNgayDat.setEnabled(false);
 
-        btnMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-add-24.png"))); // NOI18N
+        btnMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-delete-24_1.png"))); // NOI18N
         btnMoi.setText("Mới");
         btnMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -291,7 +291,7 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
         });
 
         btnSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-update-tag-24.png"))); // NOI18N
-        btnSua.setText("Sửa");
+        btnSua.setText("Cập nhật");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSuaActionPerformed(evt);
@@ -589,7 +589,7 @@ public class QLHoaDonChiTiet extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabs, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
