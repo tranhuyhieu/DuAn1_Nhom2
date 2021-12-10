@@ -7,9 +7,12 @@ package ui;
 
 import com.edusys.ui.GioiThieuJDialog;
 import java.awt.Component;
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -351,6 +354,11 @@ public class FormChinh extends javax.swing.JFrame {
         jMenu3.setText("Trợ Giúp ");
 
         mniLienHe.setText("Liên Hệ ");
+        mniLienHe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniLienHeActionPerformed(evt);
+            }
+        });
         jMenu3.add(mniLienHe);
 
         mniGioiThieu.setText("Giới Thiệu Sản Phẩm");
@@ -608,6 +616,15 @@ public class FormChinh extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_mniketThucActionPerformed
+
+    private void mniLienHeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniLienHeActionPerformed
+        // TODO add your handling code here:
+        try {
+            Desktop.getDesktop().browse(new File("help/lienhe.html").toURI());
+        } catch (IOException ex) {
+            MsgBox.alert(this, "Không tìm thấy file hướng dẫn!");
+        }
+    }//GEN-LAST:event_mniLienHeActionPerformed
 
 
     /**
