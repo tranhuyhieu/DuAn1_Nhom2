@@ -81,7 +81,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
                     x.getSoDienThoai(),
                     x.getEmail(),
                     x.getGiamGia(),
-                    hdctDAO.getTongTien(x.getMaHD()),
+                    x.getTongTien(),
                     x.getNgayThanhToan(),
                     x.getTrangThaiHD() == 0 ? "Chờ xác nhận" : x.getTrangThaiHD() == 1 ? "Đã xác nhận" : "Đã hủy",
                     x.getTrangThaiTT() == 0 ? "Chờ thanh toán" : "Đã thanh toán"});
@@ -213,7 +213,7 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
             txtTenKH.setText(hd.getHoTenKH());
             txtSDT.setText(hd.getSoDienThoai().trim());
             txtEmail.setText(hd.getEmail());
-            txtTongTien.setText(String.valueOf(hdctDAO.getTongTien(hd.getMaHD())));
+            txtTongTien.setText(hd.getTongTien() + "");
             if (hd.getGiamGia() == 0) {
                 rdo0.setSelected(true);
             } else if (hd.getGiamGia() == 5) {
