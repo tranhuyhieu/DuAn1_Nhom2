@@ -236,8 +236,14 @@ public class QuanLyHoaDonJInternalFrame extends javax.swing.JInternalFrame {
                 rdoDaThanhToan.setSelected(true);
             }
             if (hd.getAnhDatCoc() != null) {
-                lblAnh.setIcon(XImage.read(hd.getAnhDatCoc()));
-                //lblAnh.setText(hd.getAnhDatCoc());
+                ImageIcon icon = new ImageIcon(XImage.read(hd.getAnhDatCoc()).getImage().getScaledInstance(lblAnh.getWidth(), lblAnh.getHeight(), 5));
+                lblAnh.setIcon(icon);
+
+            }
+            if(tblDanhSach.getValueAt(row, 8).equals("Đã thanh toán")){
+                btnCapNhat.setEnabled(false);
+            }else{
+                btnCapNhat.setEnabled(true);
             }
 
         } catch (Exception e) {
